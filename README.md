@@ -144,6 +144,7 @@ pip install requests beautifulsoup4 urllib3 cloudscraper
 # Chạy tool
 
 ```bash
+
 python OWASP_Web_Recon_Tool_Pro.py
 
 # Website test khuyến nghị

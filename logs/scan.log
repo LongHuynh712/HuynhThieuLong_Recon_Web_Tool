@@ -1,0 +1,117 @@
+2026-05-12 15:13:17,680 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-12 15:13:17,680 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-12 15:13:17,683 - INFO -  * Restarting with stat
+2026-05-12 15:13:18,540 - WARNING -  * Debugger is active!
+2026-05-12 15:13:18,544 - INFO -  * Debugger PIN: 839-423-010
+2026-05-12 15:13:28,568 - INFO - 127.0.0.1 - - [12/May/2026 15:13:28] "GET / HTTP/1.1" 200 -
+2026-05-12 15:13:28,743 - INFO - 127.0.0.1 - - [12/May/2026 15:13:28] "GET /static/style.css HTTP/1.1" 200 -
+2026-05-12 15:13:28,901 - INFO - 127.0.0.1 - - [12/May/2026 15:13:28] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-05-12 15:13:40,140 - INFO - Connecting to http://demo.testfire.net [GET]
+2026-05-12 15:13:40,743 - INFO - Connecting to http://demo.testfire.net/robots.txt [GET]
+2026-05-12 15:13:41,355 - INFO - Connecting to http://demo.testfire.net/sitemap.xml [GET]
+2026-05-12 15:13:41,829 - INFO - Connecting to http://demo.testfire.net [OPTIONS]
+2026-05-12 15:13:42,418 - INFO - Connecting to http://demo.testfire.net [PUT]
+2026-05-12 15:13:43,026 - INFO - Connecting to http://demo.testfire.net [DELETE]
+2026-05-12 15:13:43,484 - INFO - Connecting to http://demo.testfire.net [TRACE]
+2026-05-12 15:13:44,054 - INFO - Connecting to http://demo.testfire.net [PATCH]
+2026-05-12 15:13:44,666 - INFO - Connecting to http://demo.testfire.net/admin [GET]
+2026-05-12 15:13:45,538 - INFO - Connecting to http://demo.testfire.net/administrator [GET]
+2026-05-12 15:13:46,223 - INFO - Connecting to http://demo.testfire.net/dashboard [GET]
+2026-05-12 15:13:46,728 - INFO - Connecting to http://demo.testfire.net/cpanel [GET]
+2026-05-12 15:13:47,201 - INFO - Connecting to http://demo.testfire.net/manage [GET]
+2026-05-12 15:13:47,648 - INFO - Connecting to http://demo.testfire.net/login [GET]
+2026-05-12 15:13:48,137 - INFO - Connecting to http://demo.testfire.net/admin/login [GET]
+2026-05-12 15:13:49,037 - INFO - Connecting to http://demo.testfire.net/backup.zip [GET]
+2026-05-12 15:13:49,611 - INFO - Connecting to http://demo.testfire.net/backup.tar.gz [GET]
+2026-05-12 15:13:50,199 - INFO - Connecting to http://demo.testfire.net/db.sql [GET]
+2026-05-12 15:13:50,815 - INFO - Connecting to http://demo.testfire.net/.env [GET]
+2026-05-12 15:13:51,408 - INFO - Connecting to http://demo.testfire.net/config.php.bak [GET]
+2026-05-12 15:13:51,992 - INFO - Connecting to http://demo.testfire.net/index.old [GET]
+2026-05-12 15:13:52,588 - INFO - Connecting to http://demo.testfire.net/website.zip [GET]
+2026-05-12 15:13:53,192 - INFO - Connecting to http://demo.testfire.net/backup.sql [GET]
+2026-05-12 15:13:53,682 - INFO - Connecting to http://demo.testfire.net/.git/config [GET]
+2026-05-12 15:13:54,149 - INFO - Connecting to http://demo.testfire.net/.svn/entries [GET]
+2026-05-12 15:13:54,634 - INFO - Connecting to http://demo.testfire.net/web.config [GET]
+2026-05-12 15:13:55,113 - INFO - Connecting to http://demo.testfire.net/crossdomain.xml [GET]
+2026-05-12 15:13:55,700 - INFO - Connecting to http://demo.testfire.net/clientaccesspolicy.xml [GET]
+2026-05-12 15:13:56,260 - INFO - 127.0.0.1 - - [12/May/2026 15:13:56] "POST / HTTP/1.1" 200 -
+2026-05-12 15:13:56,272 - INFO - 127.0.0.1 - - [12/May/2026 15:13:56] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-12 15:14:07,091 - INFO - Connecting to https://example.com [GET]
+2026-05-12 15:14:07,305 - INFO - Connecting to https://example.com/robots.txt [GET]
+2026-05-12 15:14:07,490 - INFO - Connecting to https://example.com/sitemap.xml [GET]
+2026-05-12 15:14:07,641 - INFO - Connecting to https://example.com [OPTIONS]
+2026-05-12 15:14:07,778 - INFO - Connecting to https://example.com [PUT]
+2026-05-12 15:14:07,949 - INFO - Connecting to https://example.com [DELETE]
+2026-05-12 15:14:08,083 - INFO - Connecting to https://example.com [TRACE]
+2026-05-12 15:14:08,216 - INFO - Connecting to https://example.com [PATCH]
+2026-05-12 15:14:08,361 - INFO - Connecting to https://example.com/admin [GET]
+2026-05-12 15:14:08,511 - INFO - Connecting to https://example.com/administrator [GET]
+2026-05-12 15:14:08,671 - INFO - Connecting to https://example.com/dashboard [GET]
+2026-05-12 15:14:08,803 - INFO - Connecting to https://example.com/cpanel [GET]
+2026-05-12 15:14:08,947 - INFO - Connecting to https://example.com/manage [GET]
+2026-05-12 15:14:09,092 - INFO - Connecting to https://example.com/login [GET]
+2026-05-12 15:14:09,224 - INFO - Connecting to https://example.com/admin/login [GET]
+2026-05-12 15:14:09,382 - INFO - Connecting to https://example.com/backup.zip [GET]
+2026-05-12 15:14:09,515 - INFO - Connecting to https://example.com/backup.tar.gz [GET]
+2026-05-12 15:14:09,645 - INFO - Connecting to https://example.com/db.sql [GET]
+2026-05-12 15:14:09,798 - INFO - Connecting to https://example.com/.env [GET]
+2026-05-12 15:14:09,955 - INFO - Connecting to https://example.com/config.php.bak [GET]
+2026-05-12 15:14:10,127 - INFO - Connecting to https://example.com/index.old [GET]
+2026-05-12 15:14:10,318 - INFO - Connecting to https://example.com/website.zip [GET]
+2026-05-12 15:14:10,478 - INFO - Connecting to https://example.com/backup.sql [GET]
+2026-05-12 15:14:10,625 - INFO - Connecting to https://example.com/.git/config [GET]
+2026-05-12 15:14:10,772 - INFO - Connecting to https://example.com/.svn/entries [GET]
+2026-05-12 15:14:10,920 - INFO - Connecting to https://example.com/web.config [GET]
+2026-05-12 15:14:11,064 - INFO - Connecting to https://example.com/crossdomain.xml [GET]
+2026-05-12 15:14:11,214 - INFO - Connecting to https://example.com/clientaccesspolicy.xml [GET]
+2026-05-12 15:14:11,328 - INFO - 127.0.0.1 - - [12/May/2026 15:14:11] "POST / HTTP/1.1" 200 -
+2026-05-12 15:14:11,338 - INFO - 127.0.0.1 - - [12/May/2026 15:14:11] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-05-12 21:59:44,919 - INFO -  * Detected change in 'C:\\Users\\Admin\\web-recon-tool\\scanner.py', reloading
+2026-05-12 21:59:46,577 - INFO -  * Restarting with stat
+2026-05-12 21:59:48,173 - WARNING -  * Debugger is active!
+2026-05-12 21:59:48,183 - INFO -  * Debugger PIN: 839-423-010
+2026-05-12 22:00:00,747 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-12 22:00:00,747 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-12 22:00:00,749 - INFO -  * Restarting with stat
+2026-05-12 22:00:01,701 - WARNING -  * Debugger is active!
+2026-05-12 22:00:01,708 - INFO -  * Debugger PIN: 839-423-010
+2026-05-12 22:00:10,726 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-05-12 22:00:10,726 - INFO - [33mPress CTRL+C to quit[0m
+2026-05-12 22:00:10,728 - INFO -  * Restarting with stat
+2026-05-12 22:00:11,601 - WARNING -  * Debugger is active!
+2026-05-12 22:00:11,606 - INFO -  * Debugger PIN: 839-423-010
+2026-05-12 22:00:20,723 - INFO - 127.0.0.1 - - [12/May/2026 22:00:20] "GET / HTTP/1.1" 200 -
+2026-05-12 22:00:20,931 - INFO - 127.0.0.1 - - [12/May/2026 22:00:20] "GET /static/style.css HTTP/1.1" 200 -
+2026-05-12 22:00:29,043 - INFO - Connecting to https://httpbin.org [GET]
+2026-05-12 22:00:30,113 - INFO - Connecting to https://httpbin.org/robots.txt [GET]
+2026-05-12 22:00:31,187 - INFO - Connecting to https://httpbin.org/sitemap.xml [GET]
+2026-05-12 22:00:32,344 - INFO - Connecting to https://httpbin.org [OPTIONS]
+2026-05-12 22:00:33,348 - INFO - Connecting to https://httpbin.org [PUT]
+2026-05-12 22:00:34,385 - INFO - Connecting to https://httpbin.org [DELETE]
+2026-05-12 22:00:35,393 - INFO - Connecting to https://httpbin.org [TRACE]
+2026-05-12 22:00:36,386 - INFO - Connecting to https://httpbin.org [PATCH]
+2026-05-12 22:00:37,989 - INFO - Connecting to https://httpbin.org/admin [GET]
+2026-05-12 22:00:39,048 - INFO - Connecting to https://httpbin.org/administrator [GET]
+2026-05-12 22:00:40,563 - INFO - Connecting to https://httpbin.org/dashboard [GET]
+2026-05-12 22:00:41,660 - INFO - Connecting to https://httpbin.org/cpanel [GET]
+2026-05-12 22:00:42,737 - INFO - Connecting to https://httpbin.org/manage [GET]
+2026-05-12 22:00:43,757 - INFO - Connecting to https://httpbin.org/login [GET]
+2026-05-12 22:00:44,737 - INFO - Connecting to https://httpbin.org/admin/login [GET]
+2026-05-12 22:00:45,722 - INFO - Connecting to https://httpbin.org/backup.zip [GET]
+2026-05-12 22:00:46,736 - INFO - Connecting to https://httpbin.org/backup.tar.gz [GET]
+2026-05-12 22:00:47,729 - INFO - Connecting to https://httpbin.org/db.sql [GET]
+2026-05-12 22:00:48,810 - INFO - Connecting to https://httpbin.org/.env [GET]
+2026-05-12 22:00:49,804 - INFO - Connecting to https://httpbin.org/config.php.bak [GET]
+2026-05-12 22:00:50,916 - INFO - Connecting to https://httpbin.org/index.old [GET]
+2026-05-12 22:00:52,419 - INFO - Connecting to https://httpbin.org/website.zip [GET]
+2026-05-12 22:00:53,721 - INFO - Connecting to https://httpbin.org/backup.sql [GET]
+2026-05-12 22:00:55,209 - INFO - Connecting to https://httpbin.org/.git/config [GET]
+2026-05-12 22:00:56,228 - INFO - Connecting to https://httpbin.org/.svn/entries [GET]
+2026-05-12 22:00:57,793 - INFO - Connecting to https://httpbin.org/web.config [GET]
+2026-05-12 22:00:58,786 - INFO - Connecting to https://httpbin.org/crossdomain.xml [GET]
+2026-05-12 22:00:59,821 - INFO - Connecting to https://httpbin.org/clientaccesspolicy.xml [GET]
+2026-05-12 22:01:00,909 - INFO - 127.0.0.1 - - [12/May/2026 22:01:00] "POST / HTTP/1.1" 200 -
+2026-05-12 22:01:00,944 - INFO - 127.0.0.1 - - [12/May/2026 22:01:00] "[36mGET /static/style.css HTTP/1.1[0m" 304 -

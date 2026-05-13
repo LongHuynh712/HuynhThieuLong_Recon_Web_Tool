@@ -1,0 +1,29 @@
+<!-- =========================
+FILE: templates/index.html
+========================= -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OWASP Web Assessment Suite</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1>OWASP WSTG 4.1 + 4.2 Web Assessment Suite</h1>
+
+        <form method="POST">
+            <input type="text" name="url" placeholder="Enter target URL" required>
+            <button type="submit">Scan</button>
+        </form>
+
+        <div class="report">
+            <pre>{{ report }}</pre>
+        </div>
+    </div>
+
+</body>
+</html>

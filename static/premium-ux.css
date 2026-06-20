@@ -1,0 +1,1368 @@
+/* ============================================================
+   ReconSight Premium UX — Additive Enhancement Layer
+   All styles are additive; nothing overrides destructively.
+   Uses existing :root vars (--primary, --background-card, etc.)
+   ============================================================ */
+
+/* ── Google Font: Inter ───────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    /* Extended palette */
+    --pux-glass: rgba(17, 18, 17, 0.72);
+    --pux-glass-border: rgba(214, 251, 65, 0.08);
+    --pux-elevation-1: 0 2px 8px rgba(0,0,0,0.18);
+    --pux-elevation-2: 0 8px 32px rgba(0,0,0,0.28);
+    --pux-elevation-3: 0 16px 48px rgba(0,0,0,0.35);
+    --pux-radius-sm: 10px;
+    --pux-radius-md: 16px;
+    --pux-radius-lg: 24px;
+    --pux-radius-xl: 32px;
+    --pux-transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --pux-transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* Severity palette (HSL-tuned for premium feel) */
+    --sev-critical-bg: rgba(220, 38, 38, 0.12);
+    --sev-critical-border: rgba(220, 38, 38, 0.35);
+    --sev-critical-text: #fca5a5;
+    --sev-critical-dot: #ef4444;
+
+    --sev-high-bg: rgba(249, 115, 22, 0.12);
+    --sev-high-border: rgba(249, 115, 22, 0.35);
+    --sev-high-text: #fdba74;
+    --sev-high-dot: #f97316;
+
+    --sev-medium-bg: rgba(234, 179, 8, 0.12);
+    --sev-medium-border: rgba(234, 179, 8, 0.30);
+    --sev-medium-text: #fde68a;
+    --sev-medium-dot: #eab308;
+
+    --sev-low-bg: rgba(34, 197, 94, 0.10);
+    --sev-low-border: rgba(34, 197, 94, 0.28);
+    --sev-low-text: #86efac;
+    --sev-low-dot: #22c55e;
+
+    --sev-info-bg: rgba(59, 130, 246, 0.10);
+    --sev-info-border: rgba(59, 130, 246, 0.25);
+    --sev-info-text: #93c5fd;
+    --sev-info-dot: #3b82f6;
+}
+
+/* Light theme severity overrides */
+[data-theme="light"] {
+    --sev-critical-bg: rgba(220, 38, 38, 0.08);
+    --sev-critical-text: #b91c1c;
+    --sev-high-bg: rgba(249, 115, 22, 0.08);
+    --sev-high-text: #c2410c;
+    --sev-medium-bg: rgba(234, 179, 8, 0.08);
+    --sev-medium-text: #a16207;
+    --sev-low-bg: rgba(34, 197, 94, 0.07);
+    --sev-low-text: #15803d;
+    --sev-info-bg: rgba(59, 130, 246, 0.07);
+    --sev-info-text: #1d4ed8;
+    --pux-glass: rgba(255, 255, 255, 0.85);
+    --pux-glass-border: rgba(0, 0, 0, 0.08);
+}
+
+
+/* ============================================================
+   1. GLOBAL TYPOGRAPHY & POLISH
+   ============================================================ */
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Better section separation */
+.page-shell--results > section + section,
+.page-shell--results > .dashboard-grid {
+    margin-top: 4px;
+}
+
+/* Subtle divider between major areas */
+.summary-bar {
+    position: relative;
+}
+
+.summary-bar::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 5%;
+    right: 5%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(214, 251, 65, 0.15), transparent);
+    pointer-events: none;
+}
+
+
+/* ============================================================
+   2. GLASSMORPHISM HEADER ENHANCEMENT
+   ============================================================ */
+.site-header {
+    backdrop-filter: blur(20px) saturate(1.4);
+    -webkit-backdrop-filter: blur(20px) saturate(1.4);
+    background: var(--pux-glass) !important;
+    border-color: var(--pux-glass-border) !important;
+    box-shadow: var(--pux-elevation-1);
+    transition: box-shadow var(--pux-transition), background var(--pux-transition);
+}
+
+.site-header:hover {
+    box-shadow: var(--pux-elevation-2);
+}
+
+/* Nav link active indicator */
+.site-nav a {
+    position: relative;
+    padding-bottom: 4px;
+    transition: color var(--pux-transition-fast);
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 999px;
+    transition: width var(--pux-transition), left var(--pux-transition);
+}
+
+.site-nav a:hover::after,
+.site-nav a.is-active::after {
+    width: 100%;
+    left: 0;
+}
+
+
+/* ============================================================
+   3. BREADCRUMB NAVIGATION
+   ============================================================ */
+.breadcrumb-nav {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0.65rem 1.25rem;
+    border-radius: var(--pux-radius-md);
+    background: var(--pux-glass);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--pux-glass-border);
+    font-size: 0.82rem;
+    font-weight: 600;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.breadcrumb-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.breadcrumb-nav a,
+.breadcrumb-nav span {
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color var(--pux-transition-fast);
+    padding: 0.25rem 0.1rem;
+}
+
+.breadcrumb-nav a:hover {
+    color: var(--primary);
+}
+
+.breadcrumb-nav .bc-sep {
+    margin: 0 0.5rem;
+    color: var(--text-muted);
+    opacity: 0.4;
+    font-size: 0.7rem;
+}
+
+.breadcrumb-nav .bc-current {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   4. KEY FINDINGS SUMMARY CARD
+   ============================================================ */
+.key-findings-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(155px, 1fr));
+    gap: 1px;
+    border-radius: var(--pux-radius-lg);
+    overflow: hidden;
+    background: rgba(214, 251, 65, 0.06);
+    border: 1px solid rgba(214, 251, 65, 0.15);
+    box-shadow: var(--pux-elevation-2);
+    position: relative;
+}
+
+.key-findings-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--success), var(--info), var(--warning), var(--danger));
+    z-index: 1;
+    border-radius: var(--pux-radius-lg) var(--pux-radius-lg) 0 0;
+}
+
+.kf-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 1.35rem 1rem;
+    background: var(--background-card);
+    text-align: center;
+    transition: background var(--pux-transition);
+    position: relative;
+}
+
+.kf-item:hover {
+    background: rgba(214, 251, 65, 0.04);
+}
+
+.kf-icon {
+    font-size: 1.35rem;
+    line-height: 1;
+    opacity: 0.85;
+}
+
+.kf-value {
+    font-size: 1.75rem;
+    font-weight: 900;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+}
+
+.kf-value.score-good { color: var(--success); }
+.kf-value.score-mid { color: var(--warning); }
+.kf-value.score-low { color: var(--danger); }
+
+.kf-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.kf-sublabel {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    opacity: 0.7;
+    max-width: 140px;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Risk level colors */
+.kf-risk-critical { color: var(--sev-critical-dot); }
+.kf-risk-high { color: var(--sev-high-dot); }
+.kf-risk-medium { color: var(--sev-medium-dot); }
+.kf-risk-low { color: var(--sev-low-dot); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .key-findings-card {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .key-findings-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .kf-value {
+        font-size: 1.4rem;
+    }
+}
+
+
+/* ============================================================
+   5. ENHANCED SEVERITY BADGES
+   ============================================================ */
+.sev-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: transform var(--pux-transition-fast), box-shadow var(--pux-transition-fast);
+}
+
+.sev-badge:hover {
+    transform: scale(1.05);
+}
+
+.sev-badge::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.sev-badge-critical {
+    background: var(--sev-critical-bg);
+    color: var(--sev-critical-text);
+    border: 1px solid var(--sev-critical-border);
+}
+.sev-badge-critical::before { background: var(--sev-critical-dot); box-shadow: 0 0 6px var(--sev-critical-dot); }
+
+.sev-badge-high {
+    background: var(--sev-high-bg);
+    color: var(--sev-high-text);
+    border: 1px solid var(--sev-high-border);
+}
+.sev-badge-high::before { background: var(--sev-high-dot); box-shadow: 0 0 6px var(--sev-high-dot); }
+
+.sev-badge-medium {
+    background: var(--sev-medium-bg);
+    color: var(--sev-medium-text);
+    border: 1px solid var(--sev-medium-border);
+}
+.sev-badge-medium::before { background: var(--sev-medium-dot); box-shadow: 0 0 6px var(--sev-medium-dot); }
+
+.sev-badge-low {
+    background: var(--sev-low-bg);
+    color: var(--sev-low-text);
+    border: 1px solid var(--sev-low-border);
+}
+.sev-badge-low::before { background: var(--sev-low-dot); box-shadow: 0 0 6px var(--sev-low-dot); }
+
+.sev-badge-info {
+    background: var(--sev-info-bg);
+    color: var(--sev-info-text);
+    border: 1px solid var(--sev-info-border);
+}
+.sev-badge-info::before { background: var(--sev-info-dot); box-shadow: 0 0 6px var(--sev-info-dot); }
+
+/* Enhance existing severity-badge and sev-pill */
+.severity-badge,
+.sev-pill {
+    transition: transform var(--pux-transition-fast);
+}
+.severity-badge:hover,
+.sev-pill:hover {
+    transform: scale(1.05);
+}
+
+/* Severity stat cards in executive summary */
+.sev-stat-card {
+    border-radius: var(--pux-radius-sm) !important;
+    transition: transform var(--pux-transition-fast), box-shadow var(--pux-transition-fast);
+}
+
+.sev-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--pux-elevation-1);
+}
+
+
+/* ============================================================
+   6. SCAN PROGRESS STAGES
+   ============================================================ */
+.scan-stages {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 1rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.scan-stages::-webkit-scrollbar {
+    display: none;
+}
+
+.scan-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+    min-width: 90px;
+    position: relative;
+    padding: 0 0.5rem;
+}
+
+/* Connector line between stages */
+.scan-stage:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 16px;
+    left: calc(50% + 16px);
+    right: calc(-50% + 16px);
+    height: 2px;
+    background: rgba(255, 255, 255, 0.08);
+    z-index: 0;
+}
+
+.scan-stage.is-complete:not(:last-child)::after {
+    background: var(--success);
+}
+
+.scan-stage.is-active:not(:last-child)::after {
+    background: linear-gradient(90deg, var(--primary), rgba(255, 255, 255, 0.08));
+}
+
+.scan-stage-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    transition: all var(--pux-transition);
+}
+
+.scan-stage.is-active .scan-stage-dot {
+    background: rgba(214, 251, 65, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 16px rgba(214, 251, 65, 0.3);
+    animation: pux-pulse 1.5s ease-in-out infinite;
+}
+
+.scan-stage.is-complete .scan-stage-dot {
+    background: rgba(32, 226, 83, 0.15);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.scan-stage-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-muted);
+    text-align: center;
+    line-height: 1.3;
+    transition: color var(--pux-transition);
+}
+
+.scan-stage.is-active .scan-stage-label {
+    color: var(--primary);
+}
+
+.scan-stage.is-complete .scan-stage-label {
+    color: var(--success);
+}
+
+
+/* ============================================================
+   7. ENHANCED RESULT CARDS (check-card)
+   ============================================================ */
+.check-card {
+    transition: transform var(--pux-transition), border-color var(--pux-transition), box-shadow var(--pux-transition) !important;
+}
+
+.check-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: var(--pux-elevation-2) !important;
+    border-color: rgba(214, 251, 65, 0.25) !important;
+}
+
+/* Status indicator dot on cards */
+.check-card::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    opacity: 0.8;
+}
+
+.check-card.pass::after { background: var(--success); box-shadow: 0 0 8px rgba(32, 226, 83, 0.4); }
+.check-card.warn::after { background: var(--warning); box-shadow: 0 0 8px rgba(246, 240, 0, 0.4); }
+.check-card.fail::after { background: var(--danger); box-shadow: 0 0 8px rgba(248, 3, 99, 0.4); }
+.check-card.skip::after { background: var(--info); box-shadow: 0 0 8px rgba(4, 228, 244, 0.3); }
+
+/* Quick-copy button */
+.pux-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: all var(--pux-transition-fast);
+    flex-shrink: 0;
+}
+
+.pux-copy-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(214, 251, 65, 0.08);
+}
+
+.pux-copy-btn.is-copied {
+    border-color: var(--success);
+    color: var(--success);
+    background: rgba(32, 226, 83, 0.1);
+}
+
+/* Expandable detail toggle */
+.pux-expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.3rem 0.65rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--pux-transition-fast);
+}
+
+.pux-expand-toggle:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.pux-expand-toggle .pux-chevron {
+    transition: transform var(--pux-transition);
+    font-size: 0.65rem;
+}
+
+.pux-expand-toggle.is-expanded .pux-chevron {
+    transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   8. EMPTY STATES
+   ============================================================ */
+.pux-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    min-height: 160px;
+}
+
+.pux-empty-icon {
+    font-size: 2.5rem;
+    line-height: 1;
+    opacity: 0.5;
+}
+
+.pux-empty-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.pux-empty-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 320px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.pux-empty-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--pux-radius-sm);
+    border: 1px solid rgba(214, 251, 65, 0.25);
+    background: rgba(214, 251, 65, 0.06);
+    color: var(--primary);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all var(--pux-transition-fast);
+}
+
+.pux-empty-action:hover {
+    background: rgba(214, 251, 65, 0.14);
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+
+/* ============================================================
+   9. RECOMMENDATIONS PANEL
+   ============================================================ */
+.pux-recommendations {
+    border-radius: var(--pux-radius-lg);
+    overflow: hidden;
+    border: 1px solid rgba(214, 251, 65, 0.12);
+    background: var(--background-card);
+    box-shadow: 6px 6px 0 var(--bg-shadow);
+}
+
+.pux-rec-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.15rem 1.35rem;
+    border-bottom: 1px solid rgba(214, 251, 65, 0.08);
+}
+
+.pux-rec-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.pux-rec-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.pux-rec-tabs::-webkit-scrollbar {
+    display: none;
+}
+
+.pux-rec-tab {
+    padding: 0.7rem 1.1rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    border: none;
+    background: none;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all var(--pux-transition-fast);
+}
+
+.pux-rec-tab:hover {
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.pux-rec-tab.is-active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    background: rgba(214, 251, 65, 0.04);
+}
+
+.pux-rec-tab .pux-tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4rem;
+    height: 1.2rem;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    font-size: 0.65rem;
+    margin-left: 0.35rem;
+}
+
+.pux-rec-tab.is-active .pux-tab-count {
+    background: rgba(214, 251, 65, 0.15);
+    color: var(--primary);
+}
+
+.pux-rec-body {
+    padding: 1rem 1.35rem 1.35rem;
+}
+
+.pux-rec-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+}
+
+.pux-rec-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    border-radius: var(--pux-radius-sm);
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: border-color var(--pux-transition-fast), background var(--pux-transition-fast);
+}
+
+.pux-rec-item:hover {
+    border-color: rgba(214, 251, 65, 0.15);
+    background: rgba(214, 251, 65, 0.03);
+}
+
+.pux-rec-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    font-size: 0.85rem;
+    background: rgba(214, 251, 65, 0.08);
+}
+
+.pux-rec-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.pux-rec-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.pux-rec-category-hidden {
+    display: none;
+}
+
+
+/* ============================================================
+   10. IMPROVED REPORT READABILITY
+   ============================================================ */
+
+/* Section card icon indicators */
+.section-card summary {
+    transition: background var(--pux-transition-fast);
+}
+
+.section-card summary:hover {
+    background: rgba(214, 251, 65, 0.03) !important;
+}
+
+/* Section card open animation */
+.section-card[open] summary {
+    border-bottom: 1px solid rgba(214, 251, 65, 0.06);
+}
+
+.section-card .collapsible {
+    animation: pux-slide-down 0.3s ease-out;
+}
+
+/* Improved section body typography */
+.section-card .section-body {
+    line-height: 1.7 !important;
+    letter-spacing: 0.01em;
+}
+
+/* Section icons for report */
+.section-card summary .section-summary-main::before {
+    content: '▸';
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    transition: transform var(--pux-transition);
+    margin-right: 0.25rem;
+    flex-shrink: 0;
+}
+
+.section-card[open] summary .section-summary-main::before {
+    transform: rotate(90deg);
+    color: var(--primary);
+}
+
+
+/* ============================================================
+   11. MOBILE & TABLET ENHANCEMENTS
+   ============================================================ */
+@media (max-width: 480px) {
+    .page-shell {
+        width: 100% !important;
+        margin: 8px auto 16px !important;
+        padding: 0 8px;
+    }
+
+    .site-header {
+        padding: 14px 16px !important;
+        border-radius: 16px !important;
+    }
+
+    .results-header {
+        padding: 16px !important;
+        border-radius: 16px !important;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .results-actions {
+        width: 100%;
+    }
+
+    .export-form {
+        width: 100%;
+    }
+
+    .summary-bar {
+        padding: 12px 14px !important;
+        border-radius: 16px !important;
+    }
+
+    .summary-pill {
+        font-size: 0.78rem;
+        padding: 6px 10px;
+    }
+
+    .breadcrumb-nav {
+        padding: 0.5rem 0.85rem;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .dashboard-sidebar {
+        position: static !important;
+        top: auto !important;
+    }
+
+    .chart-panel {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+
+    .checks-mosaic {
+        grid-template-columns: 1fr !important;
+    }
+
+    .location-panel-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .hero-webcheck {
+        grid-template-columns: 1fr !important;
+        min-height: auto !important;
+        padding: 1.5rem !important;
+    }
+
+    .feature-highlights {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* Modal improvements */
+    .feature-doc-modal {
+        width: 98vw !important;
+        max-height: 92vh !important;
+        border-radius: 16px !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .chart-panel {
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+
+    .modules-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Ensure no overflow on any viewport */
+.page-shell,
+.dashboard-main,
+.report-sections,
+.checks-mosaic,
+.hub-grid {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Chart responsiveness */
+.chart-card canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+
+/* ============================================================
+   12. MICRO-INTERACTIONS & ANIMATIONS
+   ============================================================ */
+@keyframes pux-pulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(214, 251, 65, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(214, 251, 65, 0.4); }
+}
+
+@keyframes pux-slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pux-fade-in {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pux-count-up {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pux-shimmer {
+    0% { background-position: -200px 0; }
+    100% { background-position: calc(200px + 100%) 0; }
+}
+
+@keyframes pux-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Entrance animation for sections */
+.pux-animate-in {
+    animation: pux-fade-in 0.5s ease-out both;
+}
+
+/* Animated counter */
+.pux-counter {
+    animation: pux-count-up 0.6s ease-out both;
+}
+
+/* Button feedback */
+.btn-primary,
+.toolbar-btn,
+.btn-export,
+.btn-scan-again,
+.preset-chip,
+.modules-btn {
+    transition: transform var(--pux-transition-fast), box-shadow var(--pux-transition-fast), background var(--pux-transition-fast), border-color var(--pux-transition-fast), color var(--pux-transition-fast) !important;
+}
+
+.btn-primary:active,
+.toolbar-btn:active,
+.btn-export:active,
+.btn-scan-again:active {
+    transform: scale(0.97) !important;
+}
+
+/* Smooth loading shimmer for placeholders */
+.pux-shimmer {
+    background: linear-gradient(90deg, rgba(255,255,255,0.02) 25%, rgba(255,255,255,0.06) 50%, rgba(255,255,255,0.02) 75%);
+    background-size: 200px 100%;
+    animation: pux-shimmer 1.5s infinite;
+}
+
+/* Card hover lift for all wc-cards */
+.wc-card {
+    transition: transform var(--pux-transition), box-shadow var(--pux-transition), border-color var(--pux-transition) !important;
+}
+
+.wc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2), 6px 6px 0 var(--bg-shadow);
+}
+
+/* Feature card improved animation */
+.feature-card {
+    transition: transform var(--pux-transition), border-color var(--pux-transition), box-shadow var(--pux-transition), background var(--pux-transition) !important;
+}
+
+.feature-card:hover {
+    box-shadow: var(--pux-elevation-2);
+}
+
+/* Smooth transitions for check-card status */
+.check-status {
+    transition: background var(--pux-transition-fast), color var(--pux-transition-fast);
+}
+
+/* Loading spinner */
+.pux-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(214, 251, 65, 0.2);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: pux-spin 0.8s linear infinite;
+}
+
+
+/* ============================================================
+   13. SCAN COMPLETION & DATA FRESHNESS
+   ============================================================ */
+.pux-scan-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.6rem 1rem;
+    border-radius: var(--pux-radius-sm);
+    background: rgba(214, 251, 65, 0.04);
+    border: 1px solid rgba(214, 251, 65, 0.1);
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.pux-freshness-dot {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.pux-freshness-dot::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--success);
+    flex-shrink: 0;
+    animation: pux-pulse 2s ease-in-out infinite;
+}
+
+.pux-scan-meta strong {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+
+/* ============================================================
+   14. TOOLTIP SYSTEM
+   ============================================================ */
+.pux-tooltip {
+    position: relative;
+    cursor: help;
+}
+
+.pux-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    padding: 0.55rem 0.85rem;
+    border-radius: 10px;
+    background: rgba(10, 14, 13, 0.96);
+    border: 1px solid rgba(214, 251, 65, 0.15);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    line-height: 1.45;
+    white-space: normal;
+    width: max-content;
+    max-width: 260px;
+    text-align: center;
+    z-index: 100;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--pux-transition-fast), transform var(--pux-transition-fast);
+    box-shadow: var(--pux-elevation-2);
+}
+
+.pux-tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+[data-theme="light"] .pux-tooltip::after {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #333;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   15. ACCESSIBILITY IMPROVEMENTS
+   ============================================================ */
+
+/* Focus-visible outlines */
+*:focus-visible {
+    outline: 2px solid var(--primary) !important;
+    outline-offset: 2px !important;
+}
+
+/* Minimum touch targets */
+button,
+a,
+input,
+select,
+.toolbar-btn,
+.preset-chip,
+.url-chip,
+.btn-export,
+.severity-filter-btn {
+    min-height: 36px;
+    min-width: 36px;
+}
+
+/* Improved link accessibility */
+a:focus-visible {
+    border-radius: 4px;
+}
+
+/* Skip-to-content (screen reader) */
+.pux-skip-link {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem 1.25rem;
+    background: var(--primary);
+    color: #111;
+    font-weight: 800;
+    border-radius: var(--pux-radius-sm);
+    z-index: 99999;
+    text-decoration: none;
+    transition: top var(--pux-transition-fast);
+}
+
+.pux-skip-link:focus {
+    top: 12px;
+}
+
+/* Keyboard navigation for section cards */
+.section-card summary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: -2px;
+    border-radius: var(--pux-radius-md);
+}
+
+/* Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .wc-card:hover,
+    .check-card:hover,
+    .feature-card:hover {
+        transform: none !important;
+    }
+}
+
+
+/* ============================================================
+   16. PROFESSIONAL SaaS REFINEMENTS
+   ============================================================ */
+
+/* Logo animation on hover */
+.logo-title {
+    transition: transform var(--pux-transition-fast);
+}
+
+.logo-title:hover {
+    transform: scale(1.02);
+}
+
+/* Premium gradient accent for hero headline */
+.hero-headline {
+    background: linear-gradient(135deg, var(--text-color) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Score ring glow */
+.score-ring {
+    box-shadow: 0 0 24px rgba(214, 251, 65, 0.12);
+    transition: box-shadow var(--pux-transition);
+}
+
+.score-ring:hover {
+    box-shadow: 0 0 40px rgba(214, 251, 65, 0.25);
+}
+
+/* Results header gradient accent bar */
+.results-header {
+    position: relative;
+    overflow: hidden;
+}
+
+.results-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--success), var(--info));
+    border-radius: 26px 26px 0 0;
+}
+
+/* Executive panel gradient */
+.executive-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.executive-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--danger), var(--warning), var(--success));
+}
+
+/* Advisory panel refinement */
+.advisory-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.advisory-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--warning), var(--info));
+}
+
+/* Better risk panel styling */
+.risk-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.risk-panel::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(214, 251, 65, 0.06), transparent 70%);
+    pointer-events: none;
+}
+
+/* Hub card hover refinement */
+.hub-card {
+    transition: transform var(--pux-transition), border-color var(--pux-transition) !important;
+    border-radius: var(--pux-radius-md);
+}
+
+.hub-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Footer refinement */
+.site-footer {
+    padding: 1.25rem 0 0.75rem !important;
+    border-top: 1px solid rgba(214, 251, 65, 0.06);
+    margin-top: 0.5rem;
+}
+
+/* Remediation list items */
+.remediation-list li {
+    transition: background var(--pux-transition-fast), border-color var(--pux-transition-fast);
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--pux-radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    margin-bottom: 0.5rem;
+}
+
+.remediation-list li:hover {
+    background: rgba(214, 251, 65, 0.03);
+    border-color: rgba(214, 251, 65, 0.12);
+}
+
+/* History card professional touches */
+.history-trend-chart-wrap {
+    margin: 0 0.75rem;
+    border-radius: var(--pux-radius-sm) !important;
+    overflow: hidden;
+}
+
+/* Scan form input premium glow on focus */
+.scan-form input:focus,
+.scan-form select:focus {
+    box-shadow: 0 0 0 3px rgba(214, 251, 65, 0.12) !important;
+    border-color: var(--primary) !important;
+}
+
+/* Compare panel refinement */
+.compare-panel {
+    border-radius: var(--pux-radius-md) !important;
+}
+
+/* Integration form refinements */
+.integrations-form fieldset {
+    border-radius: var(--pux-radius-sm);
+    border-color: rgba(214, 251, 65, 0.1);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.integrations-form legend {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.88rem;
+}
+
+/* Quick actions bar polish */
+.quick-actions-bar {
+    border-radius: var(--pux-radius-md);
+    padding: 1rem 1.15rem;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(214, 251, 65, 0.08);
+}
+
+.quick-chip {
+    transition: all var(--pux-transition-fast);
+}
+
+.quick-chip:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--pux-elevation-1);
+}
+
+/* Schedule panel polish */
+.schedule-panel {
+    border-radius: var(--pux-radius-lg) !important;
+}
+
+.schedule-panel summary {
+    transition: color var(--pux-transition-fast);
+}
+
+.schedule-panel summary:hover {
+    color: var(--primary);
+}

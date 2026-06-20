@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand.full }} — Security Report</title>
+    <style>
+        :root { --ink: #0f1419; --muted: #5c6b7a; --accent: #0d9488; --border: #e2e8f0; }
+        * { box-sizing: border-box; }
+        body { font-family: "Segoe UI", system-ui, sans-serif; color: var(--ink); margin: 0; padding: 2rem; line-height: 1.5; }
+        header { border-bottom: 3px solid var(--accent); padding-bottom: 1rem; margin-bottom: 2rem; }
+        h1 { margin: 0 0 0.25rem; font-size: 1.75rem; }
+        .meta { color: var(--muted); font-size: 0.9rem; }
+        .exec-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .stat { border: 1px solid var(--border); border-radius: 8px; padding: 1rem; text-align: center; }
+        .stat strong { display: block; font-size: 1.5rem; color: var(--accent); }
+        .risk-critical { color: #b91c1c; }
+        .risk-high { color: #c2410c; }
+        .risk-medium { color: #a16207; }
+        .risk-low, .risk-good { color: #047857; }
+        ul { padding-left: 1.25rem; }
+        section { margin-bottom: 2rem; page-break-inside: avoid; }
+        h2 { font-size: 1.15rem; border-left: 4px solid var(--accent); padding-left: 0.75rem; }
+        .finding { border: 1px solid var(--border); border-radius: 6px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; }
+        .sev { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+        pre { background: #f8fafc; border: 1px solid var(--border); padding: 1rem; overflow-x: auto; font-size: 0.75rem; white-space: pre-wrap; }
+        @media print { body { padding: 1rem; } }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ brand.full }} — Báo cáo đánh giá bảo mật</h1>
+        <p class="meta">{% if scan_url %}Mục tiêu: {{ scan_url }} · {% endif %}Ngày xuất: {{ generated_at }}</p>
+    </header>
+
+    {% if executive %}
+    <section>
+        <h2>Tóm tắt điều hành (Executive Summary)</h2>
+        <p>Mức rủi ro tổng thể: <strong class="{{ executive.risk_class }}">{{ executive.risk_level }}</strong>
+           · Điểm bảo mật: <strong>{{ executive.security_score }}/100</strong> ({{ executive.security_grade }})
+           · Điểm chất lượng: <strong>{{ executive.quality_score }}/100</strong> ({{ executive.quality_grade }})</p>
+        <div class="exec-grid">
+            {% for level, count in executive.severity_counts.items() %}
+            {% if count > 0 %}
+            <div class="stat"><strong>{{ count }}</strong>{{ level|title }}</div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        <ul>
+            {% for bullet in executive.bullets %}
+            <li>{{ bullet }}</li>
+            {% endfor %}
+        </ul>
+        {% if executive.top_findings %}
+        <h3>Phát hiện ưu tiên</h3>
+        {% for f in executive.top_findings %}
+        <div class="finding">
+            <span class="sev">{{ f.severity_label }}</span> — <strong>{{ f.title }}</strong>
+            {% if f.cwe_ids is defined and f.cwe_ids %}<p class="cwe-line">CWE: {{ f.cwe_ids | join(', ') }}</p>{% endif %}
+            <p>{{ f.preview }}</p>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </section>
+    {% endif %}
+
+    {% if remediation %}
+    <section>
+        <h2>Khuyến nghị khắc phục</h2>
+        <ol>
+            {% for item in remediation %}
+            <li><span class="sev">{{ item.priority_label }}</span> — {{ item.text }}</li>
+            {% endfor %}
+        </ol>
+    </section>
+    {% endif %}
+
+    <section>
+        <h2>Báo cáo chi tiết</h2>
+        <pre>{{ report }}</pre>
+    </section>
+</body>
+</html>

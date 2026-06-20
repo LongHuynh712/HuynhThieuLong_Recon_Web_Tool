@@ -1,0 +1,261 @@
+/* Premium cybersecurity dashboard — layout constraints & widgets */
+
+/* Prevent chart/canvas blowout (root cause of tall empty strip) */
+.chart-canvas-slot {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    max-height: 160px;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.chart-canvas-slot--sm {
+    height: 120px;
+    max-height: 120px;
+}
+
+.chart-canvas-slot canvas {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-height: 160px !important;
+}
+
+.chart-empty-state {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    color: var(--text-muted, #94a3b8);
+    text-align: center;
+    padding: 0.75rem;
+    pointer-events: none;
+}
+
+.trend-chart-box {
+    min-height: 0 !important;
+    max-height: none;
+    padding: 0.5rem 0.75rem 0.75rem;
+}
+
+.chart-widget-wide .chart-canvas-slot {
+    height: 140px;
+    max-height: 140px;
+}
+
+.chart-widget-wide .chart-canvas-slot canvas {
+    max-height: 140px !important;
+}
+
+/* Hero: no forced viewport height */
+.hero-webcheck {
+    min-height: auto !important;
+    align-items: start;
+    padding-bottom: 1.5rem;
+}
+
+.feature-highlights {
+    align-self: start;
+    height: auto !important;
+    min-height: 0;
+}
+
+/* KPI strip */
+.dashboard-kpis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+    margin: 0 0 1.25rem;
+    padding: 0 0.25rem;
+}
+
+.kpi-card {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.kpi-label {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted, #94a3b8);
+    margin-bottom: 0.35rem;
+}
+
+.kpi-value {
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.1;
+    color: var(--text-primary, #f1f5f9);
+}
+
+.kpi-meta {
+    font-size: 0.72rem;
+    color: var(--text-muted, #94a3b8);
+    margin-top: 0.25rem;
+}
+
+.kpi-card.kpi-accent .kpi-value {
+    color: var(--primary, #d6fb41);
+}
+
+.kpi-card.kpi-warn .kpi-value {
+    color: #fbbf24;
+}
+
+.kpi-card.kpi-ok .kpi-value {
+    color: #4ade80;
+}
+
+/* Collapsible platform hubs — compact on first load */
+.hub-collapsible {
+    margin: 1rem 0;
+    border-radius: 14px;
+    border: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.1));
+    background: var(--surface-raised, rgba(255, 255, 255, 0.02));
+    overflow: hidden;
+}
+
+.hub-collapsible > summary {
+    cursor: pointer;
+    padding: 0.85rem 1.15rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.hub-collapsible > summary::-webkit-details-marker {
+    display: none;
+}
+
+.hub-collapsible > summary::after {
+    content: "▸";
+    color: var(--text-muted, #94a3b8);
+    transition: transform 0.2s;
+}
+
+.hub-collapsible[open] > summary::after {
+    transform: rotate(90deg);
+}
+
+.hub-collapsible .hub-collapsible-body {
+    padding: 0 1.15rem 1.15rem;
+    border-top: 1px solid var(--border-subtle, rgba(255, 255, 255, 0.06));
+}
+
+.hub-collapsible .platform-hub {
+    margin: 0;
+    padding: 1rem 0 0;
+    border: none;
+    background: transparent;
+}
+
+/* Activity feed */
+.activity-feed {
+    max-height: 200px;
+    overflow-y: auto;
+    font-size: 0.78rem;
+}
+
+.activity-feed li {
+    padding: 0.4rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+/* Text overflow — URLs, certs, long intel */
+.text-truncate,
+.api-text,
+.results-target h2,
+.history-host,
+.check-title,
+.queue-item span:first-child {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.section-body,
+.pre-wrap-safe {
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+}
+
+.url-break {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+/* Chart panel compact */
+.chart-panel {
+    align-items: stretch;
+}
+
+.chart-widget {
+    min-height: 0 !important;
+    max-height: 200px;
+}
+
+.chart-widget .chart-canvas-slot {
+    height: 110px;
+    max-height: 110px;
+}
+
+.score-widget {
+    min-height: 0 !important;
+    max-height: 200px;
+}
+
+/* Export bar wrap */
+.export-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    align-items: center;
+}
+
+/* Loading skeleton */
+.skeleton {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.04) 25%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.04) 75%);
+    background-size: 200% 100%;
+    animation: rs-shimmer 1.5s infinite;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+    .dashboard-kpis {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+html[data-theme="light"] .kpi-card {
+    background: var(--surface);
+    border-color: var(--border);
+}
+
+html[data-theme="light"] .hub-collapsible {
+    background: var(--surface);
+    border-color: var(--border);
+}

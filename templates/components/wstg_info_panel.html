@@ -1,0 +1,90 @@
+<section class="wstg-info-panel wc-card" id="wstg-info-panel" aria-labelledby="wstg-info-heading">
+    <div class="panel-header">
+        <h2 id="wstg-info-heading">OWASP WSTG 4.1 — Information Gathering</h2>
+        <p class="hub-meta">Supplement checks (WSTG-INFO-01 → INFO-10). Uses existing scan target only.</p>
+    </div>
+    <div class="wstg-info-toolbar">
+        <button type="button" class="toolbar-btn" id="wstgRunAllBtn">Run all WSTG INFO checks</button>
+        <span class="hub-meta" id="wstgInfoStatus">Ready</span>
+    </div>
+    <div class="wstg-info-grid" id="wstgInfoGrid">
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-01" data-endpoint="searchengine">
+            <h3>INFO-01 Search Engine Recon</h3>
+            <p class="hub-meta">Google dorks, cache &amp; archive links</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-02" data-endpoint="webserver">
+            <h3>INFO-02 Web Server Fingerprint</h3>
+            <p class="hub-meta">Headers + error-page banner probe</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-03" data-endpoint="metafiles">
+            <h3>INFO-03 Metafiles</h3>
+            <p class="hub-meta">robots, sitemap, security.txt, humans.txt</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-04" data-endpoint="enumerate-apps">
+            <h3>INFO-04 Application Enumeration</h3>
+            <p class="hub-meta">Subdomains + TCP port scan</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-05" data-endpoint="content-leak">
+            <h3>INFO-05 Content Leakage</h3>
+            <p class="hub-meta">Comments, meta, scripts, sensitive patterns</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-06" data-endpoint="entry-points">
+            <h3>INFO-06 Entry Points</h3>
+            <p class="hub-meta">Forms, query params, cookies</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-07" data-endpoint="crawl">
+            <h3>INFO-07 Execution Paths</h3>
+            <p class="hub-meta">BFS crawl map (depth-limited)</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-08" data-endpoint="framework">
+            <h3>INFO-08 Framework Fingerprint</h3>
+            <p class="hub-meta">Cookie/header/path signatures</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-09" data-endpoint="cms">
+            <h3>INFO-09 CMS Fingerprint</h3>
+            <p class="hub-meta">Generator meta + CMS paths</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-INFO-10" data-endpoint="architecture">
+            <h3>INFO-10 Architecture Detection</h3>
+            <p class="hub-meta">CDN/WAF/LB + harmless WAF probe</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-CONF-10" data-endpoint="conf-10-subdomain-takeover">
+            <h3>CONF-10 Subdomain Takeover</h3>
+            <p class="hub-meta">Enumerate subdomains and probe common takeover signatures</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-CONF-11" data-endpoint="conf-11-cloud-storage">
+            <h3>CONF-11 Cloud Storage Discovery</h3>
+            <p class="hub-meta">Detect exposed cloud storage endpoints (S3, GCS, Azure)</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+        <article class="wstg-info-card" data-wstg="WSTG-CONF-13" data-endpoint="conf-13-path-confusion">
+            <h3>CONF-13 Path Confusion</h3>
+            <p class="hub-meta">Probe path variants to detect routing/handler inconsistencies</p>
+            <button type="button" class="toolbar-btn wstg-run-btn">Run</button>
+            <div class="wstg-info-result hidden" aria-live="polite"></div>
+        </article>
+    </div>
+</section>

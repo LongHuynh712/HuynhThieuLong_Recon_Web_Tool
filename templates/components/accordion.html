@@ -1,0 +1,18 @@
+<section class="report-sections">
+    <div class="panel-header">
+        <h2>Results</h2>
+        <p class="subtle">Expand each module to review findings.</p>
+    </div>
+    {% for section in sections %}
+        <details class="section-card {{ section.severity }}" id="{{ section.slug }}" {% if section.severity != 'high' %}open{% endif %}>
+            <summary>
+                <div>
+                    <span class="section-badge {{ section.severity }}">{{ section.category }}</span>
+                    <h3>{{ section.title }}</h3>
+                </div>
+                <span class="severity-badge {{ section.severity }}">{{ section.severity | upper }}</span>
+            </summary>
+            <pre>{{ section.text }}</pre>
+        </details>
+    {% endfor %}
+</section>

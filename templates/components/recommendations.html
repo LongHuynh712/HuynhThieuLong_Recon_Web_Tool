@@ -1,0 +1,15 @@
+<section class="recommendation-panel">
+    <div class="panel-header">
+        <h2>Recommendations</h2>
+        <span class="badge">{{ recommendations | length }}</span>
+    </div>
+    {% if recommendations %}
+        <ul class="recommendation-list">
+            {% for item in recommendations %}
+                <li>{{ item }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p class="subtle">No recommendations generated.</p>
+    {% endif %}
+</section>

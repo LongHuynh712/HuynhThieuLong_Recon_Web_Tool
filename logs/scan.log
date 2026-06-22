@@ -19544,3 +19544,162 @@
 2026-06-22 13:43:31,095 - INFO - 127.0.0.1 - - [22/Jun/2026 13:43:31] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
 2026-06-22 13:43:31,106 - INFO - 127.0.0.1 - - [22/Jun/2026 13:43:31] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
 2026-06-22 13:43:31,147 - INFO - 127.0.0.1 - - [22/Jun/2026 13:43:31] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:29,191 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-22 14:38:29,194 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-22 14:38:33,039 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "GET / HTTP/1.1" 200 -
+2026-06-22 14:38:33,449 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,460 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,467 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,473 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,473 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,479 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,484 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,486 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,490 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,491 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,493 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,495 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,498 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,499 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,997 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:33,999 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:33] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,002 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,005 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,006 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,012 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,017 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,020 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,021 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,024 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:34,194 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:34] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-22 14:38:35,663 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:35] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:38:45,557 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:45,623 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:45,623 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:45,656 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:45,657 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:45,706 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:45] "GET /api/dns?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:45,752 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:46,151 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:46] "GET /api/csp?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:46,298 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:46] "GET /api/content-leakage?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:46,388 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:46] "GET /api/assets?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:46,406 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:46] "GET /api/architecture-mapper?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:46,531 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:46,532 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:46] "GET /api/queue HTTP/1.1" 200 -
+2026-06-22 14:38:46,600 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:46,709 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:47,650 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:47] "GET /api/execution-paths?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:47,793 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:47] "GET /api/entry-point-mapper?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:48,313 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-22 14:38:48,314 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:48,384 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:48,686 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-22 14:38:48,823 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:48] "GET /api/framework-enhancement?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:48,830 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:48] "GET /api/firewall?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:48,849 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:48] "GET /api/fingerprint?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:48,852 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:48] "GET /api/get-ip?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:49,039 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:49,182 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:49,186 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:49,507 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:49] "GET /api/headers?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:49,512 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:49] "GET /api/hsts?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:49,622 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:49,627 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:49] "GET /api/http-security?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:49,876 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:49] "[35m[1mGET /api/mail-config?url=https://duck.com HTTP/1.1[0m" 500 -
+2026-06-22 14:38:49,979 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:49] "GET /api/redirects?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:50,037 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:50] "GET /api/linked-pages?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:50,399 - INFO - Connecting to https://duck.com/robots.txt [GET]
+2026-06-22 14:38:50,759 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:50] "GET /api/robots-txt?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:50,814 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:50] "GET /api/search-engine-recon?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:50,887 - INFO - Connecting to https://ipinfo.io/20.43.161.105/json [GET]
+2026-06-22 14:38:51,125 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:51] "GET /api/security-txt?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:51,165 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:51,656 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:51] "GET /api/social-tags?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:51,983 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:51] "GET /api/ssl?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:52,065 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:52,173 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-22 14:38:52,412 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-22 14:38:52,450 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:52] "GET /api/status?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:52,505 - INFO - Connecting to https://duck.com [GET]
+2026-06-22 14:38:52,866 - INFO - Connecting to https://duck.com/robots.txt [GET]
+2026-06-22 14:38:53,071 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-22 14:38:53,200 - INFO - Connecting to https://duckduckgo.com/sitemap.xml [GET]
+2026-06-22 14:38:53,414 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-22 14:38:53,843 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:53] "GET /api/cookies?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:54,134 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:54] "GET /api/tls-connection?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:54,183 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:54] "GET /api/txt-records?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:54,249 - INFO - Connecting to https://ipinfo.io/20.43.161.105/json [GET]
+2026-06-22 14:38:54,654 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:54] "GET /api/network?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:57,000 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:57] "GET /api/whois?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:57,366 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:57] "GET /api/enhanced-enumeration?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:38:58,193 - INFO - 127.0.0.1 - - [22/Jun/2026 14:38:58] "GET /api/queue HTTP/1.1" 200 -
+2026-06-22 14:39:03,803 - INFO - Connecting to https://duck.com [OPTIONS]
+2026-06-22 14:39:04,479 - INFO - Connecting to https://duck.com [PUT]
+2026-06-22 14:39:04,921 - INFO - Connecting to https://duck.com [DELETE]
+2026-06-22 14:39:05,290 - INFO - Connecting to https://duck.com [TRACE]
+2026-06-22 14:39:05,600 - INFO - Connecting to https://duck.com [PATCH]
+2026-06-22 14:39:06,255 - INFO - Connecting to https://duck.com/admin [GET]
+2026-06-22 14:39:06,763 - INFO - Connecting to https://duck.com/administrator [GET]
+2026-06-22 14:39:07,110 - INFO - Connecting to https://duck.com/dashboard [GET]
+2026-06-22 14:39:07,621 - INFO - Connecting to https://duck.com/cpanel [GET]
+2026-06-22 14:39:08,054 - INFO - Connecting to https://duck.com/manage [GET]
+2026-06-22 14:39:08,485 - INFO - Connecting to https://duck.com/login [GET]
+2026-06-22 14:39:08,953 - INFO - Connecting to https://duck.com/admin/login [GET]
+2026-06-22 14:39:09,287 - INFO - Connecting to https://duck.com/backup.zip [GET]
+2026-06-22 14:39:09,647 - INFO - Connecting to https://duck.com/backup.tar.gz [GET]
+2026-06-22 14:39:10,008 - INFO - Connecting to https://duck.com/db.sql [GET]
+2026-06-22 14:39:10,462 - INFO - Connecting to https://duck.com/.env [GET]
+2026-06-22 14:39:10,845 - INFO - Connecting to https://duck.com/config.php.bak [GET]
+2026-06-22 14:39:11,242 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:11] "GET /api/queue HTTP/1.1" 200 -
+2026-06-22 14:39:11,277 - INFO - Connecting to https://duck.com/index.old [GET]
+2026-06-22 14:39:11,656 - INFO - Connecting to https://duck.com/website.zip [GET]
+2026-06-22 14:39:12,120 - INFO - Connecting to https://duck.com/backup.sql [GET]
+2026-06-22 14:39:12,540 - INFO - Connecting to https://duck.com/.git/config [GET]
+2026-06-22 14:39:12,868 - INFO - Connecting to https://duck.com/.svn/entries [GET]
+2026-06-22 14:39:13,284 - INFO - Connecting to https://duck.com/web.config [GET]
+2026-06-22 14:39:13,678 - INFO - Connecting to https://duck.com/crossdomain.xml [GET]
+2026-06-22 14:39:14,056 - INFO - Connecting to https://duck.com/clientaccesspolicy.xml [GET]
+2026-06-22 14:39:14,457 - INFO - Connecting to https://crt.sh/?q=%25.duck.com&output=json [GET]
+2026-06-22 14:39:15,398 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:15] "GET /api/screenshot?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:39:16,809 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:16] "GET /api/tech-stack?url=https://duck.com HTTP/1.1" 200 -
+2026-06-22 14:39:22,884 - INFO - Connecting to https://www.duck.com [GET]
+2026-06-22 14:39:23,174 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:23] "GET /api/queue HTTP/1.1" 200 -
+2026-06-22 14:39:23,397 - INFO - Connecting to https://api.duck.com [GET]
+2026-06-22 14:39:23,450 - ERROR - Request failed: https://api.duck.com - HTTPSConnectionPool(host='api.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6156AD0>: Failed to resolve 'api.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,479 - INFO - Connecting to https://blog.duck.com [GET]
+2026-06-22 14:39:23,520 - ERROR - Request failed: https://blog.duck.com - HTTPSConnectionPool(host='blog.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6156FD0>: Failed to resolve 'blog.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,548 - INFO - Connecting to https://mail.duck.com [GET]
+2026-06-22 14:39:23,590 - ERROR - Request failed: https://mail.duck.com - HTTPSConnectionPool(host='mail.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6157390>: Failed to resolve 'mail.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,619 - INFO - Connecting to https://dev.duck.com [GET]
+2026-06-22 14:39:23,732 - ERROR - Request failed: https://dev.duck.com - HTTPSConnectionPool(host='dev.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6157750>: Failed to resolve 'dev.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,764 - INFO - Connecting to https://test.duck.com [GET]
+2026-06-22 14:39:23,804 - ERROR - Request failed: https://test.duck.com - HTTPSConnectionPool(host='test.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6157B10>: Failed to resolve 'test.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,837 - INFO - Connecting to https://admin.duck.com [GET]
+2026-06-22 14:39:23,948 - ERROR - Request failed: https://admin.duck.com - HTTPSConnectionPool(host='admin.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6157ED0>: Failed to resolve 'admin.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:23,986 - INFO - Connecting to https://cdn.duck.com [GET]
+2026-06-22 14:39:24,029 - ERROR - Request failed: https://cdn.duck.com - HTTPSConnectionPool(host='cdn.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B61342D0>: Failed to resolve 'cdn.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:24,066 - INFO - Connecting to https://m.duck.com [GET]
+2026-06-22 14:39:24,182 - ERROR - Request failed: https://m.duck.com - HTTPSConnectionPool(host='m.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6134690>: Failed to resolve 'm.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:24,215 - INFO - Connecting to https://portal.duck.com [GET]
+2026-06-22 14:39:24,265 - ERROR - Request failed: https://portal.duck.com - HTTPSConnectionPool(host='portal.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000193B6134A50>: Failed to resolve 'portal.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-22 14:39:35,181 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:35] "GET /api/queue HTTP/1.1" 200 -
+2026-06-22 14:39:37,213 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:37] "[32mPOST /scan HTTP/1.1[0m" 302 -
+2026-06-22 14:39:39,179 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:39] "GET /results/8db9efc4-d62c-441c-9558-841c29cd2caf?criticality=normal HTTP/1.1" 200 -
+2026-06-22 14:39:40,966 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:40] "GET /results/8db9efc4-d62c-441c-9558-841c29cd2caf?criticality=normal HTTP/1.1" 200 -
+2026-06-22 14:39:41,252 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,253 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,254 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,255 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,258 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,260 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,267 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/dashboard-charts.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,269 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,271 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,273 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,275 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,278 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,293 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,298 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,302 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-22 14:39:41,304 - INFO - 127.0.0.1 - - [22/Jun/2026 14:39:41] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -

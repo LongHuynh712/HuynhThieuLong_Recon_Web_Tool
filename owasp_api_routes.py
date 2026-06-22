@@ -18,6 +18,11 @@ from owasp_wstg_integration import (
     run_session_assessment,
     run_error_handler_assessment,
     run_security_scoring,
+    run_authentication_assessment,
+    run_authorization_assessment,
+    run_input_validation_assessment,
+    run_business_logic_assessment,
+    run_session_enhancement_assessment,
     get_module_info,
     get_module_by_wstg_section,
     run_all_owasp_modules
@@ -284,7 +289,7 @@ def security_score():
     """
     OWASP: Security posture scoring
     Computes OWASP coverage and security metrics
-    
+
     JSON Body:
     {
         "url": "https://example.com"
@@ -292,12 +297,125 @@ def security_score():
     """
     data = request.get_json() or {}
     url = data.get('url')
-    
+
     if not url:
         return jsonify({'error': 'URL parameter required'}), 400
-    
+
     try:
         results = run_security_scoring(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ===========================
+# New Assessment Endpoints
+# ===========================
+@owasp_routes.route('/authentication-assessment', methods=['POST'])
+def authentication_assessment():
+    """
+    WSTG-4.3/4.4: Authentication Assessment (Passive)
+    Detects MFA, login forms, password reset, account lockout, weak auth
+
+    JSON Body:
+    {
+        "url": "https://example.com"
+    }
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_authentication_assessment(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@owasp_routes.route('/authorization-assessment', methods=['POST'])
+def authorization_assessment():
+    """
+    WSTG-4.5: Authorization Assessment (Passive)
+    Detects IDOR, privilege escalation, forced browsing, missing access control
+
+    JSON Body:
+    {
+        "url": "https://example.com"
+    }
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_authorization_assessment(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@owasp_routes.route('/input-validation-assessment', methods=['POST'])
+def input_validation_assessment():
+    """
+    WSTG-4.7: Input Validation Assessment (Passive)
+    Detects XSS, SQLi, SSRF, open redirect, file upload indicators
+
+    JSON Body:
+    {
+        "url": "https://example.com"
+    }
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_input_validation_assessment(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@owasp_routes.route('/business-logic-assessment', methods=['POST'])
+def business_logic_assessment():
+    """
+    WSTG-4.10: Business Logic Assessment (Passive)
+    Detects workflow bypass, predictable identifiers, business process weaknesses
+
+    JSON Body:
+    {
+        "url": "https://example.com"
+    }
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_business_logic_assessment(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@owasp_routes.route('/session-enhancement-assessment', methods=['POST'])
+def session_enhancement_assessment():
+    """
+    WSTG-4.6: Session Management Enhancement (Passive)
+    Analyzes session cookies, JWT tokens, logout, entropy, fixation
+
+    JSON Body:
+    {
+        "url": "https://example.com"
+    }
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_session_enhancement_assessment(url)
         return jsonify(results), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -310,7 +428,7 @@ def security_score():
 def scan_comprehensive():
     """
     Execute all 10 OWASP modules for comprehensive assessment
-    
+
     JSON Body:
     {
         "url": "https://example.com"
@@ -318,10 +436,10 @@ def scan_comprehensive():
     """
     data = request.get_json() or {}
     url = data.get('url')
-    
+
     if not url:
         return jsonify({'error': 'URL parameter required'}), 400
-    
+
     try:
         results = run_all_owasp_modules(url)
         return jsonify(results), 200

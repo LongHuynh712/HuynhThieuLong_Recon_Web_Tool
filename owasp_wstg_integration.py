@@ -24,6 +24,12 @@ try:
     from session_assessor import SessionAssessor
     from error_handler_assessor import ErrorHandlerAssessor
     from security_scorer import SecurityScorer
+    # New modules
+    from authentication_assessor import AuthenticationAssessor
+    from authorization_assessor import AuthorizationAssessor
+    from input_validation_assessor import InputValidationAssessor
+    from business_logic_assessor import BusinessLogicAssessor
+    from session_enhancement_assessor import SessionEnhancementAssessor
 except ImportError as e:
     print(f"Warning: Could not import OWASP modules: {e}")
 
@@ -88,6 +94,37 @@ OWASP_WSTG_MODULES = {
         'wstg': 'OWASP WSTG v4.2',
         'category': 'Security Scoring',
         'description': 'OWASP coverage metrics and security posture scoring'
+    },
+    # New modules
+    'authentication_assessor': {
+        'class': AuthenticationAssessor,
+        'wstg': 'WSTG-4.3/4.4',
+        'category': 'Authentication & Identity Management',
+        'description': 'MFA detection, login analysis, password reset, account lockout, weak auth indicators'
+    },
+    'authorization_assessor': {
+        'class': AuthorizationAssessor,
+        'wstg': 'WSTG-4.5',
+        'category': 'Authorization Testing',
+        'description': 'IDOR indicators, privilege escalation, forced browsing, missing access control'
+    },
+    'input_validation_assessor': {
+        'class': InputValidationAssessor,
+        'wstg': 'WSTG-4.7',
+        'category': 'Input Validation Testing',
+        'description': 'XSS, SQLi, SSRF, Open Redirect, File Upload indicators (passive)'
+    },
+    'business_logic_assessor': {
+        'class': BusinessLogicAssessor,
+        'wstg': 'WSTG-4.10',
+        'category': 'Business Logic Testing',
+        'description': 'Workflow bypass, predictable identifiers, business process weaknesses'
+    },
+    'session_enhancement_assessor': {
+        'class': SessionEnhancementAssessor,
+        'wstg': 'WSTG-4.6',
+        'category': 'Session Management Enhancement',
+        'description': 'Session cookie analysis, JWT analysis, logout checks, entropy, fixation indicators'
     }
 }
 
@@ -255,3 +292,29 @@ def run_error_handler_assessment(url):
 def run_security_scoring(url):
     """OWASP: Security posture scoring and coverage metrics"""
     return run_owasp_module(url, 'security_scorer')
+
+
+# New module wrappers
+def run_authentication_assessment(url):
+    """WSTG-4.3/4.4: Authentication assessment (MFA, login, password reset, lockout)"""
+    return run_owasp_module(url, 'authentication_assessor')
+
+
+def run_authorization_assessment(url):
+    """WSTG-4.5: Authorization assessment (IDOR, privilege escalation, forced browsing)"""
+    return run_owasp_module(url, 'authorization_assessor')
+
+
+def run_input_validation_assessment(url):
+    """WSTG-4.7: Input validation assessment (XSS, SQLi, SSRF, open redirect, file upload)"""
+    return run_owasp_module(url, 'input_validation_assessor')
+
+
+def run_business_logic_assessment(url):
+    """WSTG-4.10: Business logic assessment (workflow bypass, predictable IDs)"""
+    return run_owasp_module(url, 'business_logic_assessor')
+
+
+def run_session_enhancement_assessment(url):
+    """WSTG-4.6: Session management enhancement (JWT, cookies, logout, entropy)"""
+    return run_owasp_module(url, 'session_enhancement_assessor')

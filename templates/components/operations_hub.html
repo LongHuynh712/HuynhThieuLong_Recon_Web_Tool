@@ -1,0 +1,71 @@
+<section class="platform-hub operations-hub wc-card" id="operations">
+    <h2 class="hub-title">Operations Center</h2>
+    <div class="hub-grid">
+        <div class="hub-card">
+            <h3>Workspace & Team</h3>
+            <label>Workspace
+                <select id="workspaceSelect">
+                    {% for ws in workspaces %}
+                    <option value="{{ ws.id }}" {% if ws.id == active_workspace_id %}selected{% endif %}>{{ ws.name }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>User
+                <select id="userSelect">
+                    {% for u in users %}
+                    <option value="{{ u.id }}" {% if active_user and u.id == active_user.id %}selected{% endif %}>{{ u.name }} ({{ u.role }})</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <button type="button" class="toolbar-btn" id="createWorkspaceBtn">+ Workspace</button>
+            {% if active_user %}<p class="hub-meta">API key: <code class="api-key-snippet" title="{{ active_user.api_key }}">{{ active_user.api_key }}</code></p>{% endif %}
+        </div>
+        <div class="hub-card">
+            <h3>Hàng đợi quét</h3>
+            <ul id="queueList" class="hub-list">
+                {% for item in scan_queue %}
+                <li class="queue-item status-{{ item.status }}">
+                    <span>{{ item.url }}</span>
+                    <span class="hub-tag">{{ item.status }}</span>
+                    {% if item.status == 'pending' %}
+                    <button type="button" class="toolbar-btn queue-cancel" data-id="{{ item.id }}">Hủy</button>
+                    {% endif %}
+                </li>
+                {% else %}
+                <li class="hub-empty">Hàng đợi trống.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="hub-card">
+            <h3>Webhooks</h3>
+            <form id="webhookForm" class="hub-inline-form">
+                <input type="url" id="webhookUrl" placeholder="https://hooks.example/..." required>
+                <button type="submit" class="toolbar-btn">Thêm</button>
+            </form>
+            <ul id="webhookList" class="hub-list compact">
+                {% for hook in webhooks %}
+                <li>{{ hook.label }} <span class="hub-tag">{{ 'on' if hook.enabled else 'off' }}</span></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="hub-card">
+            <h3>Service health</h3>
+            <p class="health-overall status-{{ health_snapshot.status }}">{{ health_snapshot.status | upper }} · {{ health_snapshot.checked_at }}</p>
+            <ul class="health-checks">
+                {% for check in health_snapshot.checks %}
+                <li class="health-{{ check.status }}"><span>{{ check.name }}</span> — {{ check.message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="hub-card hub-card-wide">
+            <h3>Audit log (30 gần nhất)</h3>
+            <ul class="audit-list">
+                {% for entry in audit_entries %}
+                <li><time>{{ entry.timestamp }}</time> <strong>{{ entry.action }}</strong> — {{ entry.actor }} <span class="hub-tag">{{ entry.status }}</span></li>
+                {% else %}
+                <li class="hub-empty">Chưa có sự kiện audit.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</section>

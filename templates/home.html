@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand.full }} — Quét bảo mật</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ui-enhancements.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='light-theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='platform.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='premium-ux.css') }}">
+</head>
+<body>
+    <div class="page-shell page-shell--home">
+        <header class="site-header">
+            <h1 class="logo-title">
+                <span class="logo-icon" aria-hidden="true">🛰️</span>
+                <span class="logo-brand">{{ brand.name }}</span><span class="logo-accent">{{ brand.accent }}</span>
+            </h1>
+            <nav class="site-nav">
+                <a href="{{ url_for('index') }}">Trang chủ</a>
+                <a href="#modules">Module</a>
+                <a href="/api/docs" target="_blank" rel="noopener">API</a>
+                <a href="#operations">Ops</a>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện sáng/tối">🌙</button>
+            </nav>
+        </header>
+
+        <section class="hero-webcheck" id="scan">
+            <div class="hero-left">
+                <h2 class="hero-headline">{{ brand.headline_line1 }}<br>{{ brand.headline_line2 }}</h2>
+                <h3 class="hero-subline">
+                    {{ brand.subline_lead }}
+                    <em>{{ brand.subline_emphasis }}</em>
+                </h3>
+                <div class="hero-stats">
+                    <span class="hero-stat">{{ scan_modules|length }} module quét</span>
+                    <span class="hero-stat">{{ api_jobs|length }} API check</span>
+                    <span class="hero-stat">Export TXT · HTML · PDF</span>
+                </div>
+
+                <aside class="quick-actions-bar" aria-label="Thao tác nhanh">
+                    <div class="quick-actions-group">
+                        <h4>Mục tiêu gần đây</h4>
+                        <div id="recentTargets" class="quick-chip-row"></div>
+                    </div>
+                    <div class="quick-actions-group">
+                        <h4>Yêu thích</h4>
+                        <div id="favoriteTargets" class="quick-chip-row"></div>
+                    </div>
+                    <div class="quick-actions-group">
+                        <button type="button" class="quick-chip" id="addFavoriteBtn" title="Lưu URL hiện tại">☆ Yêu thích</button>
+                    </div>
+                </aside>
+
+                <form id="scanForm" method="POST" action="{{ url_for('scan') }}" class="scan-form hero-form">
+                    <label for="url">Nhập URL để bắt đầu 👇</label>
+                    <input id="url" type="text" name="url" value="{{ scan_url }}" placeholder="e.g. duck.com" required autocomplete="url">
+                    <div class="example-urls">
+                        <span>E.g.</span>
+                        {% for example in example_urls %}
+                            <button type="button" class="url-chip" data-url="{{ example }}">{{ example }}</button>
+                        {% endfor %}
+                    </div>
+                    <div class="scan-options-row">
+                        <select id="scanMode" name="scanMode">
+                            <option value="full" {% if scan_mode == 'full' %}selected{% endif %}>Full scan</option>
+                            <option value="quick" {% if scan_mode == 'quick' %}selected{% endif %}>Quick scan</option>
+                        </select>
+                        <select id="assetCriticality" name="assetCriticality" aria-label="Mức độ quan trọng tài sản">
+                            <option value="low" {% if asset_criticality == 'low' %}selected{% endif %}>Asset: Low</option>
+                            <option value="normal" {% if asset_criticality == 'normal' or not asset_criticality %}selected{% endif %}>Asset: Normal</option>
+                            <option value="high" {% if asset_criticality == 'high' %}selected{% endif %}>Asset: High</option>
+                            <option value="critical" {% if asset_criticality == 'critical' %}selected{% endif %}>Asset: Critical</option>
+                        </select>
+                        <button type="submit" class="btn-primary" id="analyzeBtn">Phân tích URL</button>
+                        <button type="button" class="toolbar-btn" id="enqueueScanBtn">Hàng đợi</button>
+                    </div>
+                    <p class="kbd-hint">Phím tắt: <kbd>Ctrl</kbd> + <kbd>Enter</kbd> để quét nhanh</p>
+                    <div class="scan-presets">
+                        <span class="scan-presets-label">Preset:</span>
+                        {% for preset in scan_presets %}
+                        <button type="button" class="preset-chip {% if preset.id == 'full' %}is-active{% endif %}" data-preset="{{ preset.id }}">{{ preset.icon }} {{ preset.label }}</button>
+                        {% endfor %}
+                    </div>
+                    <div class="modules-panel" id="modules">
+                        <div class="modules-panel-head">
+                            <div>
+                                <h4 class="modules-title">Module hoạt động</h4>
+                                <p class="modules-subtitle">
+                                    Puppeteer: {% if puppeteer_available %}<span class="pill-ok">Ready</span>{% else %}<span class="pill-warn">Chưa cài — chạy <code>cd browser && npm install</code></span>{% endif %}
+                                </p>
+                            </div>
+                            <div class="modules-actions">
+                                <span class="modules-count" id="modulesCount">{{ selected_sections|length }}/{{ scan_modules|length }}</span>
+                                <button type="button" class="modules-btn" id="selectAllModules">Tất cả</button>
+                                <button type="button" class="modules-btn" id="clearAllModules">Bỏ chọn</button>
+                            </div>
+                        </div>
+                        <div class="modules-grid" id="scanOptions">
+                            {% for mod in scan_modules %}
+                            <div class="module-card-shell {% if mod.value in selected_sections %}is-active{% endif %}">
+                                <div class="module-help-strip">
+                                    <img class="module-help-thumb" src="{{ mod.help.image_url }}" alt="{{ mod.help.image_alt }}" width="48" height="32" loading="lazy">
+                                    <p class="module-help-summary">{{ mod.help.summary }}</p>
+                                    <button type="button" class="info-help-btn" data-doc-id="{{ mod.value }}">Chi tiết</button>
+                                </div>
+                                <label class="module-card {% if mod.value in selected_sections %}is-active{% endif %}">
+                                    <input type="checkbox" name="scanSections" value="{{ mod.value }}" class="module-input" {% if mod.value in selected_sections %}checked{% endif %}>
+                                    <span class="module-icon" aria-hidden="true">{{ mod.icon }}</span>
+                                    <span class="module-body">
+                                        <span class="module-name">{{ mod.label }}</span>
+                                        <span class="module-desc">{{ mod.desc }}</span>
+                                        <span class="module-tags">
+                                            {% for tag in mod.tags[:3] %}
+                                                <em>{{ tag }}</em>
+                                            {% endfor %}
+                                        </span>
+                                    </span>
+                                    <span class="module-switch" role="switch" aria-checked="{% if mod.value in selected_sections %}true{% else %}false{% endif %}"></span>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </form>
+                <div class="progress-panel hidden" id="scanProgress">
+                    <span class="progress-label">Analyzing…</span>
+                    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                    <span class="progress-text">Đang chạy các module kiểm tra…</span>
+                </div>
+                <div id="loading" class="loading hidden">Đang quét, vui lòng chờ…</div>
+
+                <section id="jobsProgress" class="jobs-progress hidden" aria-live="polite">
+                    <div class="jobs-progress-head">
+                        <div class="jobs-progress-summary">
+                            <span id="jobsLoadingText" class="jobs-loading-text">Loading 0 / 0 Jobs</span>
+                            <span id="jobsSkippedText" class="jobs-meta jobs-skipped"></span>
+                            <span id="jobsFailedText" class="jobs-meta jobs-failed"></span>
+                        </div>
+                        <span id="jobsTotalMs" class="jobs-total-ms">0 ms</span>
+                    </div>
+                    <div id="jobsProgressBar" class="jobs-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                        <span class="jobs-bar-seg jobs-bar-success"></span>
+                        <span class="jobs-bar-seg jobs-bar-loading"></span>
+                        <span class="jobs-bar-seg jobs-bar-fail"></span>
+                    </div>
+                    <div id="moduleStatusGrid" class="module-status-grid hidden" aria-label="Trạng thái module"></div>
+                    <details class="jobs-details" open>
+                        <summary>Show Details</summary>
+                        <p id="jobsReportStatus" class="jobs-report-status hidden">Đang tạo báo cáo đầy đủ…</p>
+                        <ul id="jobsList" class="jobs-list"></ul>
+                    </details>
+                </section>
+                <details class="schedule-panel wc-card" id="schedules">
+                    <summary class="schedule-panel-summary">Lịch quét tự động (Phase 2)</summary>
+                    <p class="schedule-hint">Quét nền theo chu kỳ — kết quả lưu vào lịch sử. Scheduler chạy khi app đang mở.</p>
+                    <form id="scheduleForm" class="schedule-form">
+                        <input type="text" id="scheduleUrl" placeholder="URL (vd. example.com)" required autocomplete="url">
+                        <select id="scheduleMode" aria-label="Chế độ quét">
+                            <option value="full">Full</option>
+                            <option value="quick">Quick</option>
+                        </select>
+                        <input type="number" id="scheduleInterval" value="24" min="1" max="168" step="1" aria-label="Chu kỳ giờ">
+                        <span class="schedule-interval-label">giờ</span>
+                        <button type="submit" class="btn-primary schedule-add-btn">Thêm lịch</button>
+                    </form>
+                    <ul id="scheduleList" class="schedule-list" aria-live="polite"></ul>
+                </details>
+
+                <div id="scanLiveLog" class="scan-live-log hidden" aria-live="polite">
+                    <div class="scan-live-log-head">
+                        <span><span class="live-dot" aria-hidden="true"></span> Nhật ký quét thời gian thực</span>
+                    </div>
+                    <ul id="scanLogList" class="scan-log-list"></ul>
+                </div>
+            </div>
+
+            <aside class="feature-highlights" aria-hidden="false">
+                <div class="feature-card">
+                    <span class="feature-icon">🔍</span>
+                    <h4>Phân tích sâu</h4>
+                    <p>OSINT, bảo mật, SSL, DNS và hơn thế nữa</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">⚡</span>
+                    <h4>Kết quả nhanh</h4>
+                    <p>API song song + báo cáo đầy đủ trong phút</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">📊</span>
+                    <h4>Dashboard trực quan</h4>
+                    <p>Biểu đồ điểm, lịch sử và xuất file</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🛡️</span>
+                    <h4>Tập trung bảo mật</h4>
+                    <p>Phát hiện misconfig và rủi ro thực tế</p>
+                </div>
+            </aside>
+        </section>
+
+        {% include 'components/operations_hub.html' %}
+
+        <footer class="site-footer">
+            {{ brand.full }} — {{ brand.footer_tagline }}
+        </footer>
+    </div>
+
+    <div id="toastHost" class="toast-host" aria-live="polite"></div>
+    <button type="button" class="scroll-top-btn" id="scrollTopBtn" aria-label="Lên đầu trang">↑</button>
+
+    <div id="featureDocBackdrop" class="feature-doc-backdrop hidden" aria-hidden="true"></div>
+    <div id="featureDocModal" class="feature-doc-modal hidden" role="dialog" aria-modal="true">
+        <header class="feature-doc-header">
+            <h2 id="featureDocTitle">Chức năng</h2>
+            <button type="button" class="feature-doc-dismiss" id="featureDocDismissBtn" aria-label="Đóng">×</button>
+        </header>
+        <div class="feature-doc-hero">
+            <img id="featureDocImage" class="feature-doc-image" src="{{ url_for('static', filename='doc-illustrations/default.svg') }}" alt="">
+            <p id="featureDocSummary" class="feature-doc-summary"></p>
+        </div>
+        <div class="feature-doc-body">
+            <section class="feature-doc-section">
+                <h3>Chức năng này là gì?</h3>
+                <p id="featureDocAbout"></p>
+            </section>
+            <section class="feature-doc-section">
+                <h3>Lợi ích</h3>
+                <p id="featureDocUseCases"></p>
+            </section>
+            <section class="feature-doc-section" id="featureDocLinksSection">
+                <h3>Tài liệu</h3>
+                <ul id="featureDocLinks"></ul>
+            </section>
+        </div>
+        <footer class="feature-doc-footer">
+            <button type="button" class="btn-primary feature-doc-close" id="featureDocCloseBtn">Đóng</button>
+        </footer>
+    </div>
+
+    <script>
+        window.API_JOBS = {{ api_jobs | default([]) | tojson }};
+        window.FEATURE_DOCS = {{ feature_docs | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='module_help.js') }}"></script>
+    <script src="{{ url_for('static', filename='app-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='scan_jobs.js') }}"></script>
+    <script src="{{ url_for('static', filename='platform.js') }}"></script>
+    <script src="{{ url_for('static', filename='platform-phase2.js') }}"></script>
+    <script src="{{ url_for('static', filename='platform-phase34.js') }}"></script>
+    <script src="{{ url_for('static', filename='premium-ux.js') }}"></script>
+</body>
+</html>

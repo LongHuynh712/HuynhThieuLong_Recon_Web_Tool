@@ -1,0 +1,24 @@
+<aside class="dashboard-sidebar">
+    <div class="box summary-card">
+        <h3>Snapshot</h3>
+        <div class="summary-list">
+            <div><span>Score</span><strong>{{ summary.score if summary else 0 }}/100</strong></div>
+            <div><span>HTTPS</span><strong>{{ https_status }}</strong></div>
+            <div><span>Subdomains</span><strong>{{ metrics.subdomains }}</strong></div>
+            <div><span>JS endpoints</span><strong>{{ metrics.js_endpoints }}</strong></div>
+        </div>
+    </div>
+
+    <div class="box history-card">
+        <h3>Scan history</h3>
+        {% if history %}
+            <ul class="history-list">
+                {% for item in history[:6] %}
+                    <li><a href="{{ url_for('view_history', record_id=item.id) }}">{{ item.url }} <span>{{ item.score }}/100</span></a></li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="subtle">No scans yet.</p>
+        {% endif %}
+    </div>
+</aside>

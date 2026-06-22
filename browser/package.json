@@ -1,0 +1,14 @@
+{
+  "name": "web-recon-browser",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Puppeteer browser service for Web Recon (screenshot, cookies, tech hints)",
+  "scripts": {
+    "postinstall": "node -e \"console.log('Puppeteer ready')\"",
+    "test": "node run.mjs ping"
+  },
+  "dependencies": {
+    "puppeteer": "^24.0.0"
+  }
+}

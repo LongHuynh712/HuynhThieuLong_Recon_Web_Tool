@@ -1,0 +1,41 @@
+<section class="metrics-grid">
+    <article class="metric-card score-card">
+        <span>Security Score</span>
+        <strong>{{ summary.score if summary else 0 }}</strong>
+        <small>{{ summary.status if summary else 'Ready' }}</small>
+    </article>
+    <article class="metric-card">
+        <span>Links found</span>
+        <strong>{{ metrics.links }}</strong>
+    </article>
+    <article class="metric-card">
+        <span>Forms found</span>
+        <strong>{{ metrics.forms }}</strong>
+    </article>
+    <article class="metric-card">
+        <span>Subdomains</span>
+        <strong>{{ metrics.subdomains }}</strong>
+    </article>
+</section>
+
+<section class="chart-panel">
+    <div class="chart-widget score-widget">
+        <div class="score-ring">
+            <span>{{ summary.score if summary else 0 }}</span>
+            <small>/100</small>
+        </div>
+        <p>Rating</p>
+    </div>
+    <div class="chart-widget">
+        <canvas id="securityChart"></canvas>
+        <span>Security headers</span>
+    </div>
+    <div class="chart-widget">
+        <canvas id="tlsChart"></canvas>
+        <span>TLS / SSL</span>
+    </div>
+    <div class="chart-widget">
+        <canvas id="seoChart"></canvas>
+        <span>SEO health</span>
+    </div>
+</section>

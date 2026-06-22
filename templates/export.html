@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exported Web Recon Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<main class="page-shell">
+    <section class="hero-card box">
+        <div>
+            <p class="eyebrow">Exported Report</p>
+            <h1>Web Recon Scan Report</h1>
+            {% if export_error %}
+                <p class="alert">{{ export_error }}</p>
+            {% endif %}
+        </div>
+    </section>
+    <section class="box">
+        <div class="report-output">
+            <pre>{{ report }}</pre>
+        </div>
+        <div class="result-actions">
+            <a href="{{ url_for('index') }}"><button type="button" class="secondary-btn">New Scan</button></a>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ brand.full }} — {{ target_info.hostname if target_info else scan_url }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ui-enhancements.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='light-theme.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='platform.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='premium-ux.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <script>
+        window.scanMetrics = {
+            security: {{ metrics.security_headers_pct | default(0) }},
+            tls: {{ metrics.tls_score | default(0) }},
+            seo: {{ metrics.seo_score | default(0) }}
+        };
+    </script>
+    {% if executive %}
+    <script type="application/json" id="severityChartData">{{ executive.severity_counts | tojson }}</script>
+    {% endif %}
+    {% if history_chart %}
+    <script type="application/json" id="historyTrendData">{{ history_chart | tojson }}</script>
+    {% endif %}
+    <script type="application/json" id="trend30Data">{{ trend_30 | default({}) | tojson }}</script>
+    <script type="application/json" id="trend90Data">{{ trend_90 | default({}) | tojson }}</script>
+
+    <div class="page-shell page-shell--results">
+        <header class="site-header">
+            <h1 class="logo-title">
+                <span class="logo-icon" aria-hidden="true">🛰️</span>
+                <span class="logo-brand">{{ brand.name }}</span><span class="logo-accent">{{ brand.accent }}</span>
+            </h1>
+            <nav class="site-nav">
+                <a href="#dashboard">Kết quả</a>
+                <a href="/api/docs" target="_blank" rel="noopener">API</a>
+                <a href="#intelligence">Intel</a>
+                <button type="button" class="theme-toggle" id="themeToggle" aria-label="Đổi giao diện sáng/tối">🌙</button>
+            </nav>
+        </header>
+
+        <section class="platform-hub intelligence-hub wc-card" id="intelligence">
+            <h2 class="hub-title">Threat Intelligence</h2>
+            <div class="hub-grid">
+                {% if risk_profile %}
+                <div class="hub-card">
+                    <h3>Weighted risk (lần quét hiện tại)</h3>
+                    <p class="risk-composite {{ risk_profile.risk_class }}">Risk index {{ risk_profile.risk_index }} — {{ risk_profile.risk_tier }}</p>
+                    <p>Composite score: <strong>{{ risk_profile.composite_score }}</strong>/100 (base {{ risk_profile.base_score }})</p>
+                    <p class="hub-meta api-text" title="{{ risk_profile.interpretation }}">{{ risk_profile.interpretation }}</p>
+                    <ul class="risk-drivers">
+                        {% for d in risk_profile.top_drivers %}
+                        <li>{{ d.title }} ({{ d.severity }}, w{{ d.weight }})</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+                <div class="hub-card hub-card-wide">
+                    <h3>Xu hướng 30 / 90 ngày</h3>
+                    <div class="trend-charts-row">
+                        <div class="trend-chart-box"><canvas id="trend30Chart"></canvas><span>30 ngày · {{ trend_30.scan_count }} quét · TB {{ trend_30.average_score }}</span></div>
+                        <div class="trend-chart-box"><canvas id="trend90Chart"></canvas><span>90 ngày · {{ trend_90.scan_count }} quét · {{ trend_90.trend_direction }}</span></div>
+                    </div>
+                </div>
+                <div class="hub-card hub-card-wide">
+                    <h3>Tích hợp (Slack · Teams · Jira)</h3>
+                    <form id="integrationsForm" class="integrations-form">
+                        <fieldset>
+                            <legend>Slack</legend>
+                            <label><input type="checkbox" name="slack_enabled" {% if integrations.slack.enabled %}checked{% endif %}> Bật</label>
+                            <input type="url" name="slack_url" value="{{ integrations.slack.webhook_url }}" placeholder="Slack incoming webhook URL">
+                        </fieldset>
+                        <fieldset>
+                            <legend>Microsoft Teams</legend>
+                            <label><input type="checkbox" name="teams_enabled" {% if integrations.teams.enabled %}checked{% endif %}> Bật</label>
+                            <input type="url" name="teams_url" value="{{ integrations.teams.webhook_url }}" placeholder="Teams webhook URL">
+                        </fieldset>
+                        <fieldset>
+                            <legend>Jira (generic webhook)</legend>
+                            <label><input type="checkbox" name="jira_enabled" {% if integrations.jira.enabled %}checked{% endif %}> Bật</label>
+                            <input type="url" name="jira_url" value="{{ integrations.jira.webhook_url }}" placeholder="Jira automation webhook">
+                            <input type="text" name="jira_project" value="{{ integrations.jira.project_key }}" placeholder="Project key">
+                        </fieldset>
+                        <button type="submit" class="btn-primary">Lưu tích hợp</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <section class="results-header" id="dashboard">
+            <div class="results-target">
+                <h2>{{ target_info.hostname if target_info else scan_url }}</h2>
+                <p>
+                    {% if target_info and target_info.ip %}IP {{ target_info.ip }} · {% endif %}
+                    {{ scan_mode|capitalize }} scan · {{ sections|length }} modules · {{ scan_duration }}s
+                </p>
+            </div>
+            <div class="results-actions">
+                <div class="results-actions-group" role="group" aria-label="Scan actions">
+                    <a href="{{ url_for('index') }}" class="btn-scan-again">New Scan</a>
+                </div>
+                <button type="button" class="toolbar-btn" id="copyUrlBtn">Sao chép URL</button>
+                <button type="button" class="toolbar-btn" id="copyReportBtn">Sao chép báo cáo</button>
+                <form method="POST" action="{{ url_for('export_report') }}" class="export-form">
+                    <input type="hidden" name="report" value="{{ report }}">
+                    <input type="hidden" name="scan_url" value="{{ scan_url }}">
+                    {% if current_record_id %}<input type="hidden" name="record_id" value="{{ current_record_id }}">{% endif %}
+                    <button type="submit" name="format" value="txt" class="btn-export">TXT</button>
+                    <button type="submit" name="format" value="html" class="btn-export">HTML</button>
+                    <button type="submit" name="format" value="pdf" class="btn-export">PDF</button>
+                    <button type="submit" name="format" value="json" class="btn-export">JSON</button>
+                    <button type="submit" name="format" value="sarif" class="btn-export" title="SARIF 2.1 for SIEM">SARIF</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="summary-bar">
+            <span class="summary-pill pass">✓ {{ summary.found }} pass</span>
+            <span class="summary-pill fail">✗ {{ summary.error }} issues</span>
+            <span class="summary-pill warn">⚠ {{ summary.warning }} warnings</span>
+            <span class="summary-pill info">− {{ summary.missing }} missing</span>
+            <span class="summary-pill time">Score {{ summary.score }}/100 · {{ summary.status }}</span>
+        </section>
+
+        {% set geo = (target_info.geo if target_info else {}) or {} %}
+
+        {% if "content_leakage" in section_names %}
+        <section class="leakage-panel wc-card" aria-labelledby="leakage-heading">
+            <div class="panel-header">
+                <h2 id="leakage-heading">🔍 Content Leakage Detection</h2>
+                <p class="hub-meta">Email addresses, phone numbers, API keys, and secrets found in page content</p>
+            </div>
+            <div class="leakage-grid">
+                <div class="leakage-item">
+                    <h3>Emails</h3>
+                    <p class="leakage-count" id="emailCount">0</p>
+                    <p class="leakage-desc">Email addresses detected</p>
+                </div>
+                <div class="leakage-item">
+                    <h3>Phone Numbers</h3>
+                    <p class="leakage-count" id="phoneCount">0</p>
+                    <p class="leakage-desc">Phone numbers found</p>
+                </div>
+                <div class="leakage-item high-risk">
+                    <h3>API Keys</h3>
+                    <p class="leakage-count" id="apiKeyCount">0</p>
+                    <p class="leakage-desc">Potential API keys</p>
+                </div>
+                <div class="leakage-item critical">
+                    <h3>Secrets</h3>
+                    <p class="leakage-count" id="secretCount">0</p>
+                    <p class="leakage-desc">Passwords, tokens, keys</p>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings in the 🔍 Content Leakage section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "search_engine_recon" in section_names %}
+        <section class="recon-panel wc-card" aria-labelledby="recon-heading">
+            <div class="panel-header">
+                <h2 id="recon-heading">🔎 Search Engine Reconnaissance</h2>
+                <p class="hub-meta">Information exposure through search engines and public databases</p>
+            </div>
+            <div class="recon-content">
+                <div class="recon-section">
+                    <h3>Suggested Google Dorks</h3>
+                    <p class="hub-meta">Use these searches to find exposed information on Google</p>
+                    <ul class="dork-list" id="dorkList">
+                        <li><code>site:{{ target_info.hostname if target_info else "domain.com" }} filetype:pdf</code> - Exposed PDFs</li>
+                        <li><code>site:{{ target_info.hostname if target_info else "domain.com" }} admin</code> - Admin pages</li>
+                        <li><code>site:{{ target_info.hostname if target_info else "domain.com" }} backup</code> - Backup files</li>
+                    </ul>
+                </div>
+                <div class="recon-section">
+                    <h3>Exposure Areas</h3>
+                    <ul class="exposure-list">
+                        <li>📄 Indexed documents (PDF, DOC, XLS)</li>
+                        <li>💾 Cached pages via search engines</li>
+                        <li>🗂️ Public repositories (GitHub, GitLab)</li>
+                        <li>📋 Paste site references (Pastebin, Gist)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings and recommendations in the 🔎 Search Engine Recon section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "enhanced_enumeration" in section_names %}
+        <section class="enum-panel wc-card" aria-labelledby="enum-heading">
+            <div class="panel-header">
+                <h2 id="enum-heading">🗂️ Enhanced Enumeration</h2>
+                <p class="hub-meta">Discover virtual hosts, admin paths, alternate ports, and common directories</p>
+            </div>
+            <div class="enum-grid">
+                <div class="enum-item">
+                    <h3>Virtual Hosts</h3>
+                    <p class="enum-count" id="vhostCount">0</p>
+                    <p class="enum-desc">Subdomains & alternate domains</p>
+                </div>
+                <div class="enum-item">
+                    <h3>Admin Paths</h3>
+                    <p class="enum-count" id="adminCount">0</p>
+                    <p class="enum-desc">Control panels & backends</p>
+                </div>
+                <div class="enum-item">
+                    <h3>Alternate Ports</h3>
+                    <p class="enum-count" id="portCount">0</p>
+                    <p class="enum-desc">Services on other ports</p>
+                </div>
+                <div class="enum-item">
+                    <h3>Common Paths</h3>
+                    <p class="enum-count" id="pathCount">0</p>
+                    <p class="enum-desc">Known directories</p>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings and recommendations in the 🗂️ Enhanced Enumeration section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "entry_point_mapper" in section_names %}
+        <section class="entry-panel wc-card" aria-labelledby="entry-heading">
+            <div class="panel-header">
+                <h2 id="entry-heading">📋 Entry Point Mapper</h2>
+                <p class="hub-meta">Forms, parameters, headers, and technology stack analysis</p>
+            </div>
+            <div class="entry-content">
+                <div class="entry-section">
+                    <h3>Entry Points Identified</h3>
+                    <ul class="entry-list">
+                        <li>📝 <strong>Forms</strong> - Primary attack vectors for injection</li>
+                        <li>🔗 <strong>Parameters</strong> - URL and form data parameters</li>
+                        <li>🛡️ <strong>HTTP Headers</strong> - Security and fingerprinting info</li>
+                        <li>⚙️ <strong>Technology Stack</strong> - Frontend and backend tech</li>
+                    </ul>
+                </div>
+                <div class="entry-section">
+                    <h3>Technology Fingerprinting</h3>
+                    <p class="hub-meta">Detected frameworks, libraries, and server software</p>
+                    <div class="tech-tags" id="techTags">
+                        <span class="tech-tag">Scanning...</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings and recommendations in the 📋 Entry Point Mapper section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "execution_paths" in section_names %}
+        <section class="flow-panel wc-card" aria-labelledby="flow-heading">
+            <div class="panel-header">
+                <h2 id="flow-heading">🔄 Execution Paths</h2>
+                <p class="hub-meta">Application workflow, entry/exit points, and data flow analysis</p>
+            </div>
+            <div class="flow-content">
+                <div class="flow-section">
+                    <h3>Entry Points</h3>
+                    <div class="flow-box">
+                        <p>📝 Forms, buttons, links</p>
+                        <p>🔗 API endpoints</p>
+                        <p>⚡ Event handlers</p>
+                    </div>
+                </div>
+                <div class="flow-section">
+                    <h3>Data Flow</h3>
+                    <div class="flow-box">
+                        <p>📤 Client → Server</p>
+                        <p>💾 Server → Database</p>
+                        <p>📥 Server → Client</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings in the 🔄 Execution Paths section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "architecture_mapper" in section_names %}
+        <section class="arch-panel wc-card" aria-labelledby="arch-heading">
+            <div class="panel-header">
+                <h2 id="arch-heading">🏗️ Architecture Mapper</h2>
+                <p class="hub-meta">Infrastructure components, microservices, and dependencies</p>
+            </div>
+            <div class="arch-content">
+                <div class="arch-item">
+                    <h4>Infrastructure</h4>
+                    <ul class="arch-list">
+                        <li>🌐 Web Server</li>
+                        <li>⚙️ Load Balancer</li>
+                        <li>📦 CDN</li>
+                    </ul>
+                </div>
+                <div class="arch-item">
+                    <h4>Components</h4>
+                    <ul class="arch-list">
+                        <li>💾 Database</li>
+                        <li>🔀 Microservices</li>
+                        <li>🔌 APIs</li>
+                    </ul>
+                </div>
+                <div class="arch-item">
+                    <h4>Dependencies</h4>
+                    <ul class="arch-list">
+                        <li>📚 Libraries</li>
+                        <li>🔧 Frameworks</li>
+                        <li>🌍 External Services</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings in the 🏗️ Architecture Mapper section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if "framework_enhancement" in section_names %}
+        <section class="fwk-panel wc-card" aria-labelledby="fwk-heading">
+            <div class="panel-header">
+                <h2 id="fwk-heading">⚙️ Framework Enhancement</h2>
+                <p class="hub-meta">Framework-specific vulnerabilities and version detection</p>
+            </div>
+            <div class="fwk-content">
+                <div class="fwk-section">
+                    <h3>Detected Frameworks</h3>
+                    <div class="framework-grid">
+                        <span class="fwk-tag">Framework Detection</span>
+                        <span class="fwk-tag">Version Info</span>
+                        <span class="fwk-tag">Known Vulnerabilities</span>
+                    </div>
+                </div>
+                <div class="fwk-section">
+                    <h3>Common Vulnerabilities</h3>
+                    <ul class="fwk-issues">
+                        <li>🔓 Authentication/Authorization flaws</li>
+                        <li>💉 Injection attacks</li>
+                        <li>🔓 Insecure deserialization</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <p class="hub-meta">See detailed findings in the ⚙️ Framework Enhancement section below</p>
+            </div>
+        </section>
+        {% endif %}
+
+        {% if advisories %}
+        <section class="advisory-panel">
+            <h2 class="advisory-heading">Advisory</h2>
+            <div class="advisory-grid">
+                {% if advisories.critical %}
+                <details class="advisory-group" open>
+                    <summary>Critical ({{ advisories.critical|length }})</summary>
+                    <ul>
+                        {% for item in advisories.critical %}
+                            <li class="adv-critical"><strong>{{ item.title }}</strong> — {{ item.text }}</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+                {% if advisories.warning %}
+                <details class="advisory-group" open>
+                    <summary>Warnings ({{ advisories.warning|length }})</summary>
+                    <ul>
+                        {% for item in advisories.warning %}
+                            <li class="adv-warn"><strong>{{ item.title }}</strong> — {{ item.text }}</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+                {% if advisories.info %}
+                <details class="advisory-group" open>
+                    <summary>Informational ({{ advisories.info|length }})</summary>
+                    <ul>
+                        {% for item in advisories.info[:12] %}
+                            <li class="adv-info">{{ item.text if item.title == 'Recommendation' else item.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+                {% if advisories.pass %}
+                <details class="advisory-group" open>
+                    <summary>Passes ({{ advisories.pass|length }})</summary>
+                    <ul>
+                        {% for item in advisories.pass[:10] %}
+                            <li class="adv-pass">✓ {{ item.title }}</li>
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="dashboard-grid">
+            <aside class="dashboard-sidebar">
+                <div class="box summary-card wc-card">
+                    <h3>Snapshot</h3>
+                    <div class="summary-list">
+                        <div><span>Score</span><strong class="accent">{{ summary.score }}/100</strong></div>
+                        <div><span>HTTPS</span><strong>{{ https_status }}</strong></div>
+                        <div><span>Server</span><strong>{{ metrics.server }}</strong></div>
+                        <div><span>WAF / CDN</span><strong>{{ metrics.cdn }}</strong></div>
+                        <div><span>Links</span><strong>{{ metrics.links }}</strong></div>
+                    </div>
+                </div>
+                <div class="box history-card wc-card">
+                    <header class="history-card-head">
+                        <div class="history-title-wrap">
+                            <span class="history-title-icon" aria-hidden="true">📋</span>
+                            <h3>Lịch sử quét</h3>
+                        </div>
+                        <div class="history-head-actions">
+                            {% if history %}<span class="history-badge">{{ history|length }}</span>{% endif %}
+                            {% if history %}
+                            <form method="POST" action="{{ url_for('clear_history') }}" class="history-clear-form" id="clearHistoryForm">
+                                <button type="submit" class="btn-history-clear">Xóa</button>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </header>
+                    {% if history_chart %}
+                    <div class="chart-widget-wide wc-card history-trend-chart-wrap">
+                        <canvas id="historyTrendChart" aria-label="Xu hướng điểm bảo mật"></canvas>
+                    </div>
+                    <div class="history-trend" aria-label="Xu hướng điểm số (mini)">
+                        {% for point in history_chart %}
+                        <div class="history-trend-bar" style="height: {{ [point.score, 5] | max }}%;" title="{{ point.label }}: {{ point.score }}">
+                            <span>{{ point.score }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if history|length >= 2 %}
+                    <div class="compare-panel wc-card" id="comparePanel">
+                        <h4>So sánh hai lần quét</h4>
+                        <div class="compare-selects">
+                            <label>Baseline (cũ hơn)
+                                <select id="compareBaseline" aria-label="Baseline scan">
+                                    {% for item in history %}
+                                    <option value="{{ item.id }}" {% if loop.last %}selected{% endif %}>{{ item.timestamp }} — {{ item.url | history_host }} ({{ item.score }})</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                            <label>Hiện tại (mới hơn)
+                                <select id="compareCurrent" aria-label="Current scan">
+                                    {% for item in history %}
+                                    <option value="{{ item.id }}" {% if loop.first %}selected{% endif %}>{{ item.timestamp }} — {{ item.url | history_host }} ({{ item.score }})</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                            <button type="button" class="btn-primary" id="runCompareBtn">So sánh</button>
+                        </div>
+                        <div id="compareResult" class="compare-result hidden" aria-live="polite"></div>
+                    </div>
+                    {% endif %}
+                    <div class="history-dashboard-tools">
+                        <input type="search" id="historySearch" placeholder="Tìm host…" aria-label="Tìm trong lịch sử">
+                        <select id="historyScoreFilter" aria-label="Lọc điểm tối thiểu">
+                            <option value="0">Mọi điểm</option>
+                            <option value="50">≥ 50</option>
+                            <option value="80">≥ 80</option>
+                        </select>
+                        <select id="historySort" aria-label="Sắp xếp">
+                            <option value="newest">Mới nhất</option>
+                            <option value="score-desc">Điểm cao → thấp</option>
+                            <option value="score-asc">Điểm thấp → cao</option>
+                        </select>
+                    </div>
+                    {% if history %}
+                    <ul class="history-list" role="list">
+                        {% for item in history[:8] %}
+                        <li class="history-item-wrap">
+                            <a class="history-item" href="{{ url_for('view_results', record_id=item.id) }}" title="{{ item.url }}">
+                                <span class="history-item-glyph" aria-hidden="true">🌐</span>
+                                <span class="history-item-body">
+                                    <span class="history-host">{{ item.url | history_host }}</span>
+                                    <span class="history-meta">
+                                        {% if item.timestamp %}<time class="history-time">{{ item.timestamp }}</time>{% endif %}
+                                        {% if item.mode %}<span class="history-mode">{{ item.mode }}</span>{% endif %}
+                                    </span>
+                                </span>
+                                <span class="history-score-pill {{ item.score | history_score_class }}">
+                                    <span class="history-score-value">{{ item.score }}</span>
+                                    <span class="history-score-label">điểm</span>
+                                </span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <p class="history-empty-msg">Chưa có lần quét nào.</p>
+                    {% endif %}
+                </div>
+            </aside>
+
+            <main class="dashboard-main">
+                <section class="executive-layout-group">
+                    {% if executive %}
+                    <article class="executive-panel wc-card" aria-labelledby="exec-heading">
+                        <h2 id="exec-heading">Tóm tắt điều hành
+                            <span class="exec-risk-badge {{ executive.risk_class }}">{{ executive.risk_level }} risk</span>
+                        </h2>
+                        <p>
+                            <strong>Security</strong>: {{ executive.security_score }}/100 (Grade {{ executive.security_grade }}) ·
+                            <strong>Quality</strong>: {{ executive.quality_score }}/100 (Grade {{ executive.quality_grade }}) ·
+                            {{ executive.section_count }} module · {{ executive.recommendations_count }} khuyến nghị
+                        </p>
+                        <div class="severity-stats-row" role="group" aria-label="Phân bố mức độ nghiêm trọng">
+                            {% for level in ['critical', 'high', 'medium', 'low', 'info'] %}
+                            {% set count = executive.severity_counts.get(level, 0) %}
+                            <div class="sev-stat-card sev-{{ level }}">
+                                <strong>{{ count }}</strong>
+                                <span>{{ level }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <ul class="exec-bullets">
+                            <li>Top priority 1: Ưu tiên xử lý toàn bộ findings mức <strong>Critical/High</strong> để giảm rủi ro vận hành.</li>
+                            <li>Top priority 2: Củng cố <strong>TLS</strong> và <strong>security headers</strong> để tăng baseline bảo mật.</li>
+                            <li>Top priority 3: Theo dõi liên tục và đóng vòng lặp khắc phục qua lịch quét định kỳ.</li>
+                        </ul>
+                        {% if risk_profile %}
+                        <p class="hub-meta">Management summary: Risk index {{ risk_profile.risk_index }} ({{ risk_profile.risk_tier }}) · Asset criticality {{ risk_profile.asset_criticality }}.</p>
+                        {% endif %}
+                    </article>
+                    {% endif %}
+                    {% if risk_profile %}
+                    <article class="risk-panel wc-card {{ risk_profile.risk_class }}" aria-labelledby="risk-heading">
+                        <h2 id="risk-heading">Weighted risk score</h2>
+                        <p>Risk index <strong>{{ risk_profile.risk_index }}</strong>/100 · Tier <strong>{{ risk_profile.risk_tier }}</strong> · Composite <strong>{{ risk_profile.composite_score }}</strong>/100</p>
+                        <p class="hub-meta">Asset criticality: {{ risk_profile.asset_criticality }} (×{{ risk_profile.criticality_multiplier }})</p>
+                    </article>
+                    {% endif %}
+                </section>
+
+                <section class="chart-panel dashboard-kpi-row">
+                    <article class="chart-card wc-card score-card">
+                        <div class="chart-card-header"><span class="chart-card-title">Security Score</span></div>
+                        <div class="chart-card-body">
+                            <div class="chart-card-plot">
+                                <div class="score-ring"><span>{{ summary.score }}</span><small>/100</small></div>
+                            </div>
+                        </div>
+                        <div class="chart-card-footer"><span class="chart-card-label">Overall security score</span></div>
+                    </article>
+                    {% if executive %}
+                    <article class="chart-card wc-card severity-card">
+                        <div class="chart-card-header"><span class="chart-card-title">Severity Mix</span></div>
+                        <div class="chart-card-body severity-chart-layout">
+                            <div class="chart-card-plot"><canvas id="severityChart" aria-label="Phân bố severity"></canvas></div>
+                            <ul id="severityLegend" class="severity-legend"></ul>
+                        </div>
+                        <div class="chart-card-footer"><span class="chart-card-label">Findings distribution</span></div>
+                    </article>
+                    {% endif %}
+                    <article class="chart-card wc-card">
+                        <div class="chart-card-header"><span class="chart-card-title">Security</span></div>
+                        <div class="chart-card-body">
+                            <div class="chart-card-plot"><canvas id="securityChart"></canvas></div>
+                        </div>
+                        <div class="chart-card-footer"><span class="chart-card-label">Security health</span></div>
+                    </article>
+                    <article class="chart-card wc-card">
+                        <div class="chart-card-header"><span class="chart-card-title">TLS/SSL</span></div>
+                        <div class="chart-card-body">
+                            <div class="chart-card-plot"><canvas id="tlsChart"></canvas></div>
+                        </div>
+                        <div class="chart-card-footer"><span class="chart-card-label">TLS/SSL health</span></div>
+                    </article>
+                    <article class="chart-card wc-card">
+                        <div class="chart-card-header"><span class="chart-card-title">SEO Health</span></div>
+                        <div class="chart-card-body">
+                            <div class="chart-card-plot"><canvas id="seoChart"></canvas></div>
+                        </div>
+                        <div class="chart-card-footer"><span class="chart-card-label">SEO health</span></div>
+                    </article>
+                </section>
+
+                <section class="location-panel wc-card" aria-labelledby="infrastructure-intel-heading">
+                    <div class="panel-header">
+                        <h2 id="infrastructure-intel-heading">Infrastructure / Network Intelligence</h2>
+                        <p class="hub-meta">Server location, DNS, WHOIS, hosting and network context.</p>
+                    </div>
+                    <div class="location-panel-grid">
+                        <div class="location-meta">
+                            <dl>
+                                <div><dt>IP</dt><dd>{{ target_info.ip if target_info and target_info.ip else 'Unknown' }}</dd></div>
+                                <div><dt>City</dt><dd>{{ geo.city or 'Unknown' }}</dd></div>
+                                <div><dt>Region</dt><dd>{{ geo.region or 'Unknown' }}</dd></div>
+                                <div><dt>Country</dt><dd>{{ geo.country or 'Unknown' }}</dd></div>
+                                <div><dt>ISP / Provider</dt><dd>{{ geo.provider or geo.isp or geo.org or 'Unknown' }}</dd></div>
+                                <div><dt>Hosting</dt><dd>{{ metrics.cdn or metrics.server or 'Unknown' }}</dd></div>
+                                <div><dt>DNS Intelligence</dt><dd>{{ 'Available' if metrics.dns_available else 'Limited' }}</dd></div>
+                                <div><dt>WHOIS Intelligence</dt><dd>{{ 'Available' if metrics.whois_available else 'Limited' }}</dd></div>
+                                <div><dt>Latitude</dt><dd>{{ geo.latitude if geo.latitude is not none else 'Unknown' }}</dd></div>
+                                <div><dt>Longitude</dt><dd>{{ geo.longitude if geo.longitude is not none else 'Unknown' }}</dd></div>
+                            </dl>
+                        </div>
+                        <div id="serverLocationMap" class="location-map">
+                            {% if not geo.latitude or not geo.longitude %}
+                            <div class="no-geo">Vị trí máy chủ không khả dụng.</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="panel-header"><h2>Results</h2></div>
+                    {% if target_info and target_info.screenshot_b64 %}
+                    <article class="screenshot-panel wc-card">
+                        <h3>Screenshot</h3>
+                        <img class="screenshot-result" src="data:image/png;base64,{{ target_info.screenshot_b64 }}" alt="Website screenshot">
+                    </article>
+                    {% endif %}
+                    <div class="checks-mosaic">
+                        {% for card in check_cards %}
+                            <article class="check-card wc-card {{ card.status }}">
+                                <header class="check-card-header">
+                                    <span class="check-icon" aria-hidden="true">{{ card.icon }}</span>
+                                    <div class="check-card-actions">
+                                        <button type="button" class="info-help-btn check-info-btn" data-doc-id="{{ card.doc_id }}" aria-label="Chú thích {{ card.title }}">ⓘ</button>
+                                        {% if card.severity_level %}
+                                        <span class="sev-pill {{ card.severity_level }}">{{ card.severity_label }}</span>
+                                        {% endif %}
+                                        <span class="check-status">{{ card.status_label }}</span>
+                                    </div>
+                                </header>
+                                <a class="check-card-link" href="#{{ card.slug }}" title="{{ card.title }}">
+                                    <h3 class="check-title">{{ card.title }}</h3>
+                                    <p class="check-preview" title="{{ card.preview }}">{{ card.preview }}</p>
+                                    {% if card.help and card.help.summary %}
+                                    <p class="check-help-hint">{{ card.help.summary }}</p>
+                                    {% endif %}
+                                </a>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <section class="report-sections">
+                    <div class="panel-header"><h2>Báo cáo chi tiết</h2></div>
+                    <div class="report-toolbar">
+                        <input type="search" id="reportSearch" class="report-search" placeholder="Tìm trong báo cáo…" autocomplete="off">
+                        <button type="button" class="toolbar-btn severity-filter-btn is-active" data-severity="all">Tất cả</button>
+                        <button type="button" class="toolbar-btn severity-filter-btn" data-severity="critical">Critical</button>
+                        <button type="button" class="toolbar-btn severity-filter-btn" data-severity="high">High</button>
+                        <button type="button" class="toolbar-btn severity-filter-btn" data-severity="medium">Medium</button>
+                        <button type="button" class="toolbar-btn severity-filter-btn" data-severity="low">Low</button>
+                        <button type="button" class="toolbar-btn severity-filter-btn" data-severity="info">Info</button>
+                        <button type="button" class="toolbar-btn" id="expandAllReport">Mở hết</button>
+                        <button type="button" class="toolbar-btn" id="collapseAllReport">Thu gọn</button>
+                    </div>
+                    {% for section in sections %}
+                        <details class="section-card wc-card {{ section.severity }} {{ section.severity_level }}" id="{{ section.slug }}" data-severity-level="{{ section.severity_level }}" open>
+                            <summary>
+                                <div class="section-summary-main">
+                                    <span class="section-badge {{ section.severity }}">{{ section.category }}</span>
+                                    <h3>{{ section.title }}</h3>
+                                </div>
+                                <span class="severity-badge {{ section.severity_level }}">{{ section.severity_label }}</span>
+                            </summary>
+                            {% if section.cwe_ids %}
+                            <p class="section-cwe-refs">
+                                CWE:
+                                {% for cid in section.cwe_ids %}
+                                <a href="https://cwe.mitre.org/data/definitions/{{ cid.split('-')[1] }}.html" target="_blank" rel="noopener">{{ cid }}</a>{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
+                            {% endif %}
+                            <div class="collapsible">
+                                <pre class="section-body">{{ section.text }}</pre>
+                                <button type="button" class="collapse-toggle" aria-expanded="false">Show more</button>
+                            </div>
+                        </details>
+                    {% endfor %}
+                </section>
+            </main>
+        </section>
+
+        <footer class="site-footer">
+            {{ brand.full }} — {{ brand.footer_tagline }}
+        </footer>
+    </div>
+
+    <div id="toastHost" class="toast-host" aria-live="polite"></div>
+    <button type="button" class="scroll-top-btn" id="scrollTopBtn" aria-label="Lên đầu trang">↑</button>
+
+    <div id="featureDocBackdrop" class="feature-doc-backdrop hidden" aria-hidden="true"></div>
+    <div id="featureDocModal" class="feature-doc-modal hidden" role="dialog" aria-modal="true">
+        <header class="feature-doc-header">
+            <h2 id="featureDocTitle">Chức năng</h2>
+            <button type="button" class="feature-doc-dismiss" id="featureDocDismissBtn" aria-label="Đóng">×</button>
+        </header>
+        <div class="feature-doc-hero">
+            <img id="featureDocImage" class="feature-doc-image" src="{{ url_for('static', filename='doc-illustrations/default.svg') }}" alt="">
+            <p id="featureDocSummary" class="feature-doc-summary"></p>
+        </div>
+        <div class="feature-doc-body">
+            <section class="feature-doc-section">
+                <h3>Chức năng này là gì?</h3>
+                <p id="featureDocAbout"></p>
+            </section>
+            <section class="feature-doc-section">
+                <h3>Lợi ích</h3>
+                <p id="featureDocUseCases"></p>
+            </section>
+            <section class="feature-doc-section" id="featureDocLinksSection">
+                <h3>Tài liệu</h3>
+                <ul id="featureDocLinks"></ul>
+            </section>
+        </div>
+        <footer class="feature-doc-footer">
+            <button type="button" class="btn-primary feature-doc-close" id="featureDocCloseBtn">Đóng</button>
+        </footer>
+    </div>
+
+    <script>
+        window.API_JOBS = {{ api_jobs | default([]) | tojson }};
+        window.FEATURE_DOCS = {{ feature_docs | tojson }};
+    </script>
+    <script type="application/json" id="remediationData">{{ remediation | default([]) | tojson }}</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='dashboard-charts.js') }}"></script>
+    <script src="{{ url_for('static', filename='dashboard.js') }}"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='module_help.js') }}"></script>
+    <script src="{{ url_for('static', filename='app-ui.js') }}"></script>
+    <script src="{{ url_for('static', filename='scan_jobs.js') }}"></script>
+    <script src="{{ url_for('static', filename='platform.js') }}"></script>
+    <script src="{{ url_for('static', filename='platform-phase2.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const geo = {{ target_info.geo | tojson | default('{}') }};
+            const mapContainer = document.getElementById("serverLocationMap");
+            if (!mapContainer) {
+                return;
+            }
+            const latitude = Number(geo.latitude);
+            const longitude = Number(geo.longitude);
+            if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+                const map = L.map(mapContainer, {
+                    scrollWheelZoom: false,
+                    zoomControl: true,
+                }).setView([latitude, longitude], 4);
+                L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png", {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, &copy; <a href="https://carto.com/">CARTO</a>',
+                    maxZoom: 19,
+                }).addTo(map);
+                const ipAddress = {{ target_info.ip | tojson }};
+                const provider = geo.provider || geo.isp || geo.org || "Unknown provider";
+                const locationParts = [geo.city, geo.region, geo.country].filter(Boolean);
+                const locationText = locationParts.length ? locationParts.join(", ") : "Unknown location";
+                const popupText = `<strong>${ipAddress}</strong><br>${locationText}<br>${provider}`;
+                L.marker([latitude, longitude]).addTo(map).bindPopup(popupText).openPopup();
+            } else {
+                mapContainer.innerHTML = '<div class="no-geo">Vị trí máy chủ không khả dụng.</div>';
+            }
+        });
+    </script>
+    <script src="{{ url_for('static', filename='platform-phase34.js') }}"></script>
+    <script src="{{ url_for('static', filename='premium-ux.js') }}"></script>
+</body>
+</html>

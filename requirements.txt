@@ -1,0 +1,11 @@
+﻿# Web Recon — Python dependencies
+Flask>=3.0
+requests
+cloudscraper
+beautifulsoup4
+python-whois
+dnspython
+reportlab
+
+# Puppeteer (screenshot, browser cookies) — requires Node.js 18+:
+#   cd browser && npm install

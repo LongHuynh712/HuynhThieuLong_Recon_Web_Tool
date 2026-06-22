@@ -1,0 +1,222 @@
+[
+  {
+    "url": "google.com",
+    "security_score": 95,
+    "quality_score": 60,
+    "risk_index": 49,
+    "risk_tier": "Elevated",
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 8,
+      "low": 2,
+      "info": 53
+    },
+    "high_critical_findings": [],
+    "verification": {
+      "discovery_findings": false,
+      "dorks": true,
+      "public_emails": true,
+      "crossdomain_xml": true
+    },
+    "metrics": {
+      "links": 20,
+      "forms": 1,
+      "subdomains": 5,
+      "js_endpoints": 18,
+      "security_headers_pct": 78,
+      "tls_score": 100,
+      "seo_score": 72,
+      "enumeration_findings": 46,
+      "server": "gws",
+      "technology": "Vue.js",
+      "cdn": "None",
+      "robots_found": true,
+      "sitemap_found": true,
+      "admin_findings": 1,
+      "backup_findings": 0,
+      "sensitive_findings": 0,
+      "http_methods_allowed": 5,
+      "whois_available": true,
+      "dns_available": true,
+      "https_enabled": true
+    },
+    "duration": 82.99920463562012
+  },
+  {
+    "url": "github.com",
+    "security_score": 100,
+    "quality_score": 80,
+    "risk_index": 49,
+    "risk_tier": "Elevated",
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 6,
+      "low": 1,
+      "info": 56
+    },
+    "high_critical_findings": [],
+    "verification": {
+      "discovery_findings": false,
+      "dorks": true,
+      "public_emails": true,
+      "crossdomain_xml": true
+    },
+    "metrics": {
+      "links": 106,
+      "forms": 5,
+      "subdomains": 4,
+      "js_endpoints": 143,
+      "security_headers_pct": 100,
+      "tls_score": 100,
+      "seo_score": 100,
+      "enumeration_findings": 73,
+      "server": "github.com",
+      "technology": "Unknown",
+      "cdn": "None",
+      "robots_found": true,
+      "sitemap_found": true,
+      "admin_findings": 4,
+      "backup_findings": 0,
+      "sensitive_findings": 0,
+      "http_methods_allowed": 5,
+      "whois_available": true,
+      "dns_available": true,
+      "https_enabled": true
+    },
+    "duration": 146.0894432067871
+  },
+  {
+    "url": "microsoft.com",
+    "security_score": 92,
+    "quality_score": 60,
+    "risk_index": 49,
+    "risk_tier": "Elevated",
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 9,
+      "low": 2,
+      "info": 52
+    },
+    "high_critical_findings": [],
+    "verification": {
+      "discovery_findings": false,
+      "dorks": true,
+      "public_emails": true,
+      "crossdomain_xml": true
+    },
+    "metrics": {
+      "links": 100,
+      "forms": 1,
+      "subdomains": 4,
+      "js_endpoints": 44,
+      "security_headers_pct": 78,
+      "tls_score": 100,
+      "seo_score": 72,
+      "enumeration_findings": 84,
+      "server": "AkamaiNetStorage",
+      "technology": "Unknown",
+      "cdn": "Akamai",
+      "robots_found": true,
+      "sitemap_found": true,
+      "admin_findings": 0,
+      "backup_findings": 0,
+      "sensitive_findings": 0,
+      "http_methods_allowed": 5,
+      "whois_available": true,
+      "dns_available": true,
+      "https_enabled": true
+    },
+    "duration": 139.52985501289368
+  },
+  {
+    "url": "cloudflare.com",
+    "security_score": 100,
+    "quality_score": 100,
+    "risk_index": 38,
+    "risk_tier": "Elevated",
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 4,
+      "low": 1,
+      "info": 58
+    },
+    "high_critical_findings": [],
+    "verification": {
+      "discovery_findings": false,
+      "dorks": true,
+      "public_emails": true,
+      "crossdomain_xml": true
+    },
+    "metrics": {
+      "links": 49,
+      "forms": 0,
+      "subdomains": 4,
+      "js_endpoints": 35,
+      "security_headers_pct": 100,
+      "tls_score": 100,
+      "seo_score": 100,
+      "enumeration_findings": 82,
+      "server": "cloudflare",
+      "technology": "Unknown",
+      "cdn": "Cloudflare",
+      "robots_found": true,
+      "sitemap_found": true,
+      "admin_findings": 0,
+      "backup_findings": 0,
+      "sensitive_findings": 0,
+      "http_methods_allowed": 2,
+      "whois_available": true,
+      "dns_available": true,
+      "https_enabled": true
+    },
+    "duration": 71.6830575466156
+  },
+  {
+    "url": "openai.com",
+    "security_score": 98,
+    "quality_score": 90,
+    "risk_index": 49,
+    "risk_tier": "Elevated",
+    "severity_counts": {
+      "critical": 0,
+      "high": 0,
+      "medium": 7,
+      "low": 1,
+      "info": 55
+    },
+    "high_critical_findings": [],
+    "verification": {
+      "discovery_findings": false,
+      "dorks": true,
+      "public_emails": true,
+      "crossdomain_xml": true
+    },
+    "metrics": {
+      "links": 72,
+      "forms": 1,
+      "subdomains": 5,
+      "js_endpoints": 129,
+      "security_headers_pct": 78,
+      "tls_score": 100,
+      "seo_score": 100,
+      "enumeration_findings": 91,
+      "server": "cloudflare",
+      "technology": "Next.js",
+      "cdn": "Cloudflare",
+      "robots_found": true,
+      "sitemap_found": true,
+      "admin_findings": 1,
+      "backup_findings": 0,
+      "sensitive_findings": 0,
+      "http_methods_allowed": 5,
+      "whois_available": true,
+      "dns_available": true,
+      "https_enabled": true
+    },
+    "duration": 80.05640530586243
+  }
+]

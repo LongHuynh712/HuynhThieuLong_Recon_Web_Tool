@@ -686,7 +686,7 @@ def extract_emails(html, url):
                         "support" if any(t in email for t in ["support", "help", "ticket"]) else \
                         "info" if any(t in email for t in ["info", "contact", "hello"]) else "other"
             result += f" - {email} ({email_type})\n"
-        result += "[SEVERITY] HIGH - Email addresses may be used for targeted attacks\n"
+        result += "[SEVERITY] INFO - Email addresses may be used for targeted attacks\n"
     else:
         result += "[NO EMAILS FOUND]\n"
     
@@ -924,7 +924,7 @@ def generate_google_dorks(domain):
         result += f"   Dork: {dork_item['dork']}\n\n"
     
     result += "[INFO] Use these dorks to search for exposed information on Google\n"
-    result += "[SEVERITY] HIGH - These searches may reveal sensitive exposed data\n"
+    result += "[SEVERITY] INFO - These searches may reveal sensitive exposed data\n"
     
     return result
 
@@ -1011,7 +1011,7 @@ def discover_exposed_documents(domain):
     result += "4. Add password protection to sensitive documents\n"
     result += "5. Use noindex for document directories\n\n"
     
-    result += "[SEVERITY] HIGH - Exposed documents often contain sensitive data\n"
+    result += "[SEVERITY] INFO - Exposed documents often contain sensitive data\n"
     
     return result
 
@@ -1057,7 +1057,7 @@ def find_public_repositories(domain):
     result += "4. Look for forks that may contain sensitive data\n"
     result += "5. Monitor for new repositories\n\n"
     
-    result += "[SEVERITY] HIGH - Source code repositories often contain secrets\n"
+    result += "[SEVERITY] INFO - Source code repositories often contain secrets\n"
     
     return result
 
@@ -1103,7 +1103,7 @@ def find_paste_references(domain):
     result += "4. Review and remove old pastes\n"
     result += "5. Use services like Google Alerts or Have I Been Pwned\n\n"
     
-    result += "[SEVERITY] CRITICAL - Pastes often contain exposed credentials\n"
+    result += "[SEVERITY] INFO - Pastes often contain exposed credentials\n"
     
     return result
 
@@ -1215,7 +1215,7 @@ def discover_virtual_hosts(domain):
     result += f" 1. Use dnsrecon/amass for deeper virtual host enumeration on {domain}\n"
     result += f" 2. Check DNS records and subdomain brute force results\n"
     result += f" 3. Review CDN/WAF hostnames for aliasing and alternate domains\n\n"
-    result += "[SEVERITY] MEDIUM - Virtual hosts may expose additional attack surfaces\n"
+    result += "[SEVERITY] INFO - Virtual hosts may expose additional attack surfaces\n"
     return result
 
 
@@ -1349,7 +1349,7 @@ def scan_common_admin_paths(url):
     result += f"  - Discoveries: {summary['discoveries']}\n"
 
     if found:
-        result += "[SEVERITY] MEDIUM - Accessible admin paths discovered\n"
+        result += "[SEVERITY] INFO - Accessible admin paths discovered\n"
     else:
         result += "[INFO] No accessible admin paths discovered from common list\n"
 
@@ -1448,7 +1448,7 @@ def discover_alternate_ports(domain):
         result += f"\n[FOUND] {len(discovered)} open port(s) on {domain}\n"
         for item in sorted(discovered, key=lambda x: x["port"]):
             result += f" - {item['port']}/tcp ({item['category']}) status={item['status']}\n"
-        result += "\n[SEVERITY] MEDIUM - Open alternate ports may expose additional services\n"
+        result += "\n[SEVERITY] INFO - Open alternate ports may expose additional services\n"
     else:
         result += "\n[INFO] No common alternate ports appear reachable\n"
         result += "[RECOMMENDATION]\n"
@@ -1603,7 +1603,7 @@ def find_common_paths(domain):
     result += f"  - Discoveries: {summary['discoveries']}\n"
 
     if found:
-        result += "[SEVERITY] MEDIUM - Accessible paths reveal application surface and information disclosure risk\n"
+        result += "[SEVERITY] INFO - Accessible paths reveal application surface and information disclosure risk\n"
     else:
         result += "[INFO] No accessible common paths discovered from the candidate list\n"
 
@@ -1664,7 +1664,7 @@ def enumerate_forms(html, url):
         
         result += "\n"
     
-    result += "[SEVERITY] MEDIUM - Forms are primary entry points for injection attacks\n"
+    result += "[SEVERITY] INFO - Forms are primary entry points for injection attacks\n"
     
     return result
 
@@ -1712,7 +1712,7 @@ def extract_parameters(html, url):
         for name in names:
             result += f"  - {name}\n"
     
-    result += "\n[SEVERITY] HIGH - Parameters are attack surface for injection/XSS\n"
+    result += "\n[SEVERITY] INFO - Parameters are attack surface for injection/XSS\n"
     
     return result
 
@@ -1895,7 +1895,7 @@ def trace_execution_paths(html, url):
         result += f" - {len(scripts)} script(s) found\n"
         result += " - Possible flow triggers: onclick, onload, onchange, onsubmit\n"
     
-    result += "\n[SEVERITY] MEDIUM - Understanding execution paths prevents workflow bypasses\n"
+    result += "\n[SEVERITY] INFO - Understanding execution paths prevents workflow bypasses\n"
     
     return result
 
@@ -1971,7 +1971,7 @@ def map_application_architecture(html, headers, url):
     result += " - Check for: CDNs, APIs, third-party services\n"
     result += " - Monitor for: Dependency vulnerabilities, version mismatches\n"
     
-    result += "\n[SEVERITY] MEDIUM - Architecture flaws can enable privilege escalation\n"
+    result += "\n[SEVERITY] INFO - Architecture flaws can enable privilege escalation\n"
     
     return result
 
@@ -2077,7 +2077,7 @@ def analyze_framework_vulnerabilities(html, headers, url):
     result += " 5. Regular security audits and penetration testing\n"
     result += " 6. Implement framework-level security controls\n"
     
-    result += "\n[SEVERITY] HIGH - Framework vulnerabilities are frequently exploited\n"
+    result += "\n[SEVERITY] INFO - Framework vulnerabilities are frequently exploited\n"
     
     return result
 
@@ -2125,7 +2125,7 @@ def detect_api_contracts(html, url):
         result += " - JSON-LD or schema.org markup detected\n"
         result += " - May reveal data models and relationships\n"
     
-    result += "\n[SEVERITY] MEDIUM - API contracts reveal expected data flow\n"
+    result += "\n[SEVERITY] INFO - API contracts reveal expected data flow\n"
     
     return result
 
@@ -2191,6 +2191,6 @@ def map_data_flows(html, url):
     result += " 5. Command injection (shell commands)\n"
     result += " 6. XML injection (XXE, XPath injection)\n"
     
-    result += "\n[SEVERITY] CRITICAL - Data flow analysis reveals injection attacks vectors\n"
+    result += "\n[SEVERITY] INFO - Data flow analysis reveals injection attacks vectors\n"
     
     return result

@@ -240,10 +240,11 @@ class SecurityScorer:
                     })
         
         risk_score = (
-            risk_summary['CRITICAL'] * 4 +
-            risk_summary['HIGH'] * 3 +
-            risk_summary['MEDIUM'] * 2 +
-            risk_summary['LOW'] * 1
+            risk_summary['CRITICAL'] * 20 +
+            risk_summary['HIGH'] * 10 +
+            risk_summary['MEDIUM'] * 5 +
+            risk_summary['LOW'] * 1 +
+            risk_summary['INFO'] * 0
         )
         
         return {
@@ -256,24 +257,20 @@ class SecurityScorer:
     def compute_security_score(self, test_results: Dict[str, Any]) -> Dict[str, Any]:
         """
         OWASP: Compute overall security score (0-100)
-        Based on coverage and risk assessment
+        Based purely on risk assessment; coverage is tracked separately.
         """
         coverage_data = self.compute_coverage_by_section(test_results)
         coverage_pct = coverage_data['overall_coverage_percentage']
         
-        # Score is based on:
-        # - OWASP coverage (40% weight)
-        # - Risk assessment (60% weight)
-        coverage_score = coverage_pct * 0.4
+        # Coverage is completely decoupled from the security score
+        coverage_score = coverage_pct * 0.4 # Kept for backward compatibility if needed by frontend
         
-        # Risk assessment: lower findings = higher score
+        # Risk assessment: calculate deductable points
         risk_data = self.compute_risk_summary(list(test_results.values()) if isinstance(test_results, dict) else test_results)
-        total_findings = risk_data['total_findings']
+        risk_score = risk_data['risk_score']
         
-        # Scale risk findings to 0-60 score (fewer findings = higher score)
-        risk_score = max(0, 60 - (total_findings * 2))
-        
-        overall_score = coverage_score + risk_score
+        # Base score is 100, deduct risk score points (min score 0)
+        overall_score = max(0, 100 - risk_score)
         
         return {
             'overall_security_score': round(overall_score, 1),

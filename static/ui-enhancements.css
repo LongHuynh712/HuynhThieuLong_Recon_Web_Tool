@@ -183,6 +183,21 @@
     color: var(--primary);
 }
 
+.toolbar-btn.danger {
+    color: var(--danger);
+    border-color: var(--danger);
+}
+
+.toolbar-btn.danger:hover {
+    background: rgba(184, 0, 69, 0.1);
+}
+
+.hub-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
 .report-search {
     flex: 1;
     min-width: 140px;

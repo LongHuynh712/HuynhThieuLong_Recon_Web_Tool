@@ -28,6 +28,8 @@ from audit_service import audit_log, load_audit_entries
 from workspace_service import (
     create_user,
     create_workspace,
+    delete_user,
+    delete_workspace,
     ensure_defaults,
     get_active_user,
     get_active_workspace_id,
@@ -1161,6 +1163,7 @@ def index():
         puppeteer_available=puppeteer_available(),
         api_jobs=get_api_jobs(),
         asset_criticality=asset_criticality,
+        history=load_history()[::-1],
         **_platform_context(),
     )
 
@@ -1278,6 +1281,15 @@ def api_workspaces_active():
     return jsonify({"active": wid})
 
 
+@app.route("/api/workspaces/<workspace_id>", methods=["DELETE"])
+def api_workspaces_delete(workspace_id):
+    success, message = delete_workspace(workspace_id)
+    if not success:
+        return jsonify({"error": message}), 400 if "last" in message.lower() else 404
+    audit_log("workspace.delete", detail={"workspace_id": workspace_id})
+    return jsonify({"ok": True, "message": message})
+
+
 @app.route("/api/users", methods=["GET"])
 def api_users_list():
     return jsonify({"users": load_users(), "active": (get_active_user() or {}).get("id")})
@@ -1302,6 +1314,20 @@ def api_users_active():
     if not set_active_user(uid):
         return jsonify({"error": "user not found"}), 404
     return jsonify({"active": uid})
+
+
+@app.route("/api/users/<user_id>", methods=["DELETE"])
+def api_users_delete(user_id):
+    # Get the current user ID from the active user for self-deletion check
+    active_user = get_active_user()
+    deleting_user_id = active_user.get("id") if active_user else None
+
+    success, message = delete_user(user_id, deleting_user_id)
+    if not success:
+        status = 400 if "last admin" in message.lower() or "your own" in message.lower() else 404
+        return jsonify({"error": message}), status
+    audit_log("user.delete", detail={"user_id": user_id})
+    return jsonify({"ok": True, "message": message})
 
 
 @app.route("/api/queue", methods=["GET"])

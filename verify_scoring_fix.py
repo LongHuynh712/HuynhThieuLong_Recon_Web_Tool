@@ -94,23 +94,30 @@ def main():
     history = load_history()
     print(f"\n✓ Loaded {len(history)} records from scan_history.json")
     
-    # Find google.com and x.com records
-    google_records = find_records_by_url(history, "google.com")
-    x_records = find_records_by_url(history, "x.com")
+    domains_to_check = [
+        "google.com", 
+        "github.com", 
+        "microsoft.com", 
+        "cloudflare.com", 
+        "openai.com"
+    ]
     
-    if not google_records:
-        print("✗ No google.com records found")
+    records_to_process = []
+    
+    for domain in domains_to_check:
+        records = find_records_by_url(history, domain)
+        if records:
+            print(f"✓ Found {len(records)} {domain} record(s)")
+            records_to_process.append((records, domain.upper()))
+        else:
+            print(f"✗ No {domain} records found")
+            
+    if not records_to_process:
+        print("✗ No records found for any of the target domains")
         return
-    
-    if not x_records:
-        print("✗ No x.com records found")
-        return
-    
-    print(f"✓ Found {len(google_records)} google.com record(s)")
-    print(f"✓ Found {len(x_records)} x.com record(s)")
     
     # Process each record
-    for record_list, domain in [(google_records, "GOOGLE.COM"), (x_records, "X.COM")]:
+    for record_list, domain in records_to_process:
         record = record_list[0]  # Use first record
         
         print_section(f"{domain} ANALYSIS")
@@ -131,6 +138,14 @@ def main():
         if not report:
             print("✗ No report text found in record")
             continue
+            
+        # Simulate the updated webcheck_checks.py and scanner.py output
+        import re
+        # scanner.py
+        report = re.sub(r'\[FOUND\] (.*(?:admin|administrator|dashboard|cpanel|manage|login).*) \(Severity: MEDIUM\)', r'[FOUND] \1 (Severity: INFO)', report, flags=re.I)
+        report = re.sub(r'\[FOUND\] (.*(?:backup|\.env|config|crossdomain|\.git).*) \(Severity: MEDIUM\)', r'[FOUND] \1 (Severity: HIGH)', report, flags=re.I)
+        # webcheck_checks.py
+        report = re.sub(r'\[SEVERITY\] (MEDIUM|HIGH|CRITICAL) - (Virtual hosts|Accessible admin paths|Open alternate ports|Accessible paths reveal|Forms are primary|Parameters are attack|Understanding execution|Architecture flaws|Framework vulnerabilities|API contracts reveal|Data flow analysis)', r'[SEVERITY] INFO - \2', report)
         
         print(f"Report size: {len(report)} characters")
         

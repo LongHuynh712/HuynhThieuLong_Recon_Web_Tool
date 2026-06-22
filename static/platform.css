@@ -273,8 +273,9 @@
     color: var(--text-primary, #e2e8f0);
 }
 
+.history-item-wrap.is-hidden,
 .history-item.is-hidden {
-    display: none;
+    display: none !important;
 }
 
 .chart-widget-wide {

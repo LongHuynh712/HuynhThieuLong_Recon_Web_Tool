@@ -113,37 +113,86 @@
         const sortBy = document.getElementById('historySort');
         const items = document.querySelectorAll('.history-item-wrap');
 
+        function fuzzyMatch(query, text) {
+            if (!query) return true;
+            let qIdx = 0;
+            for (let i = 0; i < text.length && qIdx < query.length; i++) {
+                if (text[i] === query[qIdx]) qIdx++;
+            }
+            return qIdx === query.length;
+        }
+
+        function matchesHost(q, rawHost) {
+            if (!q) return true;
+            const host = normalizeHost(rawHost).toLowerCase();
+
+            // Direct substring match (case-insensitive)
+            if (host.includes(q)) return true;
+
+            // Fuzzy match (subsequence)
+            if (fuzzyMatch(q, host)) return true;
+
+            return false;
+        }
+
         function apply() {
             const q = (search?.value || '').trim().toLowerCase();
             const minScore = parseInt(scoreFilter?.value || '0', 10);
             const sort = sortBy?.value || 'newest';
             const list = Array.from(items);
+            const seenHosts = new Set();
 
-            list.forEach((li) => {
+            let sortedList = [...list];
+            if (sort !== 'newest') {
+                sortedList.sort((a, b) => {
+                    const sa = parseInt(a.querySelector('.history-score-value')?.textContent || '0', 10);
+                    const sb = parseInt(b.querySelector('.history-score-value')?.textContent || '0', 10);
+                    return sort === 'score-desc' ? sb - sa : sa - sb;
+                });
+            }
+
+            sortedList.forEach((li) => {
                 const link = li.querySelector('.history-item');
-                const host = link?.getAttribute('title')?.toLowerCase() || '';
+                const rawHost = link?.getAttribute('title')?.toLowerCase() || '';
+                const cleanHost = normalizeHost(rawHost).toLowerCase();
                 const text = li.textContent?.toLowerCase() || '';
                 const scoreEl = li.querySelector('.history-score-value');
                 const score = parseInt(scoreEl?.textContent || '0', 10);
-                const matchText = !q || host.includes(q) || text.includes(q);
+
+                const matchText = matchesHost(q, rawHost) || text.includes(q);
                 const matchScore = !minScore || score >= minScore;
-                li.classList.toggle('is-hidden', !(matchText && matchScore));
+                let shouldShow = matchText && matchScore;
+
+                if (shouldShow && cleanHost) {
+                    if (!seenHosts.has(cleanHost)) {
+                        seenHosts.add(cleanHost);
+                    } else {
+                        shouldShow = false;
+                    }
+                }
+
+                li.classList.toggle('is-hidden', !shouldShow);
             });
 
             const parent = document.querySelector('.history-list');
-            if (!parent || sort === 'newest') return;
-            const visible = list.filter((li) => !li.classList.contains('is-hidden'));
-            visible.sort((a, b) => {
-                const sa = parseInt(a.querySelector('.history-score-value')?.textContent || '0', 10);
-                const sb = parseInt(b.querySelector('.history-score-value')?.textContent || '0', 10);
-                return sort === 'score-desc' ? sb - sa : sa - sb;
-            });
-            visible.forEach((li) => parent.appendChild(li));
+            if (parent) {
+                sortedList.forEach((li) => parent.appendChild(li));
+            }
         }
 
-        search?.addEventListener('input', apply);
+        const searchBtn = document.getElementById('historySearchBtn');
+        searchBtn?.addEventListener('click', apply);
+        search?.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') apply();
+        });
+        search?.addEventListener('input', (e) => {
+            if (!e.target.value.trim()) apply();
+        });
         scoreFilter?.addEventListener('change', apply);
         sortBy?.addEventListener('change', apply);
+
+        // Initial apply to ensure clean state
+        apply();
     }
 
     function appendScanLog(message, type) {

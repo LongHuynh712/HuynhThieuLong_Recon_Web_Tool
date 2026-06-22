@@ -29,46 +29,129 @@ LEGACY_SEVERITY_MAP = {
 
 
 def classify_section_severity(text: str, title: str = "") -> str:
-    """Return one of: critical, high, medium, low, info."""
-    combined = f"{title}\n{text}"
-    upper = combined.upper()
+    """Return one of: critical, high, medium, low, info.
 
-    if "[ERROR]" in combined or "SEVERITY: HIGH" in upper:
-        # Critical when sensitive artifacts or secrets are found; do not
-        # escalate purely on presence of administrative paths (discovery).
-        if re.search(r"\[FOUND\].*(?:backup|\.env|\.git|password|secret|api[_-]?key)", combined, re.I):
+    Severity classification follows OWASP principles:
+    - Discovery and informational findings are INFO
+    - Missing security controls are MEDIUM
+    - Dangerous exposures are HIGH
+    - Exposed secrets/sensitive data are CRITICAL (with evidence)
+    """
+    combined = f"{title}\n{text}"
+    lower = combined.lower()
+
+    # Google Dork suggestions are informational regardless of content
+    if "google dork" in lower or "dork suggestion" in lower:
+        return "info"
+
+    # CRITICAL: Exposed sensitive artifacts with evidence
+    # Must have [FOUND] and actual exposure (not just a Google dork suggestion)
+    if "[FOUND]" in combined:
+        # Use word boundaries to avoid false positives like ".github"
+        if re.search(r"\.git\b|\.env\b|\bbackup\b", lower):
+            return "critical"
+        if re.search(r"password.*(?:in\s+url|in\s+html|client-side|hardcoded)|secret.*(?:key|token|password)|api[_-]?key.*(?:exposed|found|leak)|aws[_-]?key|private[_-]?key|jwt.*secret|database.*password|production.*backup", lower):
+            return "critical"
+
+    if "[ERROR]" in combined:
+        if re.search(r"backup|\.env|\.git|password|secret|api[_-]?key", lower):
             return "critical"
         return "high"
 
-    # Treat admin/login discovery as informational by default; only mark
-    # critical when explicit sensitive artifacts (backup/.env/.git) are found.
-    if re.search(r"\[FOUND\].*(?:backup|\.env|\.git)", combined, re.I):
-        return "critical"
+    # HIGH: Dangerous exposures
+    high_patterns = [
+        r"directory\s+listing",
+        r"index\s+of\s+/",
+        r"backup\.(?:zip|tar|tar\.gz|sql)",
+        r"\.sql\b",
+        r"\.bak\b",
+        r"dangerous\s+cors|wildcard.*allow-origin|cors.*\*",
+        r"tls.*(?:v1\.0|v1\.1|sslv2|sslv3)",
+        r"weak\s+(?:tls|ssl|cipher)",
+        r"default\s+credentials?",
+        r"(?:admin|administrator|dashboard).*(?:public|accessible|unprotected)",
+        r"(?:auth|authorization).*bypass",
+        r"(?:account|user).*takeover"
+    ]
+    for pattern in high_patterns:
+        if re.search(pattern, lower):
+            return "high"
 
-    if "[WARNING]" in combined or "SEVERITY: MEDIUM" in upper:
+    if "[WARNING]" in combined:
+        if re.search(r"tls.*(?:v1\.0|v1\.1|weak|insecure)|dangerous\s+cors|permissive\s+cors", lower):
+            return "high"
         return "medium"
 
+    # MEDIUM: Missing security controls
     if "[MISSING]" in combined:
         key = title.lower()
-        if any(
-            w in key
-            for w in (
-                "ssl",
-                "tls",
-                "hsts",
-                "csp",
-                "security header",
-                "content-security",
-                "x-frame",
-            )
-        ):
-            return "medium"
+        security_keywords = [
+            "ssl", "tls", "hsts", "csp", "security header",
+            "x-frame-options", "x-content-type-options", "referrer-policy",
+            "secure cookie", "httponly", "samesite",
+            "security.txt", "dnssec"
+        ]
+        for sk in security_keywords:
+            if sk in key:
+                return "medium"
+
+        # Missing optional/SEO items are not medium
+        optional_keywords = [
+            "robots.txt", "sitemap.xml", "seo", "meta description",
+            "open graph", "social tags", "favicon", "viewport", "alt text"
+        ]
+        for ok in optional_keywords:
+            if ok in key:
+                return "info"
+
         return "low"
 
-    if "[FOUND]" in combined and "[MISSING]" not in combined and "[WARNING]" not in combined:
+    # INFO: Discovery, informational findings, positive controls
+    if "[FOUND]" in combined:
         return "info"
 
+    if "[INFO]" in combined:
+        return "info"
+
+    # Discovery patterns default to info
+    discovery_keywords = [
+        "server header", "x-powered-by", "via", "fingerprint", "technology",
+        "subdomain", "admin path", "common path", "entry point", "execution path",
+        "architecture", "framework", "cms", "api contract", "data flow",
+        "email", "phone", "social link", "whois", "dns", "txt record",
+        "google dork", "search engine", "cache", "wayback", "comment", "metadata",
+        "robots.txt", "sitemap.xml", "sitemap quality"
+    ]
+    for keyword in discovery_keywords:
+        if keyword in lower:
+            return "info"
+
     return "info"
+
+
+def determine_risk_tier(severity_counts: dict) -> tuple[str, str]:
+    """Determine risk tier and CSS class based on severity counts.
+
+    Rules:
+    - Critical Risk: >=1 Critical finding
+    - High Risk: >=2 High findings
+    - Elevated Risk: multiple (>=2) Medium findings, or 1 High + 1+ Medium
+    - Moderate Risk: 1 High, or 1 Medium
+    - Low Risk: no Critical/High/Medium findings
+    """
+    critical = severity_counts.get("critical", 0)
+    high = severity_counts.get("high", 0)
+    medium = severity_counts.get("medium", 0)
+
+    if critical > 0:
+        return "Critical", "risk-critical"
+    if high >= 2:
+        return "High", "risk-high"
+    if medium >= 2:
+        return "Elevated", "risk-medium"
+    if high == 1 or medium == 1:
+        return "Moderate", "risk-low"
+    return "Low", "risk-good"
 
 
 def legacy_severity(level: str) -> str:
@@ -98,21 +181,8 @@ def build_executive_summary(
     security_score = int(summary.get("security_score", summary.get("score", 0)) or 0)
     quality_score = int(summary.get("quality_score", 100) or 100)
 
-    if severity_counts["critical"] > 0 or security_score < 50:
-        risk_level = "Critical"
-        risk_class = "risk-critical"
-    elif severity_counts["high"] > 0 or security_score < 65:
-        risk_level = "High"
-        risk_class = "risk-high"
-    elif severity_counts["medium"] > 2 or security_score < 80:
-        risk_level = "Elevated"
-        risk_class = "risk-medium"
-    elif security_score < 90:
-        risk_level = "Moderate"
-        risk_class = "risk-low"
-    else:
-        risk_level = "Low"
-        risk_class = "risk-good"
+    # Determine risk tier using the new rules based on severity counts
+    risk_level, risk_class = determine_risk_tier(severity_counts)
 
     top_findings = []
     priority_order = ("critical", "high", "medium", "low", "info")

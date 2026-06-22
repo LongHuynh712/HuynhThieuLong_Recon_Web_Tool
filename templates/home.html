@@ -152,6 +152,36 @@
                         <ul id="jobsList" class="jobs-list"></ul>
                     </details>
                 </section>
+                
+                {% if history %}
+                <details class="recent-scans-panel wc-card" id="recentScans" open>
+                    <summary class="schedule-panel-summary">Mục tiêu quét gần đây</summary>
+                    <ul class="history-list" role="list">
+                        {% set seen_hosts = [] %}
+                        {% for item in history %}
+                            {% set host = item.url | history_host | lower %}
+                            {% if host not in seen_hosts and seen_hosts|length < 5 %}
+                                {% set _ = seen_hosts.append(host) %}
+                                <li class="history-item-wrap">
+                                    <a class="history-item" href="{{ url_for('view_results', record_id=item.id) }}" title="{{ item.url }}">
+                                        <span class="history-item-glyph" aria-hidden="true">🌐</span>
+                                        <span class="history-item-body">
+                                            <span class="history-host">{{ item.url | history_host }}</span>
+                                            <span class="history-meta">
+                                                {% if item.timestamp %}<time class="history-time">{{ item.timestamp }}</time>{% endif %}
+                                            </span>
+                                        </span>
+                                        <span class="history-score-pill {{ item.score | history_score_class }}">
+                                            <span class="history-score-value">{{ item.score }}</span>
+                                            <span class="history-score-label">điểm</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </details>
+                {% endif %}
                 <details class="schedule-panel wc-card" id="schedules">
                     <summary class="schedule-panel-summary">Lịch quét tự động (Phase 2)</summary>
                     <p class="schedule-hint">Quét nền theo chu kỳ — kết quả lưu vào lịch sử. Scheduler chạy khi app đang mở.</p>

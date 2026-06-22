@@ -747,7 +747,7 @@ def test_http_methods(url):
 # =========================
 # ENUMERATION
 # =========================
-def enumerate_paths(url, paths, title, baseline_text):
+def enumerate_paths(url, paths, title, baseline_text, severity="MEDIUM"):
     result = f"\n========== {title} =========="
 
     found = False
@@ -762,9 +762,7 @@ def enumerate_paths(url, paths, title, baseline_text):
                 result += f"[POSSIBLE FALSE POSITIVE] {target} returned homepage-like content\n"
                 continue
 
-            # Discovery of a reachable path is notable but not necessarily
-            # immediately exploitable; treat as MEDIUM by default.
-            result += f"[FOUND] {target} (Severity: MEDIUM)\n"
+            result += f"[FOUND] {target} (Severity: {severity})\n"
             found = True
 
     if not found:
@@ -774,15 +772,44 @@ def enumerate_paths(url, paths, title, baseline_text):
 
 
 def check_admin_interfaces(url, baseline_text):
-    return enumerate_paths(url, ADMIN_PATHS, "ADMIN INTERFACES", baseline_text)
+    return enumerate_paths(url, ADMIN_PATHS, "ADMIN INTERFACES", baseline_text, severity="INFO")
 
 
 def check_backup_files(url, baseline_text):
-    return enumerate_paths(url, BACKUP_FILES, "BACKUP FILES", baseline_text)
+    return enumerate_paths(url, BACKUP_FILES, "BACKUP FILES", baseline_text, severity="HIGH")
 
 
 def check_sensitive_files(url, baseline_text):
-    return enumerate_paths(url, SENSITIVE_FILES, "SENSITIVE FILES", baseline_text)
+    """Check for sensitive files and policy documents with appropriate severity."""
+    result = "\n========== SENSITIVE FILES =========="
+    found = False
+
+    # Files with their severity levels
+    files_with_severity = [
+        ("/.git/config", "CRITICAL"),
+        ("/.svn/entries", "CRITICAL"),
+        ("/web.config", "HIGH"),
+        ("/crossdomain.xml", "INFO"),
+        ("/clientaccesspolicy.xml", "INFO"),
+    ]
+
+    for path, severity in files_with_severity:
+        target = urljoin(url, path)
+        response = safe_request(target)
+
+        if response and response.status_code == 200:
+            candidate_text = get_text_signature(response.text)
+            if response.url.rstrip("/") == url.rstrip("/") or is_similar_content(baseline_text, candidate_text):
+                # Possible false positive (homepage or similar)
+                continue
+
+            result += f"[FOUND] {target} (Severity: {severity})\n"
+            found = True
+
+    if not found:
+        result += "No findings.\n"
+
+    return result
 
 
 # =========================

@@ -10,6 +10,10 @@
                     {% endfor %}
                 </select>
             </label>
+            <div class="hub-actions">
+                <button type="button" class="toolbar-btn" id="createWorkspaceBtn">+ Workspace</button>
+                <button type="button" class="toolbar-btn danger" id="deleteWorkspaceBtn">Delete Workspace</button>
+            </div>
             <label>User
                 <select id="userSelect">
                     {% for u in users %}
@@ -17,7 +21,10 @@
                     {% endfor %}
                 </select>
             </label>
-            <button type="button" class="toolbar-btn" id="createWorkspaceBtn">+ Workspace</button>
+            <div class="hub-actions">
+                <button type="button" class="toolbar-btn" id="addUserBtn">+ Add User</button>
+                <button type="button" class="toolbar-btn danger" id="deleteUserBtn">Delete User</button>
+            </div>
             {% if active_user %}<p class="hub-meta">API key: <code class="api-key-snippet" title="{{ active_user.api_key }}">{{ active_user.api_key }}</code></p>{% endif %}
         </div>
         <div class="hub-card">

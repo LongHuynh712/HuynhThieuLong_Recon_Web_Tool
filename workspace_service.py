@@ -147,3 +147,79 @@ def verify_api_key(api_key: str) -> dict | None:
     if not api_key:
         return None
     return next((u for u in load_users() if u.get("api_key") == api_key), None)
+
+
+def delete_workspace(workspace_id: str) -> tuple[bool, str]:
+    """
+    Delete a workspace.
+    Returns (success, message).
+    """
+    workspaces = load_workspaces()
+
+    # Check if workspace exists
+    workspace = next((w for w in workspaces if w.get("id") == workspace_id), None)
+    if not workspace:
+        return False, "Workspace not found"
+
+    # Prevent deleting the last workspace
+    if len(workspaces) <= 1:
+        return False, "Cannot delete the last workspace"
+
+    # Remove the workspace
+    workspaces = [w for w in workspaces if w.get("id") != workspace_id]
+    _save_json(WORKSPACES_FILE, workspaces)
+
+    # If the deleted workspace was active, switch to another one
+    active_workspace_id = get_active_workspace_id()
+    if active_workspace_id == workspace_id:
+        # Switch to first available workspace
+        if workspaces:
+            set_active_workspace(workspaces[0].get("id"))
+
+    # Remove workspace from all users
+    users = load_users()
+    for user in users:
+        if workspace_id in user.get("workspace_ids", []):
+            user["workspace_ids"] = [w for w in user.get("workspace_ids", []) if w != workspace_id]
+            # Ensure user still has at least one workspace
+            if not user.get("workspace_ids"):
+                user["workspace_ids"] = [workspaces[0].get("id")] if workspaces else []
+    _save_json(USERS_FILE, users)
+
+    return True, f"Workspace '{workspace.get('name')}' deleted"
+
+
+def delete_user(user_id: str, deleting_user_id: str = None) -> tuple[bool, str]:
+    """
+    Delete a user.
+    Returns (success, message).
+    """
+    users = load_users()
+
+    # Check if user exists
+    user_to_delete = next((u for u in users if u.get("id") == user_id), None)
+    if not user_to_delete:
+        return False, "User not found"
+
+    # Prevent deleting the last admin user
+    if user_to_delete.get("role") == "admin":
+        admin_count = sum(1 for u in users if u.get("role") == "admin")
+        if admin_count <= 1:
+            return False, "Cannot delete the last admin user"
+
+    # Prevent user from deleting themselves (optional, but good practice)
+    if deleting_user_id and user_id == deleting_user_id:
+        return False, "Cannot delete your own account"
+
+    # Remove the user
+    users = [u for u in users if u.get("id") != user_id]
+    _save_json(USERS_FILE, users)
+
+    # If the deleted user was active, switch to another user
+    active_user = get_active_user()
+    if active_user and active_user.get("id") == user_id:
+        # Switch to first available user
+        if users:
+            set_active_user(users[0].get("id"))
+
+    return True, f"User '{user_to_delete.get('name')}' deleted"

@@ -355,6 +355,42 @@
         </section>
         {% endif %}
 
+
+{% if target_info and target_info.owasp_assessments %}
+<section class="owasp-panel wc-card" aria-labelledby="owasp-heading">
+  <div class="panel-header">
+    <h2 id="owasp-heading">🛡️ OWASP Assessment Summary</h2>
+    <p class="hub-meta">Passive security assessment results from OWASP WSTG modules</p>
+  </div>
+  <div class="owasp-grid">
+    {% for mod_name, mod_data in target_info.owasp_assessments.items() %}
+    <div class="owasp-card">
+      <div class="owasp-card-header">
+        <h3 class="text-capitalize">{{ mod_name.replace('_', ' ') }}</h3>
+        <span class="severity-badge severity-{{ mod_data.severity | lower | default('info') }}">{{ mod_data.severity | default('INFO') }}</span>
+      </div>
+      <div class="owasp-card-body">
+        <p class="owasp-meta"><strong>Findings:</strong> {{ mod_data.summary.total_findings | default(0) }}</p>
+        {% if mod_data.wstg_reference %}
+        <p class="owasp-meta"><strong>WSTG IDs:</strong> {{ mod_data.wstg_reference | join(', ') }}</p>
+        {% endif %}
+        {% if mod_data.recommendations %}
+        <ul class="owasp-recs">
+          {% for rec in mod_data.recommendations %}
+          <li>{{ rec }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p class="text-muted"><em>No recommendations.</em></p>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+
         {% if advisories %}
         <section class="advisory-panel">
             <h2 class="advisory-heading">Advisory</h2>
@@ -592,7 +628,10 @@
                 <section class="location-panel wc-card" aria-labelledby="infrastructure-intel-heading">
                     <div class="panel-header">
                         <h2 id="infrastructure-intel-heading">Infrastructure / Network Intelligence</h2>
-                        <p class="hub-meta">Server location, DNS, WHOIS, hosting and network context.</p>
+                        <p class="hub-meta">Network location, DNS, WHOIS, hosting and routing context.</p>
+                        <p class="hub-meta text-muted location-disclaimer">
+                            <em>Location is based on GeoIP and network routing information. It may not represent the physical location of the server. CDN/Edge networks may show distributed node locations.</em>
+                        </p>
                     </div>
                     <div class="location-panel-grid">
                         <div class="location-meta">
@@ -611,7 +650,7 @@
                         </div>
                         <div id="serverLocationMap" class="location-map">
                             {% if not geo.latitude or not geo.longitude %}
-                            <div class="no-geo">Vị trí máy chủ không khả dụng.</div>
+                            <div class="no-geo">Network location data not available.</div>
                             {% endif %}
                         </div>
                     </div>

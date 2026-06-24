@@ -41,7 +41,13 @@
 
                 <aside class="quick-actions-bar" aria-label="Thao tác nhanh">
                     <div class="quick-actions-group">
-                        <h4>Mục tiêu gần đây</h4>
+                        <div class="quick-actions-header">
+                            <h4>Mục tiêu gần đây</h4>
+                            <div class="quick-actions-manage">
+                                <button type="button" class="manage-btn" id="manageRecentBtn" title="Quản lý mục tiêu gần đây">🗑 Xóa mục tiêu</button>
+                                <button type="button" class="manage-btn" id="clearAllRecentBtn" title="Xóa tất cả">🧹 Xóa tất cả</button>
+                            </div>
+                        </div>
                         <div id="recentTargets" class="quick-chip-row"></div>
                     </div>
                     <div class="quick-actions-group">
@@ -239,6 +245,39 @@
 
     <div id="toastHost" class="toast-host" aria-live="polite"></div>
     <button type="button" class="scroll-top-btn" id="scrollTopBtn" aria-label="Lên đầu trang">↑</button>
+
+    <!-- Recent Targets Management Modal -->
+    <div id="recentManageBackdrop" class="recent-manage-backdrop hidden" aria-hidden="true"></div>
+    <div id="recentManageModal" class="recent-manage-modal hidden" role="dialog" aria-modal="true">
+        <header class="recent-manage-header">
+            <h2 id="recentManageTitle">Xóa mục tiêu</h2>
+            <button type="button" class="recent-manage-dismiss" id="recentManageDismissBtn" aria-label="Đóng">×</button>
+        </header>
+        <div class="recent-manage-body">
+            <p id="recentManageDescription">Chọn mục tiêu muốn xóa.</p>
+            <div id="recentManageList" class="recent-manage-list"></div>
+        </div>
+        <footer class="recent-manage-footer">
+            <button type="button" class="btn-secondary" id="recentManageCancelBtn">Hủy</button>
+            <button type="button" class="btn-danger" id="recentManageConfirmBtn">Xác nhận xóa</button>
+        </footer>
+    </div>
+
+    <!-- Clear All Confirmation Modal -->
+    <div id="recentClearBackdrop" class="recent-clear-backdrop hidden" aria-hidden="true"></div>
+    <div id="recentClearModal" class="recent-clear-modal hidden" role="dialog" aria-modal="true">
+        <header class="recent-clear-header">
+            <h2>Xác nhận xóa</h2>
+            <button type="button" class="recent-clear-dismiss" id="recentClearDismissBtn" aria-label="Đóng">×</button>
+        </header>
+        <div class="recent-clear-body">
+            <p>Bạn có chắc muốn xóa toàn bộ mục tiêu gần đây không?</p>
+        </div>
+        <footer class="recent-clear-footer">
+            <button type="button" class="btn-secondary" id="recentClearCancelBtn">Không</button>
+            <button type="button" class="btn-danger" id="recentClearConfirmBtn">Có</button>
+        </footer>
+    </div>
 
     <div id="featureDocBackdrop" class="feature-doc-backdrop hidden" aria-hidden="true"></div>
     <div id="featureDocModal" class="feature-doc-modal hidden" role="dialog" aria-modal="true">

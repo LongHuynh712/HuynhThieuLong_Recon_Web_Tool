@@ -280,6 +280,200 @@ class APIDiscoverer:
             'wstg_reference': 'WSTG-4.12'
         }
     
+    def classify_api_authentication(self) -> Dict[str, Any]:
+        """Passive API authentication classification (WSTG-4.12.1).
+
+        Inspects discovered Swagger/OpenAPI specifications for defined
+        security schemes (e.g., apiKey, http/bearer, oauth2). The presence
+        of any scheme indicates that the API documents authentication
+        requirements; lack thereof suggests unauthenticated/public API.
+        """
+        auth_methods: set[str] = set()
+        for entry in self.apis_discovered:
+            if entry.get('type') in ('Swagger', 'OpenAPI') and entry.get('parseable'):
+                try:
+                    resp = requests.get(entry['url'], timeout=5)
+                    spec = resp.json()
+                    sec_schemes = spec.get('components', {}).get('securitySchemes', {})
+                    for name, scheme in sec_schemes.items():
+                        auth_methods.add(scheme.get('type', 'unknown'))
+                except Exception:
+                    continue
+        if auth_methods:
+            severity = 'MEDIUM'
+            finding = f"Authentication schemes documented: {', '.join(sorted(auth_methods))}"
+        else:
+            severity = 'INFO'
+            finding = 'No authentication schemes documented in discovered OpenAPI/Swagger specs.'
+        return {
+            'test_name': 'API Authentication Classification (Passive) (WSTG-4.12.1)',
+            'url': self.base_url,
+            'finding': finding,
+            'severity': severity,
+            'wstg_reference': 'WSTG-4.12.1',
+        }
+
+    def detect_api_authorization(self) -> Dict[str, Any]:
+        """Passive API authorization indicators (WSTG-4.12.2).
+
+        Looks for role‑based or privilege‑related path fragments (admin,
+        manager, role, permission, private) in discovered REST/Swagger
+        endpoints and for `security` requirements per operation in OpenAPI
+        specs. Presence of such patterns suggests authorization controls
+        (or lack thereof) that merit review.
+        """
+        auth_indicators = []
+        # Path‑based heuristics
+        sensitive_keywords = ['admin', 'manager', 'role', 'permission', 'private', 'secure', 'auth']
+        for entry in self.apis_discovered:
+            path = entry.get('path', '')
+            if any(kw in path.lower() for kw in sensitive_keywords):
+                auth_indicators.append(f"Path contains auth hint: {path}")
+        # Swagger per‑operation security checks
+        for entry in self.apis_discovered:
+            if entry.get('type') in ('Swagger', 'OpenAPI') and entry.get('parseable'):
+                try:
+                    resp = requests.get(entry['url'], timeout=5)
+                    spec = resp.json()
+                    # Look for global security or per‑operation security
+                    if spec.get('security'):
+                        auth_indicators.append('Global security requirements defined in OpenAPI spec')
+                    # Scan operations
+                    for path_item in spec.get('paths', {}).values():
+                        for operation in path_item.values():
+                            if isinstance(operation, dict) and operation.get('security'):
+                                auth_indicators.append('Operation‑level security defined')
+                                break
+                except Exception:
+                    continue
+        if auth_indicators:
+            severity = 'MEDIUM'
+            finding = f"Authorization indicators detected ({len(auth_indicators)})."
+        else:
+            severity = 'INFO'
+            finding = 'No explicit authorization indicators found.'
+        return {
+            'test_name': 'API Authorization Indicators (Passive) (WSTG-4.12.2)',
+            'url': self.base_url,
+            'finding': finding,
+            'details': auth_indicators,
+            'severity': severity,
+            'wstg_reference': 'WSTG-4.12.2',
+        }
+
+    def detect_rate_limiting(self) -> Dict[str, Any]:
+        """Passive API rate‑limiting detection (WSTG-4.12.3).
+
+        Scans response headers of discovered REST endpoints for common
+        rate‑limit headers (`X‑RateLimit-Limit`, `RateLimit`, `Retry-After`,
+        `X‑Throttle‑Limit`). The presence of any such header indicates
+        that rate limiting may be enforced.
+        """
+        rate_limit_headers = []
+        header_names = ['x-ratelimit-limit', 'ratelimit-limit', 'x-ratelimit-remaining',
+                        'retry-after', 'x-throttle-limit', 'x-rate-limit']
+        for entry in self.apis_discovered:
+            if entry.get('content_type'):
+                # entry may have been discovered via GET; we need the response object.
+                # Since we only stored metadata, re‑fetch the endpoint to inspect headers.
+                try:
+                    resp = requests.get(entry['url'], timeout=5)
+                    for hdr in header_names:
+                        if hdr in resp.headers:
+                            rate_limit_headers.append({
+                                'url': entry['url'],
+                                'header': hdr,
+                                'value': resp.headers[hdr]
+                            })
+                except Exception:
+                    continue
+        if rate_limit_headers:
+            severity = 'MEDIUM'
+            finding = f"Rate‑limit headers observed on {len(rate_limit_headers)} endpoint(s)."
+        else:
+            severity = 'INFO'
+            finding = 'No rate‑limit headers detected on discovered endpoints.'
+        return {
+            'test_name': 'API Rate Limiting Detection (Passive) (WSTG-4.12.3)',
+            'url': self.base_url,
+            'finding': finding,
+            'details': rate_limit_headers,
+            'severity': severity,
+            'wstg_reference': 'WSTG-4.12.3',
+        }
+
+    def score_sensitive_endpoints(self) -> Dict[str, Any]:
+        """Passive sensitive endpoint risk scoring (WSTG-4.12.5).
+
+        Assigns a risk score (0‑100) based on the presence of sensitive
+        keywords in endpoint paths. Each keyword contributes a weighted
+        score; the final score is capped at 100.
+        """
+        keyword_weights = {
+            'admin': 20,
+            'config': 15,
+            'secret': 20,
+            'payment': 15,
+            'private': 10,
+            'auth': 10,
+            'credential': 10,
+            'debug': 5,
+        }
+        total_score = 0
+        flagged = []
+        for entry in self.apis_discovered:
+            path = entry.get('path', '').lower()
+            for kw, weight in keyword_weights.items():
+                if kw in path:
+                    total_score += weight
+                    flagged.append({'path': entry['url'], 'keyword': kw, 'weight': weight})
+        total_score = min(total_score, 100)
+        severity = 'HIGH' if total_score >= 70 else ('MEDIUM' if total_score >= 40 else 'LOW')
+        return {
+            'test_name': 'Sensitive Endpoint Risk Scoring (Passive) (WSTG-4.12.5)',
+            'url': self.base_url,
+            'risk_score': total_score,
+            'flagged_endpoints': flagged,
+            'severity': severity,
+            'wstg_reference': 'WSTG-4.12.5',
+        }
+
+    def validate_openapi_exposure(self) -> Dict[str, Any]:
+        """Passive OpenAPI exposure validation (WSTG-4.12.6).
+
+        Checks whether a publicly reachable OpenAPI/Swagger spec contains
+        server URLs that expose internal network addresses or hostnames.
+        Presence of such URLs indicates information leakage.
+        """
+        exposures = []
+        for entry in self.apis_discovered:
+            if entry.get('type') in ('Swagger', 'OpenAPI') and entry.get('parseable'):
+                try:
+                    resp = requests.get(entry['url'], timeout=5)
+                    spec = resp.json()
+                    servers = spec.get('servers', [])
+                    for srv in servers:
+                        url = srv.get('url', '')
+                        # Flag internal IP ranges or localhost
+                        if re.search(r'10\.\d+\.\d+\.\d+|192\.168\.\d+\.\d+|127\.0\.0\.1|localhost', url):
+                            exposures.append({'url': entry['url'], 'server_url': url})
+                except Exception:
+                    continue
+        if exposures:
+            severity = 'HIGH'
+            finding = f"OpenAPI spec exposes internal server URLs on {len(exposures)} endpoint(s)."
+        else:
+            severity = 'INFO'
+            finding = 'No internal server URLs exposed in discovered OpenAPI specs.'
+        return {
+            'test_name': 'OpenAPI Exposure Validation (Passive) (WSTG-4.12.6)',
+            'url': self.base_url,
+            'finding': finding,
+            'details': exposures,
+            'severity': severity,
+            'wstg_reference': 'WSTG-4.12.6',
+        }
+
     def run_all_tests(self) -> Dict[str, Any]:
         """Execute all API discovery tests"""
         results = {
@@ -290,17 +484,30 @@ class APIDiscoverer:
                 self.discover_swagger_openapi(),
                 self.discover_graphql(),
                 self.discover_rest_api(),
-                self.discover_api_documentation()
+                self.discover_api_documentation(),
+                # New passive analyses added here
+                self.classify_api_authentication(),
+                self.detect_api_authorization(),
+                self.detect_rate_limiting(),
+                self.score_sensitive_endpoints(),
+                self.validate_openapi_exposure(),
             ],
             'summary': {
                 'total_apis': len(self.apis_discovered),
                 'swagger_endpoints': len([a for a in self.apis_discovered if 'swagger' in str(a).lower()]),
                 'graphql_endpoints': len([a for a in self.apis_discovered if 'graphql' in str(a).lower()]),
-                'rest_endpoints': len([a for a in self.apis_discovered if 'rest' in str(a).lower()])
+                'rest_endpoints': len([a for a in self.apis_discovered if 'rest' in str(a).lower()]),
+                # New summary statistics
+                'auth_classification': self.classify_api_authentication()['finding'],
+                'authorization_indicators': self.detect_api_authorization()['finding'],
+                'rate_limiting_detected': self.detect_rate_limiting()['finding'],
+                'sensitive_endpoint_risk_score': self.score_sensitive_endpoints()['risk_score'],
+                'openapi_exposure_validated': self.validate_openapi_exposure()['finding'],
             },
             'wstg_coverage': 'WSTG-4.12 (API Testing)'
         }
         return results
+
     
     @staticmethod
     def _identify_swagger_type(path: str) -> str:

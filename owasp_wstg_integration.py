@@ -30,6 +30,7 @@ try:
     from input_validation_assessor import InputValidationAssessor
     from business_logic_assessor import BusinessLogicAssessor
     from session_enhancement_assessor import SessionEnhancementAssessor
+    from cryptography_assessor import CryptographyAssessor
 except ImportError as e:
     print(f"Warning: Could not import OWASP modules: {e}")
 
@@ -125,9 +126,14 @@ OWASP_WSTG_MODULES = {
         'wstg': 'WSTG-4.6',
         'category': 'Session Management Enhancement',
         'description': 'Session cookie analysis, JWT analysis, logout checks, entropy, fixation indicators'
+    },
+        'cryptography_assessor': {
+            'class': CryptographyAssessor,
+            'wstg': 'WSTG-4.8',
+            'category': 'Cryptography Testing',
+            'description': 'TLS version, cipher strength, certificate validation, weak crypto indicators, JWT algorithm review'
+        }
     }
-}
-
 
 def run_owasp_module(base_url, module_name):
     """
@@ -289,9 +295,10 @@ def run_error_handler_assessment(url):
     return run_owasp_module(url, 'error_handler_assessor')
 
 
-def run_security_scoring(url):
-    """OWASP: Security posture scoring and coverage metrics"""
-    return run_owasp_module(url, 'security_scorer')
+def run_session_enhancement_assessment(url):
+    """WSTG-4.6: Session management enhancement (JWT, cookies, logout, entropy)"""
+    return run_owasp_module(url, 'session_enhancement_assessor')
+
 
 
 # New module wrappers
@@ -315,6 +322,6 @@ def run_business_logic_assessment(url):
     return run_owasp_module(url, 'business_logic_assessor')
 
 
-def run_session_enhancement_assessment(url):
-    """WSTG-4.6: Session management enhancement (JWT, cookies, logout, entropy)"""
-    return run_owasp_module(url, 'session_enhancement_assessor')
+def run_cryptography_assessment(url):
+    """WSTG-4.8: Cryptography assessment (TLS, cipher, certificates, weak crypto)"""
+    return run_owasp_module(url, 'cryptography_assessor')

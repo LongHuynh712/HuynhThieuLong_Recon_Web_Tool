@@ -11,6 +11,7 @@ import socket
 import logging
 import re
 import platform
+import json
 from datetime import datetime
 from difflib import SequenceMatcher
 
@@ -56,6 +57,18 @@ from webcheck_checks import (
     map_data_flows,
 )
 
+# OWASP assessors imports
+from modules.api_security_assessor import APISecurityAssessor
+from modules.input_validation_assessor import InputValidationAssessor
+from modules.authentication_assessor import AuthenticationAssessor
+from modules.client_side_assessor import ClientSideAssessor
+from modules.business_logic_assessor import BusinessLogicAssessor
+from modules.cryptography_assessor import CryptographyAssessor
+from modules.session_assessor import SessionAssessor
+from modules.authorization_assessor import AuthorizationAssessor
+from modules.error_handler_assessor import ErrorHandlerAssessor
+from modules.session_enhancement_assessor import SessionEnhancementAssessor
+
 # Optional imports for WHOIS and DNS lookups
 try:
     import whois as _whois
@@ -73,6 +86,16 @@ COMMON_SLD_DOMAINS = {
     "co.nz", "gov.nz", "com.br", "net.br",
     "com.sg", "com.tr", "co.in", "net.in",
     "edu.vn", "gov.vn", "net.vn", "org.vn", "com.vn"
+}
+
+# Heavy domains - skip deep enumeration for performance
+HEAVY_DOMAINS = {
+    "google.com", "youtube.com", "facebook.com", "microsoft.com",
+    "amazon.com", "apple.com", "netflix.com", "github.com",
+    "linkedin.com", "twitter.com", "x.com", "instagram.com",
+    "tiktok.com", "cloudflare.com", "akamai.com", "fastly.com",
+    "wikipedia.org", "yahoo.com", "ebay.com", "reddit.com",
+    "twitch.tv", "microsoftonline.com", "sharepoint.com"
 }
 
 def get_registered_domain(name):
@@ -162,7 +185,7 @@ def safe_request(url, method="GET"):
         response = scraper.request(
             method=method,
             url=url,
-            timeout=30,
+            timeout=10,
             verify=True,
             allow_redirects=True
         )
@@ -382,12 +405,23 @@ def enumerate_subdomains(domain):
     if not domain:
         return result + "\nNo domain provided."
 
+    # Fast mode for large/heavy domains - skip brute-force enumeration
+    is_heavy_domain = domain.lower() in HEAVY_DOMAINS
+
+    if is_heavy_domain:
+        result += f"\n[INFO] Domain '{domain}' detected as heavy - using fast passive mode only\n"
+        result += "[INFO] Skipping common prefix brute force to avoid excessive requests\n"
+
     try:
         query_url = f"https://crt.sh/?q=%25.{domain}&output=json"
         response = safe_request(query_url)
         if response and response.status_code == 200:
             try:
                 entries = response.json()
+                # Limit crt.sh results to prevent overwhelming output
+                if isinstance(entries, list) and len(entries) > 100:
+                    entries = entries[:100]
+                    result += "[INFO] crt.sh results limited to first 100 entries for performance\n"
                 for item in entries:
                     name = item.get("name_value")
                     if name:
@@ -399,15 +433,17 @@ def enumerate_subdomains(domain):
     except Exception:
         pass
 
-    common_prefixes = ["www", "api", "blog", "mail", "dev", "test", "admin", "cdn", "m", "portal"]
-    for prefix in common_prefixes:
-        candidate = f"{prefix}.{domain}"
-        try:
-            resp = safe_request(f"https://{candidate}")
-            if resp and resp.status_code < 400:
-                found.add(candidate)
-        except Exception:
-            pass
+    # Only do common prefix brute force for non-heavy domains
+    if not is_heavy_domain:
+        common_prefixes = ["www", "api", "blog", "mail", "dev", "test", "admin", "cdn", "m", "portal"]
+        for prefix in common_prefixes:
+            candidate = f"{prefix}.{domain}"
+            try:
+                resp = safe_request(f"https://{candidate}")
+                if resp and resp.status_code < 400:
+                    found.add(candidate)
+            except Exception:
+                pass
 
     if found:
         for sub in sorted(found):
@@ -611,7 +647,7 @@ def check_robots(url):
     result = "\n========== ROBOTS.TXT =========="
 
     if not response:
-        return result + "\nrobots.txt not reachable\n"
+        return result + "\nrobots.txt not reachable\n", []
     if response.status_code != 200:
         return result + f"\nrobots.txt returned {response.status_code}.\n"
 
@@ -926,6 +962,33 @@ def scan_target(url, mode="full", selected_sections=None):
     if should_scan("assets"):
         full_report += discover_assets(response.text, url)
 
+    # ------------------------------------------------------------------
+    # OWASP passive assessors execution
+    # ------------------------------------------------------------------
+    owasp_assessments = {}
+    _assessors = [
+        ("api_security", APISecurityAssessor),
+        ("input_validation", InputValidationAssessor),
+        ("authentication", AuthenticationAssessor),
+        ("client_side", ClientSideAssessor),
+        ("business_logic", BusinessLogicAssessor),
+        ("cryptography", CryptographyAssessor),
+        ("session", SessionAssessor),
+        ("authorization", AuthorizationAssessor),
+        ("error_handler", ErrorHandlerAssessor),
+        ("session_enhancement", SessionEnhancementAssessor),
+    ]
+    for key, AssessorCls in _assessors:
+        try:
+            assessor = AssessorCls(url)
+            owasp_assessments[key] = assessor.run_all_tests()
+        except Exception as exc:  # pragma: no‑cover
+            owasp_assessments[key] = {"error": str(exc)}
+    # Append a JSON block to the report for visibility (optional)
+    full_report += "\n========== OWASP ASSESSMENTS ==========\n"
+    full_report += json.dumps(owasp_assessments, ensure_ascii=False, indent=2)
+
+
     if should_scan("js_endpoints"):
         full_report += discover_js_endpoints(response.text, url)
 
@@ -977,10 +1040,15 @@ def scan_target(url, mode="full", selected_sections=None):
             parsed = urlparse(url)
             domain = parsed.hostname or parsed.netloc
             if domain:
-                full_report += discover_virtual_hosts(domain)
-                full_report += scan_common_admin_paths(url)
-                full_report += discover_alternate_ports(domain)
-                full_report += find_common_paths(domain)
+                # Fast mode for heavy domains - skip deep enumeration
+                if domain.lower() in HEAVY_DOMAINS:
+                    full_report += "\n[INFO] Domain is large/heavy - skipping deep enumeration for performance\n"
+                    full_report += "[INFO] Use custom scan with specific sections for targeted analysis\n"
+                else:
+                    full_report += discover_virtual_hosts(domain)
+                    full_report += scan_common_admin_paths(url)
+                    full_report += discover_alternate_ports(domain)
+                    full_report += find_common_paths(domain)
         except Exception as e:
             full_report += f"\n[ERROR] Enhanced enumeration failed: {e}\n"
 
@@ -1139,24 +1207,78 @@ def check_network_info(ip):
     except Exception:
         result += "\nReverse DNS: not available\n"
 
-    for api_url in [f"https://ipinfo.io/{ip}/json", f"https://ipapi.co/{ip}/json/"]:
+    # Try ip-api.com first (more accurate for ASN/ISP), then ipinfo.io, then ipapi.co
+    api_sources = [
+        f"http://ip-api.com/json/{ip}/json",  # http to avoid https issues
+        f"https://ipinfo.io/{ip}/json",
+        f"https://ipapi.co/{ip}/json/",
+    ]
+
+    cdn_providers = {
+        "cloudflare", "google", "akamai", "fastly", "amazonaws",
+        "aws", "azure", "microsoft", "cdn", "edge"
+    }
+
+    location_data = {}
+    cdn_detected = False
+
+    for api_url in api_sources:
         try:
             response = safe_request(api_url)
             if response and response.status_code == 200:
                 data = response.json()
-                org = data.get("org") or data.get("company") or data.get("asn")
-                if org:
-                    result += f"Organization: {org}\n"
-                if data.get("asn"):
-                    result += f"ASN: {data.get('asn')}\n"
-                if data.get("city") or data.get("region") or data.get("country"):
-                    loc = ", ".join([x for x in [data.get("city"), data.get("region"), data.get("country")] if x])
-                    result += f"Location: {loc}\n"
-                if data.get("hostname"):
-                    result += f"Hostname: {data.get('hostname')}\n"
-                return result
+                if data:
+                    location_data.update(data)
+
+                # Check for CDN/edge network indicators
+                org = str(data.get("org", "") or data.get("company", "") or "").lower()
+                isp = str(data.get("isp", "") or "").lower()
+                asn = str(data.get("asn", "") or "").lower()
+
+                for provider in cdn_providers:
+                    if provider in org or provider in isp or provider in asn:
+                        cdn_detected = True
+                        break
+
+                # Only return after successful fetch from first working source
+                if data:
+                    break
         except Exception:
             continue
 
-    result += "\nASN / hosting provider details unavailable from external services.\n"
+    if location_data:
+        # Build location string
+        city = location_data.get("city")
+        region = location_data.get("region") or location_data.get("regionName")
+        country = location_data.get("country")
+        if city or region or country:
+            loc_parts = [x for x in [city, region, country] if x]
+            result += f"Location: {', '.join(loc_parts)}\n"
+
+        # Coordinates (from ip-api or ipinfo)
+        lat = location_data.get("lat") or location_data.get("latitude")
+        lon = location_data.get("lon") or location_data.get("longitude")
+        if lat and lon:
+            result += f"Coordinates: {lat}, {lon}\n"
+
+        # ASN and organization
+        asn = location_data.get("asn")
+        if asn:
+            result += f"ASN: {asn}\n"
+
+        org = location_data.get("org") or location_data.get("company")
+        if org:
+            result += f"Organization: {org}\n"
+
+        isp = location_data.get("isp")
+        if isp and isp != org:
+            result += f"ISP: {isp}\n"
+
+        # CDN/Edge detection
+        if cdn_detected:
+            result += "\n[NOTE] CDN/Edge Network Detected - Location represents network edge, not origin server\n"
+
+    else:
+        result += "\nASN / hosting provider details unavailable from external services.\n"
+
     return result

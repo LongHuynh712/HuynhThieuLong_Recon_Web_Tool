@@ -7,6 +7,9 @@
     const MAX_RECENT = 8;
     const MAX_FAVS = 12;
 
+    // State for selected recent targets (for batch delete)
+    let selectedRecentTargets = new Set();
+
     function loadJson(key, fallback) {
         try {
             const raw = localStorage.getItem(key);
@@ -73,17 +76,48 @@
         const chip = (host, isFav) => {
             const btn = document.createElement('button');
             btn.type = 'button';
-            btn.className = `quick-chip${isFav ? ' is-fav' : ''}`;
+            btn.className = `quick-chip${isFav ? ' is-fav' : ''}${selectedRecentTargets.has(host) ? ' is-selected' : ''}`;
             btn.textContent = isFav ? `★ ${host}` : host;
-            btn.addEventListener('click', () => setUrlInput(host));
+            btn.dataset.host = host;
+            btn.addEventListener('click', () => {
+                if (isFav) {
+                    toggleFavorite(host);
+                } else {
+                    setUrlInput(host);
+                }
+            });
+            // Right-click context menu
+            btn.addEventListener('contextmenu', (e) => {
+                if (!isFav) {
+                    e.preventDefault();
+                    showRecentContextMenu(e, host);
+                }
+            });
+            // Long press for mobile (700ms)
+            let pressTimer;
+            btn.addEventListener('touchstart', () => {
+                pressTimer = setTimeout(() => {
+                    showRecentContextMenu({ clientX: 0, clientY: 0, preventDefault: () => {} }, host);
+                }, 700);
+            });
+            btn.addEventListener('touchend', () => clearTimeout(pressTimer));
+            btn.addEventListener('touchmove', () => clearTimeout(pressTimer));
             return btn;
         };
 
         if (recentEl) {
             recentEl.innerHTML = '';
             if (!recent.length) {
-                recentEl.innerHTML = '<p class="quick-actions-empty">Chưa có mục tiêu gần đây.</p>';
+                recentEl.innerHTML = '<p class="quick-actions-empty">Chưa có mục tiêu nào gần đây.</p>';
+                const manageBtn = document.getElementById('manageRecentBtn');
+                const clearBtn = document.getElementById('clearAllRecentBtn');
+                if (manageBtn) manageBtn.disabled = true;
+                if (clearBtn) clearBtn.disabled = true;
             } else {
+                const manageBtn = document.getElementById('manageRecentBtn');
+                const clearBtn = document.getElementById('clearAllRecentBtn');
+                if (manageBtn) manageBtn.disabled = false;
+                if (clearBtn) clearBtn.disabled = false;
                 recent.forEach((h) => recentEl.appendChild(chip(h, false)));
             }
         }
@@ -107,6 +141,102 @@
         btn.textContent = favs.includes(host) ? '★ Đã lưu' : '☆ Yêu thích';
     }
 
+    function showRecentContextMenu(e, host) {
+        const menu = document.getElementById('recentContextMenu');
+        if (!menu) return;
+        menu.dataset.targetHost = host;
+        // Position menu at cursor, keep within viewport
+        const menuWidth = 180;
+        const menuHeight = 80;
+        let left = e.clientX;
+        let top = e.clientY;
+        if (left + menuWidth > window.innerWidth) left -= menuWidth;
+        if (top + menuHeight > window.innerHeight) top -= menuHeight;
+        menu.style.left = `${left}px`;
+        menu.style.top = `${top}px`;
+        menu.classList.remove('hidden');
+        menu.focus();
+    }
+
+    function hideRecentContextMenu() {
+        const menu = document.getElementById('recentContextMenu');
+        if (menu) menu.classList.add('hidden');
+    }
+
+    function showRecentManageModal() {
+        const modal = document.getElementById('recentManageModal');
+        const backdrop = document.getElementById('recentManageBackdrop');
+        const list = document.getElementById('recentManageList');
+        if (!modal || !list) return;
+
+        const recent = loadJson(STORAGE_RECENT, []);
+        list.innerHTML = '';
+
+        recent.forEach((host) => {
+            const item = document.createElement('label');
+            item.className = 'recent-manage-item';
+            item.innerHTML = `
+                <input type="checkbox" value="${host}" ${selectedRecentTargets.has(host) ? 'checked' : ''}>
+                <span>${host}</span>
+            `;
+            list.appendChild(item);
+        });
+
+        // Check all by default
+        const checkboxes = list.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+            cb.checked = true;
+            selectedRecentTargets.add(cb.value);
+        });
+
+        modal.classList.remove('hidden');
+        backdrop.classList.remove('hidden');
+        modal.focus();
+    }
+
+    function hideRecentManageModal() {
+        const modal = document.getElementById('recentManageModal');
+        const backdrop = document.getElementById('recentManageBackdrop');
+        if (modal) modal.classList.add('hidden');
+        if (backdrop) backdrop.classList.add('hidden');
+        selectedRecentTargets.clear();
+    }
+
+    function showRecentClearModal() {
+        const modal = document.getElementById('recentClearModal');
+        const backdrop = document.getElementById('recentClearBackdrop');
+        if (modal) modal.classList.remove('hidden');
+        if (backdrop) backdrop.classList.remove('hidden');
+        modal.focus();
+    }
+
+    function hideRecentClearModal() {
+        const modal = document.getElementById('recentClearModal');
+        const backdrop = document.getElementById('recentClearBackdrop');
+        if (modal) modal.classList.add('hidden');
+        if (backdrop) backdrop.classList.add('hidden');
+    }
+
+    function deleteSelectedRecent() {
+        const recent = loadJson(STORAGE_RECENT, []);
+        const newRecent = recent.filter(host => !selectedRecentTargets.has(host));
+        saveJson(STORAGE_RECENT, newRecent);
+        selectedRecentTargets.clear();
+        hideRecentManageModal();
+        renderQuickActions();
+        const count = recent.length - newRecent.length;
+        if (count > 0) {
+            window.rsToast?.(`Đã xóa ${count} mục tiêu thành công`, 'success');
+        }
+    }
+
+    function deleteAllRecent() {
+        saveJson(STORAGE_RECENT, []);
+        hideRecentClearModal();
+        renderQuickActions();
+        window.rsToast?.(`Đã xóa toàn bộ mục tiêu gần đây`, 'success');
+    }
+
     function initHistoryDashboard() {
         const search = document.getElementById('historySearch');
         const scoreFilter = document.getElementById('historyScoreFilter');
@@ -125,13 +255,8 @@
         function matchesHost(q, rawHost) {
             if (!q) return true;
             const host = normalizeHost(rawHost).toLowerCase();
-
-            // Direct substring match (case-insensitive)
             if (host.includes(q)) return true;
-
-            // Fuzzy match (subsequence)
             if (fuzzyMatch(q, host)) return true;
-
             return false;
         }
 
@@ -191,29 +316,7 @@
         scoreFilter?.addEventListener('change', apply);
         sortBy?.addEventListener('change', apply);
 
-        // Initial apply to ensure clean state
         apply();
-    }
-
-    function appendScanLog(message, type) {
-        const panel = document.getElementById('scanLiveLog');
-        const list = document.getElementById('scanLogList');
-        if (!panel || !list) return;
-        panel.classList.remove('hidden');
-        const li = document.createElement('li');
-        const ts = new Date().toLocaleTimeString('vi-VN', { hour12: false });
-        li.className = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : type === 'warn' ? 'log-warn' : '';
-        li.textContent = `[${ts}] ${message}`;
-        list.appendChild(li);
-        if (list.children.length > 80) list.removeChild(list.firstChild);
-        list.scrollTop = list.scrollHeight;
-    }
-
-    function clearScanLog() {
-        const list = document.getElementById('scanLogList');
-        const panel = document.getElementById('scanLiveLog');
-        if (list) list.innerHTML = '';
-        panel?.classList.add('hidden');
     }
 
     function initModuleStatusGrid() {
@@ -241,6 +344,27 @@
         if (icon) icon.textContent = state === 'ok' ? '✓' : state === 'fail' ? '✗' : '◌';
     }
 
+    function appendScanLog(message, type) {
+        const panel = document.getElementById('scanLiveLog');
+        const list = document.getElementById('scanLogList');
+        if (!panel || !list) return;
+        panel.classList.remove('hidden');
+        const li = document.createElement('li');
+        const ts = new Date().toLocaleTimeString('vi-VN', { hour12: false });
+        li.className = type === 'ok' ? 'log-ok' : type === 'err' ? 'log-err' : type === 'warn' ? 'log-warn' : '';
+        li.textContent = `[${ts}] ${message}`;
+        list.appendChild(li);
+        if (list.children.length > 80) list.removeChild(list.firstChild);
+        list.scrollTop = list.scrollHeight;
+    }
+
+    function clearScanLog() {
+        const list = document.getElementById('scanLogList');
+        const panel = document.getElementById('scanLiveLog');
+        if (list) list.innerHTML = '';
+        panel?.classList.add('hidden');
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         renderQuickActions();
         initHistoryDashboard();
@@ -250,6 +374,37 @@
         document.getElementById('url')?.addEventListener('input', updateFavButton);
         document.getElementById('addFavoriteBtn')?.addEventListener('click', () => {
             toggleFavorite(document.getElementById('url')?.value);
+        });
+
+        // Recent Targets management buttons
+        document.getElementById('manageRecentBtn')?.addEventListener('click', showRecentManageModal);
+        document.getElementById('clearAllRecentBtn')?.addEventListener('click', showRecentClearModal);
+        document.getElementById('recentManageDismissBtn')?.addEventListener('click', hideRecentManageModal);
+        document.getElementById('recentManageCancelBtn')?.addEventListener('click', hideRecentManageModal);
+        document.getElementById('recentManageConfirmBtn')?.addEventListener('click', deleteSelectedRecent);
+        document.getElementById('recentClearDismissBtn')?.addEventListener('click', hideRecentClearModal);
+        document.getElementById('recentClearCancelBtn')?.addEventListener('click', hideRecentClearModal);
+        document.getElementById('recentClearConfirmBtn')?.addEventListener('click', deleteAllRecent);
+
+        // Close modals on backdrop click
+        document.getElementById('recentManageBackdrop')?.addEventListener('click', hideRecentManageModal);
+        document.getElementById('recentClearBackdrop')?.addEventListener('click', hideRecentClearModal);
+
+        // Close context menu on outside click
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('recentContextMenu');
+            if (menu && !menu.contains(e.target)) {
+                hideRecentContextMenu();
+            }
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideRecentManageModal();
+                hideRecentClearModal();
+                hideRecentContextMenu();
+            }
         });
 
         const scanForm = document.getElementById('scanForm');

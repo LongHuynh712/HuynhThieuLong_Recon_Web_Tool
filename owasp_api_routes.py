@@ -22,7 +22,7 @@ from owasp_wstg_integration import (
     run_authorization_assessment,
     run_input_validation_assessment,
     run_business_logic_assessment,
-    run_session_enhancement_assessment,
+    run_cryptography_assessment,
     get_module_info,
     get_module_by_wstg_section,
     run_all_owasp_modules
@@ -416,6 +416,22 @@ def session_enhancement_assessment():
         return jsonify({'error': 'URL parameter required'}), 400
     try:
         results = run_session_enhancement_assessment(url)
+        return jsonify(results), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@owasp_routes.route('/cryptography-assessment', methods=['POST'])
+def cryptography_assessment():
+    """
+    WSTG-4.8: Cryptography Assessment (Passive)
+    Checks TLS version, cipher strength, certificates, weak crypto primitives, and JWT algorithms.
+    """
+    data = request.get_json() or {}
+    url = data.get('url')
+    if not url:
+        return jsonify({'error': 'URL parameter required'}), 400
+    try:
+        results = run_cryptography_assessment(url)
         return jsonify(results), 200
     except Exception as e:
         return jsonify({'error': str(e)}), 500

@@ -24367,3 +24367,706 @@
 2026-06-24 11:07:50,523 - INFO - 127.0.0.1 - - [24/Jun/2026 11:07:50] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
 2026-06-24 11:07:50,620 - INFO - 127.0.0.1 - - [24/Jun/2026 11:07:50] "GET /api/schedules HTTP/1.1" 200 -
 2026-06-24 11:07:53,944 - INFO - 127.0.0.1 - - [24/Jun/2026 11:07:53] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:54:41,879 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 12:54:41,880 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 12:54:45,402 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:45] "GET / HTTP/1.1" 200 -
+2026-06-24 12:54:46,176 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,178 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,203 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,206 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,208 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,211 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,218 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,227 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,234 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,245 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,253 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,259 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,264 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,270 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,874 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,891 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,891 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,892 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,893 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,895 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,896 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,915 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:46,915 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:46] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:47,278 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:47] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 12:54:47,378 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:47] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-24 12:54:48,835 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:48] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:54:52,601 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:52,772 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:52,778 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:52,779 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:52,779 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:52,860 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:52] "GET /api/dns?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:52,940 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:53,113 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:53] "[35m[1mGET /api/architecture-mapper?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:53,154 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:53] "[35m[1mGET /api/cookies?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:53,248 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:53,252 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:53] "[35m[1mGET /api/assets?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:53,263 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:53] "[35m[1mGET /api/content-leakage?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:53,289 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:53] "[35m[1mGET /api/csp?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:53,453 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:53,727 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:53,798 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:54,080 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:54] "[35m[1mGET /api/entry-point-mapper?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:54,419 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:54] "[35m[1mGET /api/execution-paths?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:54,790 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:54] "[35m[1mGET /api/fingerprint?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:54,791 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:54] "GET /api/get-ip?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:54,998 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:54] "[35m[1mGET /api/firewall?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:55,252 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:55,253 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:55,351 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:55,434 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:55,565 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:55] "[35m[1mGET /api/framework-enhancement?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:55,572 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:55] "[35m[1mGET /api/headers?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:55,693 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:55,699 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:55] "[35m[1mGET /api/http-security?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:55,700 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:55] "[35m[1mGET /api/hsts?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:55,940 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:55] "GET /api/redirects?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:56,412 - INFO - Connecting to https://openai.com/robots.txt [GET]
+2026-06-24 12:54:56,465 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:56] "[35m[1mGET /api/linked-pages?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:57,555 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:57] "GET /api/robots-txt?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:57,743 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:57] "[35m[1mGET /api/mail-config?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:57,762 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:57] "GET /api/search-engine-recon?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:58,167 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:59,121 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:59] "[35m[1mGET /api/social-tags?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:59,129 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:59] "GET /api/security-txt?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:59,403 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:59,449 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:59] "GET /api/ssl?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:54:59,643 - INFO - Connecting to https://openai.com [GET]
+2026-06-24 12:54:59,768 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:59] "[35m[1mGET /api/status?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:54:59,777 - INFO - 127.0.0.1 - - [24/Jun/2026 12:54:59] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:55:00,174 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:00] "[35m[1mGET /api/tech-stack?url=https://openai.com HTTP/1.1[0m" 500 -
+2026-06-24 12:55:00,457 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:00] "GET /api/tls-connection?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:55:00,508 - INFO - Connecting to http://ip-api.com/json/172.64.154.211/json [GET]
+2026-06-24 12:55:00,948 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:00] "GET /api/txt-records?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:55:02,192 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:02] "GET /api/network?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:55:03,566 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:03] "GET /api/whois?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:55:06,388 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:06] "GET /api/enhanced-enumeration?url=https://openai.com HTTP/1.1" 200 -
+2026-06-24 12:55:17,584 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 12:55:17,585 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 12:55:20,393 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "GET / HTTP/1.1" 200 -
+2026-06-24 12:55:20,877 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,886 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,892 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,895 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,898 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,900 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,901 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,911 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,923 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,927 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,931 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,935 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,940 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:20,944 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:20] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,347 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,353 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,355 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,359 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,362 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,370 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,378 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,385 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,386 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,389 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:21,626 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:21] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 12:55:24,682 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:24] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:55:25,808 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:25,809 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:25,819 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:25,846 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:25,933 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:26,079 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:26] "GET /api/dns?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:26,163 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:26,989 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:26] "GET /api/csp?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:27,068 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:27] "GET /api/assets?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:27,154 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:27] "GET /api/architecture-mapper?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:27,395 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:27] "GET /api/content-leakage?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:27,526 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:27,595 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:27,596 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:29,168 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:29] "GET /api/execution-paths?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:29,269 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:29] "GET /api/entry-point-mapper?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:29,349 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-24 12:55:29,520 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:29,552 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:29,900 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-24 12:55:30,401 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:30] "GET /api/fingerprint?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:30,410 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:30] "GET /api/get-ip?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:30,535 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:30,592 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:30] "GET /api/framework-enhancement?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:30,695 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:30,915 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:30] "GET /api/firewall?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:31,055 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:31,844 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:31] "GET /api/headers?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:31,907 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:31,918 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:31] "GET /api/hsts?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:32,012 - INFO - Connecting to http://ip-api.com/json/20.43.161.105/json [GET]
+2026-06-24 12:55:32,184 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:32] "GET /api/http-security?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:32,592 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:32] "[35m[1mGET /api/mail-config?url=https://duck.com HTTP/1.1[0m" 500 -
+2026-06-24 12:55:32,771 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:32] "GET /api/redirects?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:32,843 - INFO - Connecting to https://duck.com/robots.txt [GET]
+2026-06-24 12:55:32,937 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:32] "GET /api/linked-pages?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:32,948 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-24 12:55:33,437 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-24 12:55:33,545 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:33] "GET /api/robots-txt?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:33,559 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:33] "GET /api/search-engine-recon?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:33,863 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:33] "GET /api/security-txt?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:33,960 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:34,380 - INFO - Connecting to https://duck.com/robots.txt [GET]
+2026-06-24 12:55:34,679 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:34] "GET /api/cookies?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:34,687 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:34] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:55:34,909 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:34] "GET /api/ssl?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:34,975 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:35,037 - INFO - Connecting to https://duckduckgo.com/sitemap.xml [GET]
+2026-06-24 12:55:35,122 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:35] "GET /api/social-tags?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:35,216 - INFO - Connecting to https://duck.com [GET]
+2026-06-24 12:55:35,940 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:35] "GET /api/status?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:36,772 - INFO - Connecting to http://ip-api.com/json/20.43.161.105/json [GET]
+2026-06-24 12:55:36,783 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:36] "GET /api/tls-connection?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:36,847 - INFO - Connecting to https://duckduckgo.com/administrator [HEAD]
+2026-06-24 12:55:36,951 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:36] "GET /api/txt-records?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:37,013 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:37] "GET /api/network?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:37,989 - INFO - Connecting to https://duckduckgo.com/media/system/js [HEAD]
+2026-06-24 12:55:38,234 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:38] "GET /api/enhanced-enumeration?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:39,228 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:39] "GET /api/screenshot?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:39,842 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:39] "GET /api/whois?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:44,533 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:44] "GET /api/tech-stack?url=https://duck.com HTTP/1.1" 200 -
+2026-06-24 12:55:46,316 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:46] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:55:58,314 - INFO - 127.0.0.1 - - [24/Jun/2026 12:55:58] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:10,316 - INFO - 127.0.0.1 - - [24/Jun/2026 12:56:10] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:22,314 - INFO - 127.0.0.1 - - [24/Jun/2026 12:56:22] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:34,318 - INFO - 127.0.0.1 - - [24/Jun/2026 12:56:34] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:46,314 - INFO - 127.0.0.1 - - [24/Jun/2026 12:56:46] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:52,800 - INFO - Connecting to https://duck.com [OPTIONS]
+2026-06-24 12:56:53,644 - INFO - Connecting to https://duck.com [PUT]
+2026-06-24 12:56:54,557 - INFO - Connecting to https://duck.com [DELETE]
+2026-06-24 12:56:55,453 - INFO - Connecting to https://duck.com [TRACE]
+2026-06-24 12:56:55,651 - INFO - Connecting to https://duck.com [PATCH]
+2026-06-24 12:56:56,403 - INFO - Connecting to https://duck.com/admin [GET]
+2026-06-24 12:56:57,373 - INFO - Connecting to https://duck.com/administrator [GET]
+2026-06-24 12:56:58,308 - INFO - 127.0.0.1 - - [24/Jun/2026 12:56:58] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:56:58,416 - INFO - Connecting to https://duck.com/dashboard [GET]
+2026-06-24 12:57:00,056 - INFO - Connecting to https://duck.com/cpanel [GET]
+2026-06-24 12:57:01,271 - INFO - Connecting to https://duck.com/manage [GET]
+2026-06-24 12:57:02,204 - INFO - Connecting to https://duck.com/login [GET]
+2026-06-24 12:57:03,110 - INFO - Connecting to https://duck.com/admin/login [GET]
+2026-06-24 12:57:03,812 - INFO - Connecting to https://duck.com/backup.zip [GET]
+2026-06-24 12:57:04,713 - INFO - Connecting to https://duck.com/backup.tar.gz [GET]
+2026-06-24 12:57:05,385 - INFO - Connecting to https://duck.com/db.sql [GET]
+2026-06-24 12:57:06,281 - INFO - Connecting to https://duck.com/.env [GET]
+2026-06-24 12:57:07,138 - INFO - Connecting to https://duck.com/config.php.bak [GET]
+2026-06-24 12:57:08,081 - INFO - Connecting to https://duck.com/index.old [GET]
+2026-06-24 12:57:09,010 - INFO - Connecting to https://duck.com/website.zip [GET]
+2026-06-24 12:57:09,979 - INFO - Connecting to https://duck.com/backup.sql [GET]
+2026-06-24 12:57:10,305 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:10] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:57:10,892 - INFO - Connecting to https://duck.com/.git/config [GET]
+2026-06-24 12:57:11,581 - INFO - Connecting to https://duck.com/.svn/entries [GET]
+2026-06-24 12:57:12,293 - INFO - Connecting to https://duck.com/web.config [GET]
+2026-06-24 12:57:13,110 - INFO - Connecting to https://duck.com/crossdomain.xml [GET]
+2026-06-24 12:57:13,786 - INFO - Connecting to https://duck.com/clientaccesspolicy.xml [GET]
+2026-06-24 12:57:14,458 - INFO - Connecting to https://crt.sh/?q=%25.duck.com&output=json [GET]
+2026-06-24 12:57:22,314 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:22] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:57:23,449 - INFO - Connecting to https://www.duck.com [GET]
+2026-06-24 12:57:24,414 - INFO - Connecting to https://api.duck.com [GET]
+2026-06-24 12:57:24,472 - ERROR - Request failed: https://api.duck.com - HTTPSConnectionPool(host='api.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A5590>: Failed to resolve 'api.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:24,506 - INFO - Connecting to https://blog.duck.com [GET]
+2026-06-24 12:57:24,733 - ERROR - Request failed: https://blog.duck.com - HTTPSConnectionPool(host='blog.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A5BD0>: Failed to resolve 'blog.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:24,768 - INFO - Connecting to https://mail.duck.com [GET]
+2026-06-24 12:57:24,841 - ERROR - Request failed: https://mail.duck.com - HTTPSConnectionPool(host='mail.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A5F90>: Failed to resolve 'mail.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:24,878 - INFO - Connecting to https://dev.duck.com [GET]
+2026-06-24 12:57:24,937 - ERROR - Request failed: https://dev.duck.com - HTTPSConnectionPool(host='dev.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A6350>: Failed to resolve 'dev.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:24,988 - INFO - Connecting to https://test.duck.com [GET]
+2026-06-24 12:57:25,141 - ERROR - Request failed: https://test.duck.com - HTTPSConnectionPool(host='test.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A6710>: Failed to resolve 'test.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:25,183 - INFO - Connecting to https://admin.duck.com [GET]
+2026-06-24 12:57:25,250 - ERROR - Request failed: https://admin.duck.com - HTTPSConnectionPool(host='admin.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A6AD0>: Failed to resolve 'admin.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:25,293 - INFO - Connecting to https://cdn.duck.com [GET]
+2026-06-24 12:57:25,352 - ERROR - Request failed: https://cdn.duck.com - HTTPSConnectionPool(host='cdn.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A6E90>: Failed to resolve 'cdn.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:25,394 - INFO - Connecting to https://m.duck.com [GET]
+2026-06-24 12:57:25,453 - ERROR - Request failed: https://m.duck.com - HTTPSConnectionPool(host='m.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A7250>: Failed to resolve 'm.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:25,491 - INFO - Connecting to https://portal.duck.com [GET]
+2026-06-24 12:57:25,552 - ERROR - Request failed: https://portal.duck.com - HTTPSConnectionPool(host='portal.duck.com', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001DDA42A7610>: Failed to resolve 'portal.duck.com' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 12:57:34,312 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:34] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:57:37,612 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:37] "[32mPOST /scan HTTP/1.1[0m" 302 -
+2026-06-24 12:57:38,906 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:38] "GET /results/b0acf579-2285-4395-a1ea-d9a61bc55c36?criticality=normal HTTP/1.1" 200 -
+2026-06-24 12:57:40,325 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "GET /results/b0acf579-2285-4395-a1ea-d9a61bc55c36?criticality=normal HTTP/1.1" 200 -
+2026-06-24 12:57:40,382 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,382 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,383 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,393 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,396 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,397 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,406 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/dashboard-charts.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,416 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,423 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,431 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,441 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,447 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,454 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,460 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,495 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 12:57:40,496 - INFO - 127.0.0.1 - - [24/Jun/2026 12:57:40] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 12:58:28,317 - INFO - 127.0.0.1 - - [24/Jun/2026 12:58:28] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:58:40,303 - INFO - 127.0.0.1 - - [24/Jun/2026 12:58:40] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:59:12,335 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 12:59:12,335 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 12:59:14,168 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "GET / HTTP/1.1" 200 -
+2026-06-24 12:59:14,384 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,384 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,387 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,389 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,389 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,390 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,393 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,396 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,398 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,399 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,400 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,400 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,404 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,406 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,617 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,617 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,619 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,621 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,625 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,628 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,629 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,630 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,630 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:14,740 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:14] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 12:59:15,754 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:15] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-24 12:59:26,741 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:26] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:59:39,301 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:39] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 12:59:50,749 - INFO - 127.0.0.1 - - [24/Jun/2026 12:59:50] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:01,664 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:01,675 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:01,682 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:01,713 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:01,719 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:01,932 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:01] "GET /api/dns?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:01,963 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:02,398 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:02] "GET /api/assets?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:02,410 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:02] "GET /api/csp?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:02,419 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:02] "GET /api/architecture-mapper?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:02,475 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:02] "GET /api/content-leakage?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:02,510 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:02,539 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:02,604 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:02,685 - INFO - Connecting to http://ip-api.com/json/103.63.115.9/json [GET]
+2026-06-24 13:00:03,186 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/entry-point-mapper?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:03,355 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/execution-paths?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:03,393 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:03,407 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 13:00:03,410 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:03,441 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:03,635 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 13:00:03,812 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/fingerprint?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:03,817 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/get-ip?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:03,864 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:03,866 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/firewall?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:03,904 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:03,982 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:03] "GET /api/framework-enhancement?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:04,059 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:05,226 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:05] "GET /api/hsts?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:05,282 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:05,399 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 13:00:05,480 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:05] "GET /api/headers?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:05,896 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:05] "GET /api/http-security?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:05,927 - INFO - Connecting to http://ip-api.com/json/103.63.115.9/json [GET]
+2026-06-24 13:00:06,609 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:06] "GET /api/network?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:06,621 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 13:00:06,975 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:06] "GET /api/redirects?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:07,007 - INFO - Connecting to https://hutech.edu.vn/robots.txt [GET]
+2026-06-24 13:00:07,679 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:07] "GET /api/linked-pages?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:07,790 - INFO - Connecting to https://hutech.edu.vn/robots.txt [GET]
+2026-06-24 13:00:08,025 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:08] "GET /api/robots-txt?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:08,028 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:08] "GET /api/search-engine-recon?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:08,171 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:08] "GET /api/security-txt?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:08,200 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:08] "[35m[1mGET /api/mail-config?url=https://hutech.edu.vn HTTP/1.1[0m" 500 -
+2026-06-24 13:00:08,294 - INFO - Connecting to https://hutech.edu.vn/sitemap.xml [GET]
+2026-06-24 13:00:08,386 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:08,517 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:08] "GET /api/ssl?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:08,715 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:09,252 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:09] "GET /api/social-tags?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:09,314 - INFO - Connecting to https://hutech.edu.vn [GET]
+2026-06-24 13:00:09,514 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:09] "GET /api/status?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:09,700 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:09] "GET /api/tls-connection?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:09,909 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 13:00:09,910 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:09] "GET /api/cookies?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:10,207 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 13:00:10,502 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:10] "GET /api/txt-records?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:12,544 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:12] "[35m[1mGET /api/whois?url=https://hutech.edu.vn HTTP/1.1[0m" 500 -
+2026-06-24 13:00:14,749 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:15,333 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:15] "GET /api/screenshot?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:17,447 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:17] "GET /api/enhanced-enumeration?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:22,660 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:22] "GET /api/tech-stack?url=https://hutech.edu.vn HTTP/1.1" 200 -
+2026-06-24 13:00:26,747 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:26] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:38,745 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:38] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:50,825 - INFO - 127.0.0.1 - - [24/Jun/2026 13:00:50] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:00:51,904 - INFO - Connecting to https://hutech.edu.vn [OPTIONS]
+2026-06-24 13:00:52,272 - INFO - Connecting to https://hutech.edu.vn [PUT]
+2026-06-24 13:00:52,648 - INFO - Connecting to https://hutech.edu.vn [DELETE]
+2026-06-24 13:00:52,994 - INFO - Connecting to https://hutech.edu.vn [TRACE]
+2026-06-24 13:00:53,269 - INFO - Connecting to https://hutech.edu.vn [PATCH]
+2026-06-24 13:00:53,507 - INFO - Connecting to https://hutech.edu.vn/admin [GET]
+2026-06-24 13:00:54,336 - INFO - Connecting to https://hutech.edu.vn/administrator [GET]
+2026-06-24 13:00:54,865 - INFO - Connecting to https://hutech.edu.vn/dashboard [GET]
+2026-06-24 13:00:55,301 - INFO - Connecting to https://hutech.edu.vn/cpanel [GET]
+2026-06-24 13:00:55,786 - INFO - Connecting to https://hutech.edu.vn/manage [GET]
+2026-06-24 13:00:56,260 - INFO - Connecting to https://hutech.edu.vn/login [GET]
+2026-06-24 13:00:56,752 - INFO - Connecting to https://hutech.edu.vn/admin/login [GET]
+2026-06-24 13:00:57,272 - INFO - Connecting to https://hutech.edu.vn/backup.zip [GET]
+2026-06-24 13:00:57,819 - INFO - Connecting to https://hutech.edu.vn/backup.tar.gz [GET]
+2026-06-24 13:00:58,267 - INFO - Connecting to https://hutech.edu.vn/db.sql [GET]
+2026-06-24 13:00:58,744 - INFO - Connecting to https://hutech.edu.vn/.env [GET]
+2026-06-24 13:00:59,142 - INFO - Connecting to https://hutech.edu.vn/config.php.bak [GET]
+2026-06-24 13:00:59,575 - INFO - Connecting to https://hutech.edu.vn/index.old [GET]
+2026-06-24 13:01:00,013 - INFO - Connecting to https://hutech.edu.vn/website.zip [GET]
+2026-06-24 13:01:00,462 - INFO - Connecting to https://hutech.edu.vn/backup.sql [GET]
+2026-06-24 13:01:00,950 - INFO - Connecting to https://hutech.edu.vn/.git/config [GET]
+2026-06-24 13:01:01,524 - INFO - Connecting to https://hutech.edu.vn/.svn/entries [GET]
+2026-06-24 13:01:01,749 - INFO - Connecting to https://hutech.edu.vn/web.config [GET]
+2026-06-24 13:01:02,218 - INFO - Connecting to https://hutech.edu.vn/crossdomain.xml [GET]
+2026-06-24 13:01:02,698 - INFO - Connecting to https://hutech.edu.vn/clientaccesspolicy.xml [GET]
+2026-06-24 13:01:02,749 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:02] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:01:03,474 - INFO - Connecting to https://crt.sh/?q=%25.hutech.edu.vn&output=json [GET]
+2026-06-24 13:01:04,704 - INFO - Connecting to https://www.hutech.edu.vn [GET]
+2026-06-24 13:01:04,974 - INFO - Connecting to https://api.hutech.edu.vn [GET]
+2026-06-24 13:01:05,151 - INFO - Connecting to https://blog.hutech.edu.vn [GET]
+2026-06-24 13:01:05,242 - ERROR - Request failed: https://blog.hutech.edu.vn - HTTPSConnectionPool(host='blog.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001F8EE8F6D50>: Failed to resolve 'blog.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 13:01:05,272 - INFO - Connecting to https://mail.hutech.edu.vn [GET]
+2026-06-24 13:01:05,439 - ERROR - Request failed: https://mail.hutech.edu.vn - HTTPSConnectionPool(host='mail.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)')))
+2026-06-24 13:01:05,469 - INFO - Connecting to https://dev.hutech.edu.vn [GET]
+2026-06-24 13:01:05,569 - ERROR - Request failed: https://dev.hutech.edu.vn - HTTPSConnectionPool(host='dev.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001F8EE8F74D0>: Failed to resolve 'dev.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 13:01:05,601 - INFO - Connecting to https://test.hutech.edu.vn [GET]
+2026-06-24 13:01:05,689 - ERROR - Request failed: https://test.hutech.edu.vn - HTTPSConnectionPool(host='test.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by SSLError(SSLError(1, '[SSL: UNSUPPORTED_PROTOCOL] unsupported protocol (_ssl.c:1028)')))
+2026-06-24 13:01:05,719 - INFO - Connecting to https://admin.hutech.edu.vn [GET]
+2026-06-24 13:01:05,833 - ERROR - Request failed: https://admin.hutech.edu.vn - HTTPSConnectionPool(host='admin.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001F8EE8F7B10>: Failed to resolve 'admin.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 13:01:05,866 - INFO - Connecting to https://cdn.hutech.edu.vn [GET]
+2026-06-24 13:01:05,979 - ERROR - Request failed: https://cdn.hutech.edu.vn - HTTPSConnectionPool(host='cdn.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001F8EE84AD50>: Failed to resolve 'cdn.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 13:01:06,008 - INFO - Connecting to https://m.hutech.edu.vn [GET]
+2026-06-24 13:01:06,089 - ERROR - Request failed: https://m.hutech.edu.vn - HTTPSConnectionPool(host='m.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001F8EE8F7ED0>: Failed to resolve 'm.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 13:01:06,115 - INFO - Connecting to https://portal.hutech.edu.vn [GET]
+2026-06-24 13:01:14,741 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:01:26,742 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:26] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:01:30,642 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:30] "[32mPOST /scan HTTP/1.1[0m" 302 -
+2026-06-24 13:01:31,507 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:31] "GET /results/3ea15f0d-aced-4690-9210-29b275a2f42e?criticality=normal HTTP/1.1" 200 -
+2026-06-24 13:01:32,340 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "GET /results/3ea15f0d-aced-4690-9210-29b275a2f42e?criticality=normal HTTP/1.1" 200 -
+2026-06-24 13:01:32,372 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,373 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,374 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,374 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,374 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,381 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,384 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/dashboard-charts.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,384 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,388 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,388 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,389 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,392 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,392 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,395 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,397 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 13:01:32,399 - INFO - 127.0.0.1 - - [24/Jun/2026 13:01:32] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,096 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "GET / HTTP/1.1" 200 -
+2026-06-24 13:03:19,124 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,125 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,128 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,130 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,131 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,133 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,136 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,139 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,140 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,141 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,145 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,147 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,149 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,149 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,327 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,327 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,329 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,330 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,333 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,334 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,335 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,339 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,339 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:19,453 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:19] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 13:03:21,523 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:21] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:03:31,453 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:31] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:03:43,467 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:43] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:03:55,456 - INFO - 127.0.0.1 - - [24/Jun/2026 13:03:55] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:04:08,310 - INFO - 127.0.0.1 - - [24/Jun/2026 13:04:08] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:04:20,309 - INFO - 127.0.0.1 - - [24/Jun/2026 13:04:20] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:04:32,315 - INFO - 127.0.0.1 - - [24/Jun/2026 13:04:32] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:04:44,310 - INFO - 127.0.0.1 - - [24/Jun/2026 13:04:44] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:04:56,301 - INFO - 127.0.0.1 - - [24/Jun/2026 13:04:56] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:05:08,314 - INFO - 127.0.0.1 - - [24/Jun/2026 13:05:08] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:05:20,309 - INFO - 127.0.0.1 - - [24/Jun/2026 13:05:20] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:05:32,308 - INFO - 127.0.0.1 - - [24/Jun/2026 13:05:32] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:05:44,310 - INFO - 127.0.0.1 - - [24/Jun/2026 13:05:44] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:06:14,308 - INFO - 127.0.0.1 - - [24/Jun/2026 13:06:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:07:14,311 - INFO - 127.0.0.1 - - [24/Jun/2026 13:07:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:08:14,315 - INFO - 127.0.0.1 - - [24/Jun/2026 13:08:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:09:14,308 - INFO - 127.0.0.1 - - [24/Jun/2026 13:09:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:16:48,043 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 13:16:48,044 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 13:16:50,695 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "GET / HTTP/1.1" 200 -
+2026-06-24 13:16:50,955 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 13:16:50,959 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 13:16:50,960 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:50,961 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 13:16:50,964 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 13:16:50,966 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:50] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,010 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,011 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,012 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,012 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,014 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,014 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,036 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,056 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,334 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,334 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,336 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,337 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,345 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,346 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,349 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,353 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,354 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:16:51,465 - INFO - 127.0.0.1 - - [24/Jun/2026 13:16:51] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 13:17:03,472 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:03] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:17:04,687 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:04] "GET / HTTP/1.1" 200 -
+2026-06-24 13:17:05,165 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/style.css HTTP/1.1" 200 -
+2026-06-24 13:17:05,174 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/scan_jobs.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,176 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/premium-ux.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,178 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/platform-phase34.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,179 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/platform.css HTTP/1.1" 200 -
+2026-06-24 13:17:05,181 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/light-theme.css HTTP/1.1" 200 -
+2026-06-24 13:17:05,181 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/ui-enhancements.css HTTP/1.1" 200 -
+2026-06-24 13:17:05,182 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/premium-ux.css HTTP/1.1" 200 -
+2026-06-24 13:17:05,188 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/platform-phase2.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,192 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/script.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,199 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/app-ui.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,200 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/doc-illustrations/default.svg HTTP/1.1" 200 -
+2026-06-24 13:17:05,201 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/module_help.js HTTP/1.1" 200 -
+2026-06-24 13:17:05,202 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:05] "GET /static/platform.js HTTP/1.1" 200 -
+2026-06-24 13:17:06,189 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/headers.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,190 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/ssl.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,191 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/fingerprint.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,196 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/cookies.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,197 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/enumeration.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,198 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/robots.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,203 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/seo.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,204 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/links.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,212 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 13:17:06,213 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "GET /static/doc-illustrations/browser.svg HTTP/1.1" 200 -
+2026-06-24 13:17:06,663 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:06] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-06-24 13:17:15,479 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:15] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:17:18,403 - INFO - 127.0.0.1 - - [24/Jun/2026 13:17:18] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:52:30,621 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 13:52:30,622 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 13:52:50,145 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-06-24 13:52:50,146 - INFO - [33mPress CTRL+C to quit[0m
+2026-06-24 13:52:52,551 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "GET / HTTP/1.1" 200 -
+2026-06-24 13:52:52,790 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,794 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,795 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,800 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,800 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,801 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,801 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,802 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,803 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,811 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,812 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,812 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,813 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:52,814 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:52] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,035 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/ssl.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,036 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/headers.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,037 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/cookies.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,040 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/fingerprint.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,042 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/robots.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,042 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/links.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,045 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/seo.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,046 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/enumeration.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,055 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/browser.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,057 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:52:53,163 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:53] "GET /api/schedules HTTP/1.1" 200 -
+2026-06-24 13:52:59,776 - INFO - 127.0.0.1 - - [24/Jun/2026 13:52:59] "[36mGET /static/doc-illustrations/dns.svg HTTP/1.1[0m" 304 -
+2026-06-24 13:53:05,308 - INFO - 127.0.0.1 - - [24/Jun/2026 13:53:05] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:53:17,309 - INFO - 127.0.0.1 - - [24/Jun/2026 13:53:17] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:53:29,312 - INFO - 127.0.0.1 - - [24/Jun/2026 13:53:29] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:53:41,313 - INFO - 127.0.0.1 - - [24/Jun/2026 13:53:41] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:53:53,301 - INFO - 127.0.0.1 - - [24/Jun/2026 13:53:53] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:54:05,300 - INFO - 127.0.0.1 - - [24/Jun/2026 13:54:05] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:54:17,316 - INFO - 127.0.0.1 - - [24/Jun/2026 13:54:17] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:54:29,303 - INFO - 127.0.0.1 - - [24/Jun/2026 13:54:29] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:54:41,307 - INFO - 127.0.0.1 - - [24/Jun/2026 13:54:41] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:54:53,302 - INFO - 127.0.0.1 - - [24/Jun/2026 13:54:53] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:55:14,312 - INFO - 127.0.0.1 - - [24/Jun/2026 13:55:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:56:14,311 - INFO - 127.0.0.1 - - [24/Jun/2026 13:56:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:57:14,303 - INFO - 127.0.0.1 - - [24/Jun/2026 13:57:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:58:14,309 - INFO - 127.0.0.1 - - [24/Jun/2026 13:58:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 13:59:14,309 - INFO - 127.0.0.1 - - [24/Jun/2026 13:59:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:00:14,302 - INFO - 127.0.0.1 - - [24/Jun/2026 14:00:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:01:14,310 - INFO - 127.0.0.1 - - [24/Jun/2026 14:01:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:02:14,317 - INFO - 127.0.0.1 - - [24/Jun/2026 14:02:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:03:14,301 - INFO - 127.0.0.1 - - [24/Jun/2026 14:03:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:03:46,476 - INFO - 127.0.0.1 - - [24/Jun/2026 14:03:46] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:03:53,307 - INFO - 127.0.0.1 - - [24/Jun/2026 14:03:53] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:04:05,307 - INFO - 127.0.0.1 - - [24/Jun/2026 14:04:05] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:04:17,310 - INFO - 127.0.0.1 - - [24/Jun/2026 14:04:17] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:04:29,302 - INFO - 127.0.0.1 - - [24/Jun/2026 14:04:29] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:04:41,302 - INFO - 127.0.0.1 - - [24/Jun/2026 14:04:41] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:05:14,306 - INFO - 127.0.0.1 - - [24/Jun/2026 14:05:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:06:14,313 - INFO - 127.0.0.1 - - [24/Jun/2026 14:06:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:07:14,305 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:14] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:07:24,213 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:24] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:07:29,165 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:29] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:07:30,416 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:30,434 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:30,434 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:30,434 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:30,435 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:30,805 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:30] "GET /api/content-leakage?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:30,809 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:30] "GET /api/csp?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:30,841 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:30] "GET /api/architecture-mapper?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:30,908 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:30] "GET /api/assets?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:30,945 - INFO - Connecting to https://www.hutech.edu.vn [GET]
+2026-06-24 14:07:31,015 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:31,015 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:31,184 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:31] "GET /api/dns?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:31,218 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:31,420 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:31] "GET /api/entry-point-mapper?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:31,542 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:31] "GET /api/execution-paths?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:31,576 - INFO - Connecting to http://ip-api.com/json/103.63.115.9/json [GET]
+2026-06-24 14:07:31,630 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:31,863 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:31,873 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 14:07:32,194 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/firewall?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,328 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/get-ip?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,344 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 14:07:32,421 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:32,623 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/framework-enhancement?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,624 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/fingerprint?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,680 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:32,713 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:32,775 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/headers?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,808 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:32,982 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 14:07:32,984 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/http-security?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:32,986 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:32] "GET /api/hsts?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,030 - INFO - Connecting to http://ip-api.com/json/103.63.115.9/json [GET]
+2026-06-24 14:07:33,161 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "GET /api/linked-pages?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,276 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "GET /api/redirects?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,276 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 14:07:33,320 - INFO - Connecting to https://www.hutech.edu.vn/robots.txt [GET]
+2026-06-24 14:07:33,642 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "GET /api/robots-txt?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,720 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "[35m[1mGET /api/mail-config?url=https://www.hutech.edu.vn/ HTTP/1.1[0m" 500 -
+2026-06-24 14:07:33,724 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "GET /api/search-engine-recon?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,859 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:33] "GET /api/network?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:33,914 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:34,083 - INFO - Connecting to https://www.hutech.edu.vn/robots.txt [GET]
+2026-06-24 14:07:34,242 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:34] "GET /api/security-txt?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:35,569 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:35] "GET /api/ssl?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:35,600 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:35,705 - INFO - Connecting to https://www.hutech.edu.vn/sitemap.xml [GET]
+2026-06-24 14:07:35,791 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:35] "GET /api/social-tags?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:35,823 - INFO - Connecting to https://www.hutech.edu.vn/ [GET]
+2026-06-24 14:07:37,613 - INFO - Connecting to https://www.hutech.edu.vn/administrator [HEAD]
+2026-06-24 14:07:37,777 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:37] "GET /api/status?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:38,178 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:38] "GET /api/tls-connection?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:38,220 - INFO - Connecting to https://www.hutech.edu.vn/media/system/js [HEAD]
+2026-06-24 14:07:38,284 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:38] "GET /api/txt-records?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:39,931 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:39] "[35m[1mGET /api/whois?url=https://www.hutech.edu.vn/ HTTP/1.1[0m" 500 -
+2026-06-24 14:07:41,137 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:41] "GET /api/enhanced-enumeration?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:41,165 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:41] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:07:45,158 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:45] "GET /api/screenshot?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:45,379 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:45] "GET /api/cookies?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:51,591 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:51] "GET /api/tech-stack?url=https://www.hutech.edu.vn/ HTTP/1.1" 200 -
+2026-06-24 14:07:53,314 - INFO - 127.0.0.1 - - [24/Jun/2026 14:07:53] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:08:05,304 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:05] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:08:17,302 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:17] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:08:18,888 - INFO - Connecting to https://www.hutech.edu.vn [OPTIONS]
+2026-06-24 14:08:19,154 - INFO - Connecting to https://www.hutech.edu.vn [PUT]
+2026-06-24 14:08:19,349 - INFO - Connecting to https://www.hutech.edu.vn [DELETE]
+2026-06-24 14:08:19,530 - INFO - Connecting to https://www.hutech.edu.vn [TRACE]
+2026-06-24 14:08:19,734 - INFO - Connecting to https://www.hutech.edu.vn [PATCH]
+2026-06-24 14:08:19,959 - INFO - Connecting to https://www.hutech.edu.vn/admin [GET]
+2026-06-24 14:08:20,680 - INFO - Connecting to https://www.hutech.edu.vn/administrator [GET]
+2026-06-24 14:08:20,988 - INFO - Connecting to https://www.hutech.edu.vn/dashboard [GET]
+2026-06-24 14:08:21,275 - INFO - Connecting to https://www.hutech.edu.vn/cpanel [GET]
+2026-06-24 14:08:21,576 - INFO - Connecting to https://www.hutech.edu.vn/manage [GET]
+2026-06-24 14:08:21,849 - INFO - Connecting to https://www.hutech.edu.vn/login [GET]
+2026-06-24 14:08:22,128 - INFO - Connecting to https://www.hutech.edu.vn/admin/login [GET]
+2026-06-24 14:08:22,415 - INFO - Connecting to https://www.hutech.edu.vn/backup.zip [GET]
+2026-06-24 14:08:22,694 - INFO - Connecting to https://www.hutech.edu.vn/backup.tar.gz [GET]
+2026-06-24 14:08:22,965 - INFO - Connecting to https://www.hutech.edu.vn/db.sql [GET]
+2026-06-24 14:08:23,210 - INFO - Connecting to https://www.hutech.edu.vn/.env [GET]
+2026-06-24 14:08:23,473 - INFO - Connecting to https://www.hutech.edu.vn/config.php.bak [GET]
+2026-06-24 14:08:23,768 - INFO - Connecting to https://www.hutech.edu.vn/index.old [GET]
+2026-06-24 14:08:24,057 - INFO - Connecting to https://www.hutech.edu.vn/website.zip [GET]
+2026-06-24 14:08:24,353 - INFO - Connecting to https://www.hutech.edu.vn/backup.sql [GET]
+2026-06-24 14:08:24,635 - INFO - Connecting to https://www.hutech.edu.vn/.git/config [GET]
+2026-06-24 14:08:24,925 - INFO - Connecting to https://www.hutech.edu.vn/.svn/entries [GET]
+2026-06-24 14:08:25,119 - INFO - Connecting to https://www.hutech.edu.vn/web.config [GET]
+2026-06-24 14:08:25,380 - INFO - Connecting to https://www.hutech.edu.vn/crossdomain.xml [GET]
+2026-06-24 14:08:25,672 - INFO - Connecting to https://www.hutech.edu.vn/clientaccesspolicy.xml [GET]
+2026-06-24 14:08:25,949 - INFO - Connecting to https://crt.sh/?q=%25.www.hutech.edu.vn&output=json [GET]
+2026-06-24 14:08:29,177 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:29] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:08:34,837 - INFO - Connecting to https://www.www.hutech.edu.vn [GET]
+2026-06-24 14:08:34,937 - ERROR - Request failed: https://www.www.hutech.edu.vn - HTTPSConnectionPool(host='www.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6FC50>: Failed to resolve 'www.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:34,968 - INFO - Connecting to https://api.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,024 - ERROR - Request failed: https://api.www.hutech.edu.vn - HTTPSConnectionPool(host='api.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6FC50>: Failed to resolve 'api.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,053 - INFO - Connecting to https://blog.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,130 - ERROR - Request failed: https://blog.www.hutech.edu.vn - HTTPSConnectionPool(host='blog.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6F9D0>: Failed to resolve 'blog.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,160 - INFO - Connecting to https://mail.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,301 - ERROR - Request failed: https://mail.www.hutech.edu.vn - HTTPSConnectionPool(host='mail.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6F110>: Failed to resolve 'mail.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,326 - INFO - Connecting to https://dev.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,417 - ERROR - Request failed: https://dev.www.hutech.edu.vn - HTTPSConnectionPool(host='dev.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6E990>: Failed to resolve 'dev.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,441 - INFO - Connecting to https://test.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,493 - ERROR - Request failed: https://test.www.hutech.edu.vn - HTTPSConnectionPool(host='test.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6E210>: Failed to resolve 'test.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,523 - INFO - Connecting to https://admin.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,572 - ERROR - Request failed: https://admin.www.hutech.edu.vn - HTTPSConnectionPool(host='admin.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6DA90>: Failed to resolve 'admin.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,601 - INFO - Connecting to https://cdn.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,704 - ERROR - Request failed: https://cdn.www.hutech.edu.vn - HTTPSConnectionPool(host='cdn.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4B6D310>: Failed to resolve 'cdn.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,731 - INFO - Connecting to https://m.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,836 - ERROR - Request failed: https://m.www.hutech.edu.vn - HTTPSConnectionPool(host='m.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4D54050>: Failed to resolve 'm.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:35,864 - INFO - Connecting to https://portal.www.hutech.edu.vn [GET]
+2026-06-24 14:08:35,935 - ERROR - Request failed: https://portal.www.hutech.edu.vn - HTTPSConnectionPool(host='portal.www.hutech.edu.vn', port=443): Max retries exceeded with url: / (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x00000127A4D54410>: Failed to resolve 'portal.www.hutech.edu.vn' ([Errno 11001] getaddrinfo failed)"))
+2026-06-24 14:08:41,312 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:41] "GET /api/queue HTTP/1.1" 200 -
+2026-06-24 14:08:49,408 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:49] "[32mPOST /scan HTTP/1.1[0m" 302 -
+2026-06-24 14:08:50,243 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:50] "GET /results/c6d18750-047f-4fad-8a37-cd2e2297e9f4?criticality=normal HTTP/1.1" 200 -
+2026-06-24 14:08:51,052 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "GET /results/c6d18750-047f-4fad-8a37-cd2e2297e9f4?criticality=normal HTTP/1.1" 200 -
+2026-06-24 14:08:51,087 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/ui-enhancements.css HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,088 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/style.css HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,089 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/light-theme.css HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,095 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/platform.css HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,097 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/premium-ux.css HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,100 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/doc-illustrations/default.svg HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,106 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/dashboard-charts.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,111 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/dashboard.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,116 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/script.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,122 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/module_help.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,127 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/app-ui.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,136 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/scan_jobs.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,143 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/platform.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,148 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/platform-phase2.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,159 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/platform-phase34.js HTTP/1.1[0m" 304 -
+2026-06-24 14:08:51,163 - INFO - 127.0.0.1 - - [24/Jun/2026 14:08:51] "[36mGET /static/premium-ux.js HTTP/1.1[0m" 304 -

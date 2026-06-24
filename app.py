@@ -562,20 +562,29 @@ def perform_scan(url: str, scan_mode: str = "full", selected_sections: list | No
     browser_data = {}
 
     if "browser" in selected_sections:
-        browser_data = browser_scan(url)
-        if browser_data.get("screenshot"):
-            report += format_screenshot_report()
-            report += format_browser_cookies_report(browser_data.get("clientCookies", []))
-            report += format_tech_hints_report(
-                browser_data.get("generators"),
-                browser_data.get("scriptSources"),
-            )
-        elif browser_data.get("error") or browser_data.get("skipped"):
-            msg = browser_data.get("error") or browser_data.get("skipped")
-            hint = browser_data.get("hint", "")
-            report += f"\n========== SCREENSHOT ==========\n[WARNING] Puppeteer: {msg}\n"
-            if hint:
-                report += f"{hint}\n"
+        try:
+            browser_data = browser_scan(url)
+            if browser_data.get("screenshot"):
+                report += format_screenshot_report()
+                report += format_browser_cookies_report(browser_data.get("clientCookies", []))
+                report += format_tech_hints_report(
+                    browser_data.get("generators"),
+                    browser_data.get("scriptSources"),
+                )
+            elif browser_data.get("error") or browser_data.get("skipped"):
+                msg = browser_data.get("error") or browser_data.get("skipped")
+                hint = browser_data.get("hint", "")
+                report += f"\n========== SCREENSHOT ==========\n[WARNING] Puppeteer: {msg}\n"
+                if hint:
+                    report += f"{hint}\n"
+        except Exception as e:
+            # Browser module fails, mark as skipped but continue scan
+            browser_data = {
+                "status": "skipped",
+                "module": "Browser (Puppeteer)",
+                "reason": str(e)
+            }
+            report += f"\n========== SCREENSHOT ==========\n[WARNING] Puppeteer: {str(e)}\n"
 
     scan_duration = round(time.perf_counter() - start_time, 1)
     sections = _parse_and_enrich_sections(report)
